@@ -31,13 +31,15 @@ public class CenterWhenNoScrollNeeded : MonoBehaviour {
                     //horizontal scrollbar
             if (!ScrollView.shouldMoveHorizontally)
             {
+                bool restrictWithinPanel = ScrollView.restrictWithinPanel;
                 Debug.Log("Spring Scrollview back to center");
                 ScrollView.restrictWithinPanel = false;
                 SpringPanel.Begin(ScrollView.gameObject, Vector3.zero, 13f);
+                ScrollView.restrictWithinPanel = restrictWithinPanel;
             }
             else
             {
-                ScrollView.restrictWithinPanel = true;
+                //ScrollView.restrictWithinPanel = true;
             }
                 //}
                 //else

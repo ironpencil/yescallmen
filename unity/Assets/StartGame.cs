@@ -3,7 +3,8 @@ using System.Collections;
 
 public class StartGame : MonoBehaviour {
 
-    public GameObject go;
+    public GameObject HandPanel;
+    public GameObject GamePanel;
 
 	// Use this for initialization
 	void Start () {
@@ -17,10 +18,19 @@ public class StartGame : MonoBehaviour {
 
     public void Play()
     {
-        if (go != null)
+        if (HandPanel != null && GamePanel != null)
         {
-            NGUITools.SetActive(go, true);
-            NGUITools.SetActive(gameObject, false);
+            NGUITools.SetActive(HandPanel, true);
+            NGUITools.SetActive(GamePanel, true);
+
+            GetComponent<TweenAlpha>().PlayForward();
+
+            //NGUITools.SetActive(gameObject, false);
         }
+    }
+
+    public void Disable()
+    {
+        NGUITools.SetActive(gameObject, false);
     }
 }
