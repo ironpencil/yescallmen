@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class CardController : MonoBehaviour {
 
     public CardContainer.CardZone CurrentZone;
+
     static public CardController current;
 
     public List<EventDelegate> ScaleToLarge = new List<EventDelegate>();
@@ -44,14 +45,22 @@ public class CardController : MonoBehaviour {
 
     void HoverOver()
     {
-        NGUITools.BringForward(gameObject);
-        EventDelegate.Execute(ScaleToLarge);
+        if (CurrentZone != CardContainer.CardZone.Discard &&
+            CurrentZone != CardContainer.CardZone.Attached)
+        {
+            NGUITools.BringForward(gameObject);
+            EventDelegate.Execute(ScaleToLarge);
+        }
         EventDelegate.Execute(onHoverOver);
     }
 
     void HoverOut()
-    {        
-        EventDelegate.Execute(ScaleToNormal);
+    {
+        if (CurrentZone != CardContainer.CardZone.Discard &&
+            CurrentZone != CardContainer.CardZone.Attached)
+        {
+            EventDelegate.Execute(ScaleToNormal);
+        }        
         EventDelegate.Execute(onHoverOut);
     }
 
@@ -68,15 +77,24 @@ public class CardController : MonoBehaviour {
     {
         //collider.enabled = false;
         UpdateCurrentZone();
-        NGUITools.BringForward(gameObject);
-        EventDelegate.Execute(ScaleToLarge);
+        if (CurrentZone != CardContainer.CardZone.Discard &&
+            CurrentZone != CardContainer.CardZone.Attached)
+        {
+            NGUITools.BringForward(gameObject);
+            EventDelegate.Execute(ScaleToLarge);
+        }
+
         EventDelegate.Execute(onPress);
     }
 
     void Release()
     {
         //collider.enabled = true;
-        EventDelegate.Execute(ScaleToNormal);
+        //if (CurrentZone != CardContainer.CardZone.Discard &&
+        //    CurrentZone != CardContainer.CardZone.Attached)
+        //{
+            EventDelegate.Execute(ScaleToNormal);
+       // }
         EventDelegate.Execute(onRelease);
     }
 
@@ -152,7 +170,7 @@ public class CardController : MonoBehaviour {
         EventDelegate.Execute(onDragOut);
     }
 
-    void UpdateCurrentZone()
+    public void UpdateCurrentZone()
     {
         CardContainer currentContainer = GetComponentInParent<CardContainer>();
 
@@ -160,5 +178,10 @@ public class CardController : MonoBehaviour {
         {
             CurrentZone = currentContainer.cardZone;
         }
+    }
+
+    public bool CanAttach(CardController cardController)
+    {
+        return CurrentZone == CardContainer.CardZone.Play;
     }
 }

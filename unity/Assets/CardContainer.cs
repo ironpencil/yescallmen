@@ -9,6 +9,7 @@ public class CardContainer : MonoBehaviour {
     {
         Hand,
         Play,
+        Attached,
         Discard
     }
 	// Use this for initialization

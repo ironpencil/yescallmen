@@ -6,11 +6,9 @@ public class DrawPileController : MonoBehaviour {
     public UIWidgetContainer HandTable;
     public GameObject CardPrefab;
 
-    public TweenPosition TweenDrawCard;
+    public CardDisplayController DisplayController;
 
-    public Vector3 DisplayPosition;
-
-    private GameObject NewCard;
+    //private GameObject NewCard;
 	// Use this for initialization
 	void Start () {
 	
@@ -26,13 +24,13 @@ public class DrawPileController : MonoBehaviour {
 
         //NGUITools.AddChild(HandTable.gameObject, CardPrefab);
         
-        NewCard = NGUITools.AddChild(gameObject, CardPrefab);
+        GameObject newCard = NGUITools.AddChild(gameObject, CardPrefab);
 
-        NewCard.transform.localPosition = CardPrefab.transform.localPosition;
+        newCard.transform.localPosition = CardPrefab.transform.localPosition;
 
-        if (NewCard == null) { return; }
+        if (newCard == null) { return; }
 
-        NGUITools.BringForward(NewCard);
+        //NGUITools.BringForward(NewCard);
 
         //if (TweenDrawCard != null)
         //{
@@ -41,16 +39,26 @@ public class DrawPileController : MonoBehaviour {
         //    TweenDrawCard.PlayForward();
         //}
 
-        ReParentNewCard();
-        
+        //ReParentNewCard(newCard);
+
+        DisplayCard(newCard);
+
         //HandTable.repositionNow = true;
     }
 
-    public void ReParentNewCard()
+    public void DisplayCard(GameObject cardObject)
     {
-        if (NewCard != null && HandTable != null)
+        if (DisplayController != null)
         {
-            NewCard.transform.parent = HandTable.transform;
+            DisplayController.DisplayCard(cardObject);
+        }
+    }
+
+    public void ReParentNewCard(GameObject cardObject)
+    {
+        if (cardObject != null && HandTable != null)
+        {
+            cardObject.transform.parent = HandTable.transform;
 
             if (HandTable is UIGrid)
             {
