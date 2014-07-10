@@ -6,6 +6,10 @@ public class CardDisplayController : MonoBehaviour {
     public UIGrid displayGrid;
     public UIGrid handGrid;
 
+    public bool canSelectCards = true;
+
+    public float displayTime = 3.0f;
+
     //public UIScrollView handScrollView;
 
     private List<DisplayedCard> displayedCards = new List<DisplayedCard>();
@@ -34,12 +38,25 @@ public class CardDisplayController : MonoBehaviour {
             displayedCards.Remove(card);
         }
 
+        if (displayedCards.Count == 0 && collider.enabled)
+        {
+            collider.enabled = false;
+        }
+
 	}
 
     public void DisplayCard(GameObject cardObject)
     {
+        if (!canSelectCards)
+        {
+            //enable this panel's collider so you can't interact with the cards
+            collider.enabled = true;
+        }
+        //TweenScale.Begin(cardObject, 0.5f, new Vector3(1.5f, 1.5f, 0.0f)).PlayForward(); 
         
-        TweenScale.Begin(cardObject, 0.5f, new Vector3(1.5f, 1.5f, 0.0f)).PlayForward(); 
+        CardController displayedCardController = cardObject.GetComponent<CardController>();
+        if (displayedCardController) { displayedCardController.UpdateCurrentZone(); }
+
         cardObject.transform.parent = displayGrid.transform;
         NGUITools.BringForward(cardObject);
         displayGrid.repositionNow = true;
@@ -47,14 +64,14 @@ public class CardDisplayController : MonoBehaviour {
         NGUITools.MarkParentAsChanged(cardObject);
                
 
-        displayedCards.Add(new DisplayedCard(cardObject, 3.0f, true));
+        displayedCards.Add(new DisplayedCard(cardObject, displayTime, true));
     }
 
     public void MoveCardToHand(DisplayedCard displayedCard)
     {
         GameObject cardObject = displayedCard.cardObject;
 
-        TweenScale.Begin(cardObject, 0.5f, new Vector3(1.0f, 1.0f, 0.0f)).PlayForward();
+        //TweenScale.Begin(cardObject, 0.5f, new Vector3(1.0f, 1.0f, 0.0f)).PlayForward();
 
         cardObject.transform.parent = handGrid.transform;
         handGrid.repositionNow = true;

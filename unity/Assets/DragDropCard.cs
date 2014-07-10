@@ -7,11 +7,15 @@ public class DragDropCard : UIDragDropItem {
 
     protected override void OnDragDropStart()
     {
-        bool allowedToDrag = true;
+        bool allowedToDrag = false;
         //check to see if we're allowed to drag this item from wherever it is
         switch (cardController.CurrentZone)
         {
+            case CardContainer.CardZone.None:
+                allowedToDrag = false;
+                break;
             case CardContainer.CardZone.Hand:
+                allowedToDrag = true;
                 break;
             case CardContainer.CardZone.Play:
                 allowedToDrag = false;
@@ -23,6 +27,7 @@ public class DragDropCard : UIDragDropItem {
                 allowedToDrag = false;
                 break;
             default:
+                allowedToDrag = false;
                 break;
         }
 
@@ -82,6 +87,10 @@ public class DragDropCard : UIDragDropItem {
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = true;
                     break;                
                 case CardContainer.CardZone.Attached:
+                    int attachedCardCount = cardController.CurrentContainer.transform.childCount;
+                    //string newCardName = (999-attachedCardCount).ToString().PadLeft(3, '0');
+                    string newCardName = attachedCardCount.ToString().PadLeft(3, '0');
+                    gameObject.name = newCardName;
                     NGUITools.PushBack(gameObject);
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
                     break;

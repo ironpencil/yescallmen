@@ -7,10 +7,12 @@ public class CardContainer : MonoBehaviour {
 
     public enum CardZone
     {
+        None,
         Hand,
         Play,
         Attached,
-        Discard
+        Discard,
+        Display
     }
 	// Use this for initialization
 	void Start () {
