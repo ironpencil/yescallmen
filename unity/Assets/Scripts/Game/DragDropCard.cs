@@ -84,6 +84,8 @@ public class DragDropCard : UIDragDropItem {
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
                     break;
                 case CardContainer.CardZone.Play:
+                    //card was moved to play, trigger its event
+                    CardEventManager.cardEventManager.QueueEvents(gameObject);
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = true;
                     break;                
                 case CardContainer.CardZone.Attached:
@@ -96,6 +98,14 @@ public class DragDropCard : UIDragDropItem {
                     break;
                 case CardContainer.CardZone.Discard:
                     NGUITools.BringForward(gameObject);
+                    GameCard gameCard = gameObject.GetComponent<GameCard>();
+                    if (gameCard != null)
+                    {
+                        if (gameCard.cardDefinition != null)
+                        {
+                            DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition);
+                        }
+                    }
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
                     break;
                 default:

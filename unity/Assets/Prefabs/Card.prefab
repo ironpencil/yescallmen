@@ -97,6 +97,7 @@ GameObject:
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400034}
+  - 114: {fileID: 11400042}
   m_Layer: 8
   m_Name: Card
   m_TagString: Untagged
@@ -401,8 +402,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620b740cc8461374d94425d0762ef706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentZone: 2
+  CurrentZone: 1
   CurrentContainer: {fileID: 0}
+  gameCard: {fileID: 0}
   ScaleToLarge:
   - mTarget: {fileID: 11400018}
     mMethodName: PlayForward
@@ -1101,6 +1103,29 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &11400042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33bd939340c44f2498b3c849f86b10be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleLabel: {fileID: 11400006}
+  textLabel: {fileID: 11400038}
+  levelLabel: {fileID: 11400036}
+  damageLabel: {fileID: 11400010}
+  cardType: 1
+  damageType: 3
+  levelPrvt: 1
+  titlePrvt: 
+  textPrvt: 
+  baseDamagePrvt: 1
+  currentDamagePrvt: 1
+  cardEvents: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

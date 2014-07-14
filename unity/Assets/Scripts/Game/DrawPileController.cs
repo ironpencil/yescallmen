@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class DrawPileController : MonoBehaviour {
+
+    public static DrawPileController drawPile;
 
     public UIWidgetContainer HandTable;
     public GameObject CardPrefab;
 
     public CardDisplayController DisplayController;
 
+    public bool generateRandom = false;
     //private GameObject NewCard;
 	// Use this for initialization
 	void Start () {
-	
+
+        drawPile = this;
 	}
 	
 	// Update is called once per frame
@@ -23,10 +28,32 @@ public class DrawPileController : MonoBehaviour {
     {
 
         //NGUITools.AddChild(HandTable.gameObject, CardPrefab);
-        
-        GameObject newCard = NGUITools.AddChild(gameObject, CardPrefab);
+        GameObject newCard = null;
 
-        newCard.transform.localPosition = CardPrefab.transform.localPosition;
+        if (generateRandom)
+        {
+            Array cardNames = Enum.GetValues(typeof(CardFactory.CardName));
+
+            int random = UnityEngine.Random.Range(0, cardNames.Length);
+
+            CardFactory.CardName randomCard = (CardFactory.CardName)cardNames.GetValue(random);
+
+            newCard = CardFactory.cardFactory.CreateCard(randomCard, 1, gameObject);
+        }
+        else
+        {
+            CardDefinition nextCard = DeckManager.deckManager.DrawFromDeck();
+
+            if (nextCard != null)
+            {
+                newCard = CardFactory.cardFactory.CreateCard(nextCard, gameObject);
+            }
+            //newCard = CardFactory.cardFactory.CreateCard(cardName, 1, gameObject);
+        }
+
+        //GameObject newCard = NGUITools.AddChild(gameObject, CardPrefab);
+
+        //newCard.transform.localPosition = CardPrefab.transform.localPosition;
 
         if (newCard == null) { return; }
 
@@ -40,6 +67,8 @@ public class DrawPileController : MonoBehaviour {
         //}
 
         //ReParentNewCard(newCard);
+
+        
 
         DisplayCard(newCard);
 

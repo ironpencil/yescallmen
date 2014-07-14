@@ -19,9 +19,9 @@ public class RefreshScrollView : MonoBehaviour {
     {
         if (scrollView != null)
         {
-            Debug.Log("Refreshing Scroll View");
+            //Debug.Log("Refreshing Scroll View");
             scrollView.InvalidateBounds();
-            scrollView.RestrictWithinBounds(false);
+            //scrollView.RestrictWithinBounds(false);
             scrollView.UpdateScrollbars(false);
             scrollView.onDragFinished();
         }

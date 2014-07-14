@@ -23,6 +23,22 @@ public class CardEventManager : MonoBehaviour
         }
     }
 
+    public void QueueEvents(GameObject cardObject)
+    {
+        GameCard gameCard = cardObject.GetComponent<GameCard>();
+
+        if (gameCard != null)
+        {
+            foreach (CardEvent cardEvent in gameCard.cardEvents)
+            {
+                if (cardEvent != null)
+                {
+                    executionQueue.Enqueue(cardEvent);
+                }
+            }
+        }
+    }
+
     public void Start()
     {
         processEvents = true;

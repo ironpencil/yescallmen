@@ -6,6 +6,8 @@ public class CardController : MonoBehaviour {
     public CardContainer.CardZone CurrentZone;
     public CardContainer CurrentContainer;
 
+    public GameCard gameCard;
+
     static public CardController current;
 
     public List<EventDelegate> ScaleToLarge = new List<EventDelegate>();
