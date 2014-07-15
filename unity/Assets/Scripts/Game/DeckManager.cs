@@ -29,16 +29,31 @@ public class DeckManager : MonoBehaviour {
         deckManager = this;
 
         //just create a random deck of 10 cards for now
-        for (int i = 0; i < 10; i++)
-        {
-            Array cardNames = Enum.GetValues(typeof(CardFactory.CardName));
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    Array cardNames = Enum.GetValues(typeof(CardFactory.CardName));
 
-            int random = UnityEngine.Random.Range(0, cardNames.Length);
+        //    int random = UnityEngine.Random.Range(0, cardNames.Length);
 
-            CardFactory.CardName randomCard = (CardFactory.CardName)cardNames.GetValue(random);
+        //    CardFactory.CardName randomCard = (CardFactory.CardName)cardNames.GetValue(random);
 
-            AddCardToDeck(new CardDefinition(randomCard, 1));
-        }
+        //    AddCardToDeck(new CardDefinition(randomCard, 1));
+        //}
+
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
+
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
+
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
+        AddCardToDeck(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
+
+        ShuffleDeck();
 	
 	}
 	

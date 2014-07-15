@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
-public class CardDefinition
+public class CardDefinition : ScriptableObject
 {
     public CardFactory.CardName CardName;
 

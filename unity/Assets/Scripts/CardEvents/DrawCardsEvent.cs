@@ -26,5 +26,4 @@ public class DrawCardsEvent : CardEvent
         return eventFinished;
     }
 
-    //public List<CardEvent> OnFinished = new List<CardEvent>();
 }

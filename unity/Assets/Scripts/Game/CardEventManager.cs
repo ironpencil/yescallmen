@@ -58,6 +58,8 @@ public class CardEventManager : MonoBehaviour
                 //first check to see if we have an event we are processing already
                 if (currentEvent != null)
                 {
+                    currentEvent.Update();
+
                     //check to see if the current event has completed
                     processNextEvent = currentEvent.eventFinished;
 

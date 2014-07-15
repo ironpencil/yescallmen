@@ -70,12 +70,25 @@ public class CardFactory : MonoBehaviour
         switch (cardDefinition.CardName)
         {
             case CardName.FatigueAttack:
-                gameCard.Title = "Fatigue";
+                gameCard.Title = "Fatigue!!";
                 gameCard.AbilityText = "Draw a card, play another Fatigue card.";
                 gameCard.cardType = GameCard.CardType.Action;
                 gameCard.damageType = GameCard.DamageType.Fatigue;
                 gameCard.BaseDamage = level;
-                gameCard.CurrentDamage = level;
+                gameCard.CurrentDamage = gameCard.BaseDamage;
+
+                DealDamageEvent fatigueDmgEvent = new DealDamageEvent();
+                fatigueDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+                fatigueDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+                gameCard.AddEvent(fatigueDmgEvent);
+
+                //DealCardDamageEvent cardDamageEvent = new DealCardDamageEvent();
+                //gameCard.AddEvent(cardDamageEvent);
+
+                DrawCardsEvent fatigueDrawEvent = new DrawCardsEvent();
+                fatigueDrawEvent.numCards = level;
+                gameCard.AddEvent(fatigueDrawEvent);
+
                 break;
             case CardName.ConfusionAttack:
                 gameCard.Title = "Confusion";
@@ -90,8 +103,29 @@ public class CardFactory : MonoBehaviour
                 gameCard.AbilityText = "Boost damage rate increases.";
                 gameCard.cardType = GameCard.CardType.Action;
                 gameCard.damageType = GameCard.DamageType.Anger;
-                gameCard.BaseDamage = level * 2;
-                gameCard.CurrentDamage = level * 2;
+                gameCard.BaseDamage = level;
+                gameCard.CurrentDamage = level;
+
+                DealDamageEvent angerBaseDmgEvent = new DealDamageEvent();
+                angerBaseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+                angerBaseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+                gameCard.AddEvent(angerBaseDmgEvent);
+
+                CountCardsEvent angerCountEvent = new CountCardsEvent();
+                angerCountEvent.countCardsInZone = CardContainer.CardZone.Play;
+                angerCountEvent.countCardsWithName = CardName.AngerAttack;
+                angerCountEvent.ignoreSelf = true;
+                angerCountEvent.countFilter = CountCardsEvent.CountFilter.CardName;
+                angerCountEvent.cardCountVariable = "anger attacks already in play";
+                gameCard.AddEvent(angerCountEvent);
+
+                DealDamageEvent angerBonusDmgEvent = new DealDamageEvent();
+                angerBonusDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+                angerBonusDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.SpecifyVariable;
+                angerBonusDmgEvent.damageAmountVariable = angerCountEvent.cardCountVariable;
+                //angerBonusDmgEvent.damageMultiplier = 2.0f;
+                gameCard.AddEvent(angerBonusDmgEvent);
+
                 break;
             case CardName.FatigueBoost:
                 gameCard.Title = "Fallacy";

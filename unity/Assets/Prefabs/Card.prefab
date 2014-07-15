@@ -404,7 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentZone: 1
   CurrentContainer: {fileID: 0}
-  gameCard: {fileID: 0}
+  gameCard: {fileID: 11400042}
   ScaleToLarge:
   - mTarget: {fileID: 11400018}
     mMethodName: PlayForward
@@ -1118,6 +1118,7 @@ MonoBehaviour:
   textLabel: {fileID: 11400038}
   levelLabel: {fileID: 11400036}
   damageLabel: {fileID: 11400010}
+  cardDefinition: {fileID: 0}
   cardType: 1
   damageType: 3
   levelPrvt: 1

@@ -98,6 +98,40 @@ public class BattleManager : MonoBehaviour {
     public UILabel enemyConfusionLabel;
     public UILabel enemyFatigueLabel;
 
+    public int DamageEnemy(GameCard.DamageType damageType, int value)
+    {
+        int newValue = -1;
+
+        switch (damageType)
+        {
+            case GameCard.DamageType.None:
+                break;
+            case GameCard.DamageType.Anger:
+                EnemyCurrentAnger = EnemyCurrentAnger - value;
+                newValue = EnemyCurrentAnger;
+                break;
+            case GameCard.DamageType.Confusion:
+                EnemyCurrentConfusion = EnemyCurrentConfusion - value;
+                newValue = EnemyCurrentConfusion;
+                break;
+            case GameCard.DamageType.Fatigue:
+                EnemyCurrentFatigue = EnemyCurrentFatigue - value;
+                newValue = EnemyCurrentFatigue;
+                break;
+            default:
+                break;
+        }
+
+        return newValue;
+    }
+
+    public int DamagePlayer(int value)
+    {
+        PlayerCurrentAnger = PlayerCurrentAnger - value;
+
+        return PlayerCurrentAnger;
+    }
+
 	// Use this for initialization
 	void Start () {
         battleManager = this;

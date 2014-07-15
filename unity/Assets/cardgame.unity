@@ -945,6 +945,7 @@ MonoBehaviour:
   textLabel: {fileID: 2063644405}
   levelLabel: {fileID: 1920023864}
   damageLabel: {fileID: 2089114535}
+  cardDefinition: {fileID: 0}
   cardType: 1
   damageType: 3
   levelPrvt: 1
@@ -952,8 +953,7 @@ MonoBehaviour:
   textPrvt: Placeholder card.
   baseDamagePrvt: 1
   currentDamagePrvt: 1
-  cardEvents:
-  - {fileID: 0}
+  cardEvents: []
 --- !u!1 &216131231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,6 +2780,7 @@ MonoBehaviour:
   textLabel: {fileID: 573998278}
   levelLabel: {fileID: 194463593}
   damageLabel: {fileID: 1883204350}
+  cardDefinition: {fileID: 0}
   cardType: 1
   damageType: 3
   levelPrvt: 1
@@ -2787,8 +2788,7 @@ MonoBehaviour:
   textPrvt: Placeholder card.
   baseDamagePrvt: 1
   currentDamagePrvt: 1
-  cardEvents:
-  - {fileID: 0}
+  cardEvents: []
 --- !u!1 &698946671
 GameObject:
   m_ObjectHideFlags: 0
@@ -6207,6 +6207,7 @@ GameObject:
   - 114: {fileID: 1819080650}
   - 114: {fileID: 1819080652}
   - 114: {fileID: 1819080653}
+  - 114: {fileID: 1819080654}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6299,6 +6300,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deckCount: 0
   discardCount: 0
+--- !u!114 &1819080654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1819080647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a6d1fceb188194bbfacbc8e1883936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handContainer: {fileID: 0}
+  playContainer: {fileID: 0}
+  discardContainer: {fileID: 0}
+  displayContainer: {fileID: 0}
 --- !u!1 &1825231404
 GameObject:
   m_ObjectHideFlags: 0

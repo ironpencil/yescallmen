@@ -112,7 +112,15 @@ public class GameCard : MonoBehaviour
         }
     }
 
+    public Dictionary<string, string> eventVariables = new Dictionary<string, string>();
+
     public List<CardEvent> cardEvents = new List<CardEvent>();
+
+    public void AddEvent(CardEvent cardEvent)
+    {
+        cardEvent.gameCard = this;
+        cardEvents.Add(cardEvent);
+    }
 
     [ContextMenu("Find Card Labels")]
     public void FindCardLabels()
