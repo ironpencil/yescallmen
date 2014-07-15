@@ -135,6 +135,16 @@ public class BattleManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         battleManager = this;
+
+        EnemyMaxAnger = EnemyMaxAnger;
+        EnemyCurrentAnger = EnemyMaxAnger;
+        EnemyMaxConfusion = EnemyMaxConfusion;
+        EnemyCurrentConfusion = EnemyMaxConfusion;
+        EnemyMaxFatigue = EnemyMaxFatigue;
+        EnemyCurrentFatigue = EnemyMaxFatigue;
+
+        PlayerMaxAnger = PlayerMaxAnger;
+        PlayerCurrentAnger = PlayerMaxAnger;
 	}
 	
 	// Update is called once per frame

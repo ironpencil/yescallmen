@@ -1623,7 +1623,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   rightAnchor:
-    target: {fileID: 1384699389}
+    target: {fileID: 0}
     relative: 1
     absolute: 147
   bottomAnchor:
@@ -5270,7 +5270,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1492721204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 165, y: 0, z: 0}
+  m_LocalPosition: {x: 165, y: 7.62939453e-06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1739377535}
@@ -5291,7 +5291,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   rightAnchor:
-    target: {fileID: 2092474749}
+    target: {fileID: 0}
     relative: 1
     absolute: 144
   bottomAnchor:
@@ -5554,7 +5554,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   rightAnchor:
-    target: {fileID: 319905575}
+    target: {fileID: 0}
     relative: 1
     absolute: 118
   bottomAnchor:
@@ -6311,10 +6311,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a6d1fceb188194bbfacbc8e1883936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handContainer: {fileID: 0}
-  playContainer: {fileID: 0}
-  discardContainer: {fileID: 0}
-  displayContainer: {fileID: 0}
+  handContainer: {fileID: 514666698}
+  playContainer: {fileID: 264105828}
+  discardContainer: {fileID: 1887877633}
+  displayContainer: {fileID: 1346309468}
 --- !u!1 &1825231404
 GameObject:
   m_ObjectHideFlags: 0
@@ -7821,7 +7821,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   rightAnchor:
-    target: {fileID: 1491261724}
+    target: {fileID: 0}
     relative: 1
     absolute: 134
   bottomAnchor:
