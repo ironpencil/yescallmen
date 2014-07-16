@@ -105,24 +105,57 @@ public class DeckManager : MonoBehaviour {
         discard.Add(card);
     }
 
-    public CardDefinition DrawFromDeck()
+    public static CardDefinition GetCardDefinition(GameObject cardObject)
     {
-        if (deck.Count == 0)
+        GameCard gameCard = cardObject.GetComponent<GameCard>();
+
+        if (gameCard != null)
         {
-            if (discard.Count == 0)
-            {
-                //no cards left anywhere!
-                return null;
-            }
-            else
-            {
-                ShuffleDiscardIntoDeck();
-            }
+            return gameCard.cardDefinition;
         }
 
-        int lastIndex = deck.Count - 1;
-        CardDefinition cardToDraw = deck[lastIndex];
-        deck.RemoveAt(lastIndex);
+        return null;
+
+    }
+
+    public CardDefinition DrawFromDeck(bool discardPile, bool peek)
+    {
+        List<CardDefinition> targetPile;
+
+        //check if target pile is empty
+        if (discardPile)
+        {            
+            if (discard.Count == 0)
+            {
+                return null;
+            }
+            targetPile = discard;
+        }
+        else
+        {
+            if (deck.Count == 0)
+            {
+                if (discard.Count == 0)
+                {
+                    //no cards left anywhere!
+                    return null;
+                }
+                else
+                {
+                    ShuffleDiscardIntoDeck();
+                }
+            }
+            targetPile = deck;
+        }
+
+        int lastIndex = targetPile.Count - 1;
+        CardDefinition cardToDraw = targetPile[lastIndex];
+
+        if (!peek)
+        {
+            targetPile.RemoveAt(lastIndex);
+        }
+
         return cardToDraw;
     }
 

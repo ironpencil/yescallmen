@@ -9,6 +9,8 @@ public class DrawCardsEvent : CardEvent
 
     public int numCards = 1;
 
+    public CardContainer.CardZone drawToZone = CardContainer.CardZone.Hand;
+
     public override bool Execute()
     {
         DrawPileController drawPile = DrawPileController.drawPile;
@@ -18,7 +20,7 @@ public class DrawCardsEvent : CardEvent
 
             for (int i = 0; i < numCards; i++)
             {
-                drawPile.DrawCard();
+                drawPile.DrawCard(drawToZone);
             }
         }
 

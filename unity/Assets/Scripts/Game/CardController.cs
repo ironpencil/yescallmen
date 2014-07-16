@@ -195,6 +195,7 @@ public class CardController : MonoBehaviour {
 
     public bool CanAttach(CardController cardController)
     {
-        return CurrentZone == CardContainer.CardZone.Play;
+        //return CurrentZone == CardContainer.CardZone.Play;
+        return false;
     }
 }

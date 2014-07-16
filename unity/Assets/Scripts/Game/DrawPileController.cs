@@ -6,12 +6,11 @@ public class DrawPileController : MonoBehaviour {
 
     public static DrawPileController drawPile;
 
-    public UIWidgetContainer HandTable;
     public GameObject CardPrefab;
 
-    public CardDisplayController DisplayController;
-
     public bool generateRandom = false;
+
+    public int maximumHandSize = 5;
     //private GameObject NewCard;
 	// Use this for initialization
 	void Start () {
@@ -24,7 +23,12 @@ public class DrawPileController : MonoBehaviour {
 	
 	}
 
-    public void DrawCard()
+    public void Draw()
+    {
+        DrawCard(CardContainer.CardZone.Hand);
+    }
+
+    public GameObject DrawCard(CardContainer.CardZone destinationZone)
     {
 
         //NGUITools.AddChild(HandTable.gameObject, CardPrefab);
@@ -42,10 +46,11 @@ public class DrawPileController : MonoBehaviour {
         }
         else
         {
-            CardDefinition nextCard = DeckManager.deckManager.DrawFromDeck();
+            CardDefinition nextCard = DeckManager.deckManager.DrawFromDeck(false, false);
 
             if (nextCard != null)
             {
+                GameMessageManager.gameMessageManager.AddLine("Drew card: " + nextCard.CardName, false);
                 newCard = CardFactory.cardFactory.CreateCard(nextCard, gameObject);
             }
             //newCard = CardFactory.cardFactory.CreateCard(cardName, 1, gameObject);
@@ -54,8 +59,6 @@ public class DrawPileController : MonoBehaviour {
         //GameObject newCard = NGUITools.AddChild(gameObject, CardPrefab);
 
         //newCard.transform.localPosition = CardPrefab.transform.localPosition;
-
-        if (newCard == null) { return; }
 
         //NGUITools.BringForward(NewCard);
 
@@ -68,35 +71,23 @@ public class DrawPileController : MonoBehaviour {
 
         //ReParentNewCard(newCard);
 
-        
 
-        DisplayCard(newCard);
+        CardDisplayController.cardDisplayController.DisplayCard(newCard, destinationZone, 1.0f);
+        
+        //DisplayCard(newCard, destinationZone);
+
+        return newCard;
 
         //HandTable.repositionNow = true;
     }
 
-    public void DisplayCard(GameObject cardObject)
+    public void DrawToFullHand()
     {
-        if (DisplayController != null)
-        {
-            DisplayController.DisplayCard(cardObject);
-        }
-    }
+        int currentHandSize = CardZoneManager.cardZoneManager.GetCardsInZone(CardContainer.CardZone.Hand).Count;
 
-    public void ReParentNewCard(GameObject cardObject)
-    {
-        if (cardObject != null && HandTable != null)
+        for (int i = currentHandSize; i < maximumHandSize; i++)
         {
-            cardObject.transform.parent = HandTable.transform;
-
-            if (HandTable is UIGrid)
-            {
-                ((UIGrid)HandTable).repositionNow = true;
-            }
-            else if (HandTable is UITable)
-            {
-                ((UITable)HandTable).repositionNow = true;
-            }
+            DrawCard(CardContainer.CardZone.Hand);
         }
     }
 }

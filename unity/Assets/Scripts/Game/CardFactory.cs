@@ -43,8 +43,8 @@ public class CardFactory : MonoBehaviour
         if (gameCard != null)
         {
             gameCard.Level = cardDefinition.Level;
-            gameCard = SetupCard(gameCard, cardDefinition);
             gameCard.cardDefinition = cardDefinition;
+            gameCard = SetupCard(gameCard, cardDefinition);            
             //gameCard.Text = GetCardText(cardName);
             //gameCard.Level = level;
             //gameCard.cardType = GetCardType(cardName);
@@ -70,61 +70,15 @@ public class CardFactory : MonoBehaviour
         switch (cardDefinition.CardName)
         {
             case CardName.FatigueAttack:
-                gameCard.Title = "Fatigue!!";
-                gameCard.AbilityText = "Draw a card, play another Fatigue card.";
-                gameCard.cardType = GameCard.CardType.Action;
-                gameCard.damageType = GameCard.DamageType.Fatigue;
-                gameCard.BaseDamage = level;
-                gameCard.CurrentDamage = gameCard.BaseDamage;
-
-                DealDamageEvent fatigueDmgEvent = new DealDamageEvent();
-                fatigueDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
-                fatigueDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
-                gameCard.AddEvent(fatigueDmgEvent);
-
-                //DealCardDamageEvent cardDamageEvent = new DealCardDamageEvent();
-                //gameCard.AddEvent(cardDamageEvent);
-
-                DrawCardsEvent fatigueDrawEvent = new DrawCardsEvent();
-                fatigueDrawEvent.numCards = level;
-                gameCard.AddEvent(fatigueDrawEvent);
+                GenerateFatigueAttack(gameCard, level);
 
                 break;
             case CardName.ConfusionAttack:
-                gameCard.Title = "Confusion";
-                gameCard.AbilityText = "Reveal cards, do damage based on Contradictions.";
-                gameCard.cardType = GameCard.CardType.Action;
-                gameCard.damageType = GameCard.DamageType.Confusion;
-                gameCard.BaseDamage = level;
-                gameCard.CurrentDamage = level;
+                GenerateConfusionAttack(gameCard, level);
+
                 break;
             case CardName.AngerAttack:
-                gameCard.Title = "Anger";
-                gameCard.AbilityText = "Boost damage rate increases.";
-                gameCard.cardType = GameCard.CardType.Action;
-                gameCard.damageType = GameCard.DamageType.Anger;
-                gameCard.BaseDamage = level;
-                gameCard.CurrentDamage = level;
-
-                DealDamageEvent angerBaseDmgEvent = new DealDamageEvent();
-                angerBaseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
-                angerBaseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
-                gameCard.AddEvent(angerBaseDmgEvent);
-
-                CountCardsEvent angerCountEvent = new CountCardsEvent();
-                angerCountEvent.countCardsInZone = CardContainer.CardZone.Play;
-                angerCountEvent.countCardsWithName = CardName.AngerAttack;
-                angerCountEvent.ignoreSelf = true;
-                angerCountEvent.countFilter = CountCardsEvent.CountFilter.CardName;
-                angerCountEvent.cardCountVariable = "anger attacks already in play";
-                gameCard.AddEvent(angerCountEvent);
-
-                DealDamageEvent angerBonusDmgEvent = new DealDamageEvent();
-                angerBonusDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
-                angerBonusDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.SpecifyVariable;
-                angerBonusDmgEvent.damageAmountVariable = angerCountEvent.cardCountVariable;
-                //angerBonusDmgEvent.damageMultiplier = 2.0f;
-                gameCard.AddEvent(angerBonusDmgEvent);
+                GenerateAngerAttack(gameCard, level);
 
                 break;
             case CardName.FatigueBoost:
@@ -157,6 +111,97 @@ public class CardFactory : MonoBehaviour
 
 
         return gameCard;
+    }
+
+    private static void GenerateConfusionAttack(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Confusion";
+        gameCard.AbilityText = "Discard top of deck, bonus damage if Confusion attack.";
+        gameCard.cardType = GameCard.CardType.Action;
+        gameCard.damageType = GameCard.DamageType.Confusion;
+        gameCard.BaseDamage = level;
+        gameCard.CurrentDamage = level;
+
+        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = 1;
+        drawEvent.drawToZone = CardContainer.CardZone.Discard;
+        gameCard.AddEvent(drawEvent);
+
+        WaitForDisplayedCardsEvent waitEvent = new WaitForDisplayedCardsEvent();
+        gameCard.AddEvent(waitEvent);
+
+        IsCardOnDiscardPileEvent discardCheckEvent = new IsCardOnDiscardPileEvent();
+        discardCheckEvent.cardName = gameCard.cardDefinition.CardName;
+        discardCheckEvent.resultVariable = "ConfusionBonusDamage";
+        discardCheckEvent.resultValueTrue = "3";
+        discardCheckEvent.resultValueFalse = "0";
+        gameCard.AddEvent(discardCheckEvent);        
+
+        DealDamageEvent bonusDmgEvent = new DealDamageEvent();
+        bonusDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        bonusDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.SpecifyVariable;
+        bonusDmgEvent.damageAmountVariable = discardCheckEvent.resultVariable;
+        //angerBonusDmgEvent.damageMultiplier = 2.0f;
+        gameCard.AddEvent(bonusDmgEvent);
+
+
+    }
+
+    private static void GenerateAngerAttack(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Anger";
+        gameCard.AbilityText = "Bonus damage for each other Anger attack in play.";
+        gameCard.cardType = GameCard.CardType.Action;
+        gameCard.damageType = GameCard.DamageType.Anger;
+        gameCard.BaseDamage = level;
+        gameCard.CurrentDamage = level;
+
+        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
+
+        CountCardsEvent countEvent = new CountCardsEvent();
+        countEvent.countCardsInZone = CardContainer.CardZone.Play;
+        countEvent.countCardsWithName = CardName.AngerAttack;
+        countEvent.ignoreSelf = true;
+        countEvent.countFilter = CountCardsEvent.CountFilter.CardName;
+        countEvent.cardCountVariable = "anger attacks already in play";
+        gameCard.AddEvent(countEvent);
+
+        DealDamageEvent bonusDmgEvent = new DealDamageEvent();
+        bonusDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        bonusDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.SpecifyVariable;
+        bonusDmgEvent.damageAmountVariable = countEvent.cardCountVariable;
+        //angerBonusDmgEvent.damageMultiplier = 2.0f;
+        gameCard.AddEvent(bonusDmgEvent);
+    }
+
+    private static void GenerateFatigueAttack(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Fatigue";
+        gameCard.AbilityText = "Draw a card.";
+        gameCard.cardType = GameCard.CardType.Action;
+        gameCard.damageType = GameCard.DamageType.Fatigue;
+        gameCard.BaseDamage = level;
+        gameCard.CurrentDamage = gameCard.BaseDamage;
+
+        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
+
+        //DealCardDamageEvent cardDamageEvent = new DealCardDamageEvent();
+        //gameCard.AddEvent(cardDamageEvent);
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = level;
+        gameCard.AddEvent(drawEvent);
     }
 
     /* Old Card Generation Stuff

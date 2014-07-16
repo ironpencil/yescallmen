@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620b740cc8461374d94425d0762ef706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentZone: 1
+  CurrentZone: 0
   CurrentContainer: {fileID: 0}
   gameCard: {fileID: 11400042}
   ScaleToLarge:
