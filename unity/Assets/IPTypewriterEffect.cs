@@ -269,4 +269,9 @@ public class IPTypewriterEffect : MonoBehaviour
     {
         mFullText += text;        
     }
+
+    public void SetText(string text)
+    {
+        mFullText = text;
+    }
 }

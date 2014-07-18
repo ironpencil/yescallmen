@@ -20,7 +20,7 @@ public class DrawCardsEvent : CardEvent
 
             for (int i = 0; i < numCards; i++)
             {
-                drawPile.DrawCard(drawToZone);
+                drawPile.DrawCardToZone(drawToZone);
             }
         }
 

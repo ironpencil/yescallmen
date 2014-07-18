@@ -28,13 +28,16 @@ public class GameMessageManager : MonoBehaviour {
 
     public void SetText(string text, bool instant)
     {
-        uiLabel.text = text;
-        typewriter.ResetToBeginning();
+        typewriter.SetText(text);        
         typewriter.isActive = true;
 
         if (instant)
         {
             typewriter.Finish();
+        }
+        else
+        {
+            typewriter.ResetToBeginning();
         }
 
         messageScrollview.ResetPosition();

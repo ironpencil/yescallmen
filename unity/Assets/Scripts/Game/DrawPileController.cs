@@ -25,13 +25,11 @@ public class DrawPileController : MonoBehaviour {
 
     public void Draw()
     {
-        DrawCard(CardContainer.CardZone.Hand);
+        DrawCardToZone(CardContainer.CardZone.Hand);
     }
 
-    public GameObject DrawCard(CardContainer.CardZone destinationZone)
+    public GameObject DrawCard()
     {
-
-        //NGUITools.AddChild(HandTable.gameObject, CardPrefab);
         GameObject newCard = null;
 
         if (generateRandom)
@@ -56,6 +54,16 @@ public class DrawPileController : MonoBehaviour {
             //newCard = CardFactory.cardFactory.CreateCard(cardName, 1, gameObject);
         }
 
+        return newCard;
+    }
+
+    public GameObject DrawCardToZone(CardContainer.CardZone destinationZone)
+    {
+
+        //NGUITools.AddChild(HandTable.gameObject, CardPrefab);
+        GameObject newCard = DrawCard();
+
+        
         //GameObject newCard = NGUITools.AddChild(gameObject, CardPrefab);
 
         //newCard.transform.localPosition = CardPrefab.transform.localPosition;
@@ -87,7 +95,7 @@ public class DrawPileController : MonoBehaviour {
 
         for (int i = currentHandSize; i < maximumHandSize; i++)
         {
-            DrawCard(CardContainer.CardZone.Hand);
+            DrawCardToZone(CardContainer.CardZone.Hand);
         }
     }
 }

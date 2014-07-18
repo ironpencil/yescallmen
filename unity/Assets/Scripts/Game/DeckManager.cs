@@ -41,17 +41,15 @@ public class DeckManager : MonoBehaviour {
         //}
 
         AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
 
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
         AddCardToDeck(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
 
         AddCardToDeck(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
+
+        for (int i = 0; i < 7; i++)
+        {
+            AddCardToDeck(new CardDefinition(CardFactory.CardName.Spite, 1));
+        }        
 
         ShuffleDeck();
 	

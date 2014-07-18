@@ -17,9 +17,10 @@ public class GameCard : MonoBehaviour
     public enum CardType
     {
         None,
-        Action,
-        Boost,
-        Special
+        Argument,
+        Spite,
+        Special,
+        Action
     }
 
     public enum DamageType
@@ -33,6 +34,10 @@ public class GameCard : MonoBehaviour
     public CardType cardType = CardType.None;
 
     public DamageType damageType = DamageType.None;
+
+    public int spiteUsed = 0;
+
+    public int spiteAdded = 0;
 
     [SerializeField]
     private int levelPrvt = 1;
@@ -100,7 +105,7 @@ public class GameCard : MonoBehaviour
             currentDamagePrvt = value;
             if (damageLabel != null)
             {
-                if (cardType == CardType.Action)
+                if (cardType == CardType.Argument)
                 {
                     damageLabel.text = currentDamagePrvt.ToString() + " DMG";
                 }

@@ -27,6 +27,29 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    public int enemyMaxHP = 10;
+    public int EnemyMaxHP
+    {
+        get { return enemyMaxHP; }
+        set
+        {
+            enemyMaxHP = Mathf.Max(1, value);
+            enemyHPLabel.text = EnemyCurrentHP.ToString() + " / " + EnemyMaxHP;
+        }
+    }
+
+    public int enemyCurrentHP = 10;
+    public int EnemyCurrentHP
+    {
+        get { return enemyCurrentHP; }
+        set
+        {
+            enemyCurrentHP = Mathf.Min(EnemyMaxHP, value);
+            enemyHPLabel.text = EnemyCurrentHP.ToString() + " / " + EnemyMaxHP;
+        }            
+    }
+
+    /* old damage types
     public int enemyMaxAnger = 10;
     public int EnemyMaxAnger
     {
@@ -92,12 +115,16 @@ public class BattleManager : MonoBehaviour {
             enemyFatigueLabel.text = EnemyCurrentFatigue.ToString() + " / " + EnemyMaxFatigue;
         }
     }
+     * */
 
     public bool IsEnemyAlive()
     {
-        return (EnemyCurrentAnger > 0 &&
-            EnemyCurrentConfusion > 0 &&
-            EnemyCurrentFatigue > 0);
+
+        return EnemyCurrentHP > 0;
+
+        //return (EnemyCurrentAnger > 0 &&
+        //    EnemyCurrentConfusion > 0 &&
+        //    EnemyCurrentFatigue > 0);
     }
 
     public bool IsPlayerAlive()
@@ -107,21 +134,28 @@ public class BattleManager : MonoBehaviour {
 
     public void StartNewBattle()
     {
-        EnemyCurrentAnger = EnemyMaxAnger;
-        EnemyCurrentFatigue = EnemyMaxFatigue;
-        EnemyCurrentConfusion = EnemyMaxConfusion;
+        //EnemyCurrentAnger = EnemyMaxAnger;
+        //EnemyCurrentFatigue = EnemyMaxFatigue;
+        //EnemyCurrentConfusion = EnemyMaxConfusion;
+        EnemyCurrentHP = EnemyMaxHP;
     }
 
     public UILabel playerAngerLabel;
-    public UILabel enemyAngerLabel;
+
+    public UILabel enemyHPLabel;
+    /*old damage typespublic UILabel enemyAngerLabel;
     public UILabel enemyConfusionLabel;
     public UILabel enemyFatigueLabel;
+     * */
 
     public int DamageEnemy(GameCard.DamageType damageType, int value)
     {
-        int newValue = -1;
+        //int newValue = 
 
-        switch (damageType)
+        EnemyCurrentHP = EnemyCurrentHP - value;
+
+        /* old damage types
+         * switch (damageType)
         {
             case GameCard.DamageType.None:
                 break;
@@ -139,9 +173,9 @@ public class BattleManager : MonoBehaviour {
                 break;
             default:
                 break;
-        }
+        }*/
 
-        return newValue;
+        return EnemyCurrentHP;
     }
 
     public int DamagePlayer(int value)
@@ -155,12 +189,17 @@ public class BattleManager : MonoBehaviour {
 	void Start () {
         battleManager = this;
 
+        /* old damage types
         EnemyMaxAnger = EnemyMaxAnger;
         EnemyCurrentAnger = EnemyMaxAnger;
         EnemyMaxConfusion = EnemyMaxConfusion;
         EnemyCurrentConfusion = EnemyMaxConfusion;
         EnemyMaxFatigue = EnemyMaxFatigue;
         EnemyCurrentFatigue = EnemyMaxFatigue;
+         */
+
+        EnemyMaxHP = EnemyMaxHP;
+        EnemyCurrentHP = EnemyMaxHP;
 
         PlayerMaxAnger = PlayerMaxAnger;
         PlayerCurrentAnger = PlayerMaxAnger;

@@ -19,9 +19,7 @@ public class CardFactory : MonoBehaviour
         FatigueAttack,
         ConfusionAttack,
         AngerAttack,
-        FatigueBoost,
-        ConfusionBoost,
-        AngerBoost
+        Spite
     }
 
     public GameObject CreateCard(CardDefinition cardDefinition)
@@ -81,29 +79,8 @@ public class CardFactory : MonoBehaviour
                 GenerateAngerAttack(gameCard, level);
 
                 break;
-            case CardName.FatigueBoost:
-                gameCard.Title = "Fallacy";
-                gameCard.AbilityText = "Play on Fatigue cards.";
-                gameCard.cardType = GameCard.CardType.Boost;
-                gameCard.damageType = GameCard.DamageType.Fatigue;
-                gameCard.BaseDamage = 0;
-                gameCard.CurrentDamage = 0;
-                break;
-            case CardName.ConfusionBoost:
-                gameCard.Title = "Contradiction";
-                gameCard.AbilityText = "Play on Confusion cards.";
-                gameCard.cardType = GameCard.CardType.Boost;
-                gameCard.damageType = GameCard.DamageType.Confusion;
-                gameCard.BaseDamage = 0;
-                gameCard.CurrentDamage = 0;
-                break;
-            case CardName.AngerBoost:
-                gameCard.Title = "Insult";
-                gameCard.AbilityText = "Play on Anger cards.";
-                gameCard.cardType = GameCard.CardType.Boost;
-                gameCard.damageType = GameCard.DamageType.Anger;
-                gameCard.BaseDamage = 0;
-                gameCard.CurrentDamage = 0;
+            case CardName.Spite:
+                GenerateSpite(gameCard, level);
                 break;
             default:
                 break;
@@ -113,83 +90,57 @@ public class CardFactory : MonoBehaviour
         return gameCard;
     }
 
+    private void GenerateSpite(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Spite";
+        gameCard.AbilityText = "Gain " + level + " Spite.";
+        gameCard.cardType = GameCard.CardType.Spite;
+        gameCard.spiteAdded = level;
+    }
+
     private static void GenerateConfusionAttack(GameCard gameCard, int level)
     {
         gameCard.Title = "Confusion";
-        gameCard.AbilityText = "Discard top of deck, bonus damage if it is a Confusion attack.";
-        gameCard.cardType = GameCard.CardType.Action;
+        gameCard.AbilityText = "Uses 1 Spite. Reveal top card of deck. If it is an Argument, put it into play for free. Otherwise, discard it.";
+        gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Confusion;
-        gameCard.BaseDamage = level;
-        gameCard.CurrentDamage = level;
+        gameCard.BaseDamage = level * 2;
+        gameCard.CurrentDamage = level * 2;
+        gameCard.spiteUsed = 1;
 
         DealDamageEvent baseDmgEvent = new DealDamageEvent();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
         baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
         gameCard.AddEvent(baseDmgEvent);
 
-        DrawCardsEvent drawEvent = new DrawCardsEvent();
-        drawEvent.numCards = 1;
-        drawEvent.drawToZone = CardContainer.CardZone.Discard;
-        gameCard.AddEvent(drawEvent);
-
-        WaitForDisplayedCardsEvent waitEvent = new WaitForDisplayedCardsEvent();
-        gameCard.AddEvent(waitEvent);
-
-        IsCardOnDiscardPileEvent discardCheckEvent = new IsCardOnDiscardPileEvent();
-        discardCheckEvent.cardName = gameCard.cardDefinition.CardName;
-        discardCheckEvent.resultVariable = "ConfusionBonusDamage";
-        discardCheckEvent.resultValueTrue = "3";
-        discardCheckEvent.resultValueFalse = "0";
-        gameCard.AddEvent(discardCheckEvent);        
-
-        DealDamageEvent bonusDmgEvent = new DealDamageEvent();
-        bonusDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
-        bonusDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.SpecifyVariable;
-        bonusDmgEvent.damageAmountVariable = discardCheckEvent.resultVariable;
-        //angerBonusDmgEvent.damageMultiplier = 2.0f;
-        gameCard.AddEvent(bonusDmgEvent);
-
+        ConfusionArgumentEvent confEvent = new ConfusionArgumentEvent();
+        gameCard.AddEvent(confEvent);
 
     }
 
     private static void GenerateAngerAttack(GameCard gameCard, int level)
     {
         gameCard.Title = "Anger";
-        gameCard.AbilityText = "Bonus damage for each other Anger attack in play.";
-        gameCard.cardType = GameCard.CardType.Action;
+        gameCard.AbilityText = "Uses 2 Spite. Does damage equal to total Spite when played.";
+        gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Anger;
-        gameCard.BaseDamage = level;
-        gameCard.CurrentDamage = level;
+        gameCard.BaseDamage = 0;
+        gameCard.CurrentDamage = 0;
+        gameCard.spiteUsed = 2;
 
-        DealDamageEvent baseDmgEvent = new DealDamageEvent();
-        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
-        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
-        gameCard.AddEvent(baseDmgEvent);
-
-        CountCardsEvent countEvent = new CountCardsEvent();
-        countEvent.countCardsInZone = CardContainer.CardZone.Play;
-        countEvent.countCardsWithName = CardName.AngerAttack;
-        countEvent.ignoreSelf = true;
-        countEvent.countFilter = CountCardsEvent.CountFilter.CardName;
-        countEvent.cardCountVariable = "anger attacks already in play";
-        gameCard.AddEvent(countEvent);
-
-        DealDamageEvent bonusDmgEvent = new DealDamageEvent();
-        bonusDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
-        bonusDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.SpecifyVariable;
-        bonusDmgEvent.damageAmountVariable = countEvent.cardCountVariable;
-        //angerBonusDmgEvent.damageMultiplier = 2.0f;
-        gameCard.AddEvent(bonusDmgEvent);
+        AngerDamageEvent angDmgEvent = new AngerDamageEvent();
+        gameCard.AddEvent(angDmgEvent);
     }
 
     private static void GenerateFatigueAttack(GameCard gameCard, int level)
     {
         gameCard.Title = "Fatigue";
-        gameCard.AbilityText = "Draw a card.";
-        gameCard.cardType = GameCard.CardType.Action;
+        gameCard.AbilityText = "Uses 1 Spite. Draw a card.";
+        gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Fatigue;
         gameCard.BaseDamage = level;
         gameCard.CurrentDamage = gameCard.BaseDamage;
+        gameCard.spiteUsed = 1;
 
         DealDamageEvent baseDmgEvent = new DealDamageEvent();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;

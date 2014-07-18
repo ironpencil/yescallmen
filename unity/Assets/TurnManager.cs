@@ -79,7 +79,10 @@ public class TurnManager : MonoBehaviour {
         {
             currentTurnState = TurnState.PlayerCleanup;
 
+            DiscardHand();
             CleanupCardsInPlay();
+
+            GameMessageManager.gameMessageManager.SetText("", true);
 
             ChangeState(TurnState.EnemyTurn);
         }

@@ -6,7 +6,51 @@ public class RulesManager : MonoBehaviour {
 
     public static RulesManager rulesManager;
 
-    private List<CardFactory.CardName> restrictedCards = new List<CardFactory.CardName>();
+    public UILabel spiteTotalLabel;
+    public UILabel spiteLeftLabel;
+    public UILabel actionsLeftLabel;
+
+    private int spiteTotal = 0;
+    public int SpiteTotal
+    {
+        get
+        {
+            return spiteTotal;
+        }
+        set
+        {
+            spiteTotal = value;
+            spiteTotalLabel.text = SpiteTotal.ToString();
+        }
+    }
+
+    private int spiteLeft = 0;
+    public int SpiteLeft
+    {
+        get
+        {
+            return spiteLeft;
+        }
+        set
+        {
+            spiteLeft = value;
+            spiteLeftLabel.text = SpiteLeft.ToString();
+        }
+    }
+
+    private int actionsLeft = 1;
+    public int ActionsLeft
+    {
+        get
+        {
+            return actionsLeft;
+        }
+        set
+        {
+            actionsLeft = value;
+            actionsLeftLabel.text = ActionsLeft.ToString();
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -25,51 +69,43 @@ public class RulesManager : MonoBehaviour {
 
         if (gameCard == null) { return false; }
 
-        Debug.Log("Restricted cards: " + restrictedCards.ToString());
-        if (restrictedCards.Contains(gameCard.cardDefinition.CardName))
-        {
-            return false;
-        }
+        if (gameCard.cardType == GameCard.CardType.Action && ActionsLeft == 0) { return false; }
+
+        //if (gameCard.spiteUsed > SpiteLeft) { return false; }
 
         return true;
     }
 
     public void PlayCard(GameObject card)
     {
-        GameCard gameCard = card.GetComponent<GameCard>();
+        CardController cardController = card.GetComponent<CardController>();
+
+        if (cardController == null) { return; }
+
+        GameCard gameCard = cardController.gameCard;
 
         if (gameCard == null) { return; }
 
-        switch (gameCard.cardDefinition.CardName)
+        if (gameCard.cardType == GameCard.CardType.Action)
         {
-            case CardFactory.CardName.FatigueAttack:
-                if (restrictedCards.Count == 0)
-                {
-                    restrictedCards.Add(CardFactory.CardName.ConfusionAttack);
-                    restrictedCards.Add(CardFactory.CardName.AngerAttack);
-                }
-                break;
-            case CardFactory.CardName.ConfusionAttack:
-                if (restrictedCards.Count == 0)
-                {
-                restrictedCards.Add(CardFactory.CardName.AngerAttack);
-                restrictedCards.Add(CardFactory.CardName.FatigueAttack);
-                }
-                break;
-            case CardFactory.CardName.AngerAttack:
-                if (restrictedCards.Count == 0)
-                {
-                    restrictedCards.Add(CardFactory.CardName.FatigueAttack);
-                    restrictedCards.Add(CardFactory.CardName.ConfusionAttack);
-                }
-                break;
-            default:
-                break;
+            ActionsLeft--;
         }
+
+        SpiteTotal += gameCard.spiteAdded;
+        SpiteLeft += gameCard.spiteAdded;
+
+        SpiteLeft -= gameCard.spiteUsed;
+
+        cardController.UpdateCurrentZone();
+
+        CardEventManager.cardEventManager.QueueEvents(card);
+
     }
 
     public void ResetTurn()
     {
-        restrictedCards.Clear();
+        ActionsLeft = 1;
+        SpiteTotal = 0;
+        SpiteLeft = 0;
     }
 }
