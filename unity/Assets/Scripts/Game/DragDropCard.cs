@@ -15,7 +15,7 @@ public class DragDropCard : UIDragDropItem {
                 allowedToDrag = false;
                 break;
             case CardContainer.CardZone.Hand:
-                allowedToDrag = true;
+                allowedToDrag = TurnManager.turnManager.CanPlayCards();
                 break;
             case CardContainer.CardZone.Play:
                 allowedToDrag = false;
@@ -68,7 +68,34 @@ public class DragDropCard : UIDragDropItem {
                     }
                 }
             }
+
+            CardContainer.CardZone surfaceZone = CardZoneManager.FindObjectZone(surface);
+
+            Debug.Log("Surface zone = " + surfaceZone.ToString());
+            switch (surfaceZone)
+            {
+                case CardContainer.CardZone.None:
+                    break;
+                case CardContainer.CardZone.Hand:
+                    break;
+                case CardContainer.CardZone.Play:
+                    if (!RulesManager.rulesManager.CanPlayCard(gameObject))
+                    {
+                        surface = null;
+                    }
+                    break;
+                case CardContainer.CardZone.Attached:
+                    break;
+                case CardContainer.CardZone.Discard:
+                    break;
+                case CardContainer.CardZone.Display:
+                    break;
+                default:
+                    break;
+            }
         }
+
+        
 
 		base.OnDragDropRelease(surface);
 
@@ -85,6 +112,7 @@ public class DragDropCard : UIDragDropItem {
                     break;
                 case CardContainer.CardZone.Play:
                     //card was moved to play, trigger its event
+                    RulesManager.rulesManager.PlayCard(gameObject);
                     CardEventManager.cardEventManager.QueueEvents(gameObject);
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = true;
                     break;                

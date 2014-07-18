@@ -93,6 +93,25 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    public bool IsEnemyAlive()
+    {
+        return (EnemyCurrentAnger > 0 &&
+            EnemyCurrentConfusion > 0 &&
+            EnemyCurrentFatigue > 0);
+    }
+
+    public bool IsPlayerAlive()
+    {
+        return PlayerCurrentAnger > 0;
+    }
+
+    public void StartNewBattle()
+    {
+        EnemyCurrentAnger = EnemyMaxAnger;
+        EnemyCurrentFatigue = EnemyMaxFatigue;
+        EnemyCurrentConfusion = EnemyMaxConfusion;
+    }
+
     public UILabel playerAngerLabel;
     public UILabel enemyAngerLabel;
     public UILabel enemyConfusionLabel;

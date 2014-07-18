@@ -58,4 +58,19 @@ public class CardZoneManager : MonoBehaviour {
 
         return cardList;
     }
+
+    public static CardContainer.CardZone FindObjectZone(GameObject go)
+    {
+        CardContainer cardContainer = go.GetComponentInParent<CardContainer>();
+
+        CardContainer.CardZone returnZone = CardContainer.CardZone.None;
+
+        if (cardContainer != null)
+        {
+            returnZone = cardContainer.cardZone;
+        }
+
+        return returnZone;
+
+    }
 }

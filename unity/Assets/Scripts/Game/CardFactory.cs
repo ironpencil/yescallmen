@@ -116,7 +116,7 @@ public class CardFactory : MonoBehaviour
     private static void GenerateConfusionAttack(GameCard gameCard, int level)
     {
         gameCard.Title = "Confusion";
-        gameCard.AbilityText = "Discard top of deck, bonus damage if Confusion attack.";
+        gameCard.AbilityText = "Discard top of deck, bonus damage if it is a Confusion attack.";
         gameCard.cardType = GameCard.CardType.Action;
         gameCard.damageType = GameCard.DamageType.Confusion;
         gameCard.BaseDamage = level;

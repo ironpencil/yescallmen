@@ -26,6 +26,8 @@ public class StartGame : MonoBehaviour {
             GetComponent<TweenAlpha>().PlayForward();
         }
 
+        TurnManager.turnManager.ChangeState(TurnManager.TurnState.OutOfBattle);
+
         //if (HandPanel != null && GamePanel != null)
         //{
         //    NGUITools.SetActive(HandPanel, true);
