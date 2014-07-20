@@ -8,7 +8,6 @@ public class GameMessageManager : MonoBehaviour {
     public GameObject labelObject;
     public UIScrollView messageScrollview;
 
-    private UILabel uiLabel;
     private IPTypewriterEffect typewriter;
 
     public int charsPerSecond = 50;
@@ -16,7 +15,6 @@ public class GameMessageManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gameMessageManager = this;
-        uiLabel = labelObject.GetComponent<UILabel>();
         typewriter = labelObject.GetComponent<IPTypewriterEffect>();
 
 	}

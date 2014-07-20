@@ -19,7 +19,9 @@ public class CardFactory : MonoBehaviour
         FatigueAttack,
         ConfusionAttack,
         AngerAttack,
-        Spite
+        Spite,
+        Trasher,
+        NotAllMen
     }
 
     public GameObject CreateCard(CardDefinition cardDefinition)
@@ -30,7 +32,7 @@ public class CardFactory : MonoBehaviour
 
     public GameObject CreateCard(CardDefinition cardDefinition, GameObject parent)
     {
-        if (parent == null) { parent = gameObject; }
+        //if (parent == null) { parent = gameObject; }
 
         GameObject newCard = NGUITools.AddChild(parent, CardPrefab);
 
@@ -39,9 +41,7 @@ public class CardFactory : MonoBehaviour
         GameCard gameCard = newCard.GetComponent<GameCard>();
 
         if (gameCard != null)
-        {
-            gameCard.Level = cardDefinition.Level;
-            gameCard.cardDefinition = cardDefinition;
+        {                        
             gameCard = SetupCard(gameCard, cardDefinition);            
             //gameCard.Text = GetCardText(cardName);
             //gameCard.Level = level;
@@ -61,9 +61,15 @@ public class CardFactory : MonoBehaviour
         return CreateCard(new CardDefinition(cardName, level), parent);
     }
 
-    private GameCard SetupCard(GameCard gameCard, CardDefinition cardDefinition)
+    public GameCard SetupCard(GameCard gameCard, CardDefinition cardDefinition)
     {
         int level = cardDefinition.Level;
+
+        gameCard.cardDefinition = cardDefinition;
+
+        gameCard.Level = level;
+
+        gameCard.cardEvents.Clear();
 
         switch (cardDefinition.CardName)
         {
@@ -82,6 +88,12 @@ public class CardFactory : MonoBehaviour
             case CardName.Spite:
                 GenerateSpite(gameCard, level);
                 break;
+            case CardName.Trasher:
+                GenerateTrasher(gameCard, level);
+                break;
+            case CardName.NotAllMen:
+                GenerateNotAllMen(gameCard, level);
+                break;
             default:
                 break;
         }
@@ -90,23 +102,74 @@ public class CardFactory : MonoBehaviour
         return gameCard;
     }
 
+    private void GenerateNotAllMen(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Not All Men";
+        gameCard.AbilityText = "Special (No Action). Draw 5 cards. May level up 1 card from hand. Trash this card when played.";
+        gameCard.cardType = GameCard.CardType.Special;
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = 5;
+        drawEvent.drawToZone = CardContainer.CardZone.Hand;
+
+        gameCard.AddEvent(drawEvent);
+
+        LevelSelectedCardsEvent levelEvent = new LevelSelectedCardsEvent();
+        levelEvent.numCards = 1;
+        levelEvent.numRequiredCards = 0;
+        levelEvent.promptText = "You may level up a card from your hand.";
+
+        gameCard.AddEvent(levelEvent);
+
+        TrashSelfEvent trashEvent = new TrashSelfEvent();
+        gameCard.AddEvent(trashEvent);
+    }
+
+    private void GenerateTrasher(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Trasher";
+        gameCard.AbilityText = "Action. Draw 2 cards. May trash (remove from game) 1 card from hand.";
+        gameCard.cardType = GameCard.CardType.Action;
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = 2;
+        drawEvent.drawToZone = CardContainer.CardZone.Hand;
+
+        gameCard.AddEvent(drawEvent);
+
+        TrashSelectedCardsEvent trashEvent = new TrashSelectedCardsEvent();
+        trashEvent.numCards = 1;
+        trashEvent.numRequiredCards = 0;
+        trashEvent.promptText = "You may trash a card from your hand.";
+
+        gameCard.AddEvent(trashEvent);
+
+    }
+
     private void GenerateSpite(GameCard gameCard, int level)
     {
         gameCard.Title = "Spite";
         gameCard.AbilityText = "Gain " + level + " Spite.";
         gameCard.cardType = GameCard.CardType.Spite;
         gameCard.spiteAdded = level;
+        gameCard.BaseDamage = 1;
+        gameCard.CurrentDamage = 1;
+
+        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
     }
 
     private static void GenerateConfusionAttack(GameCard gameCard, int level)
     {
-        gameCard.Title = "Confusion";
-        gameCard.AbilityText = "Uses 1 Spite. Reveal top card of deck. If it is an Argument, put it into play for free. Otherwise, discard it.";
+        gameCard.Title = "Confusion";        
         gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Confusion;
-        gameCard.BaseDamage = level * 2;
-        gameCard.CurrentDamage = level * 2;
-        gameCard.spiteUsed = 1;
+        gameCard.BaseDamage = level + 2;
+        gameCard.CurrentDamage = gameCard.BaseDamage;
+        gameCard.spiteUsed = level;
+        gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Reveal top card of deck. If it is an Argument, put it into play for free. Otherwise, discard it.";
 
         DealDamageEvent baseDmgEvent = new DealDamageEvent();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -120,13 +183,18 @@ public class CardFactory : MonoBehaviour
 
     private static void GenerateAngerAttack(GameCard gameCard, int level)
     {
-        gameCard.Title = "Anger";
-        gameCard.AbilityText = "Uses 2 Spite. Does damage equal to total Spite when played.";
+        gameCard.Title = "Anger";        
         gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Anger;
-        gameCard.BaseDamage = 0;
-        gameCard.CurrentDamage = 0;
-        gameCard.spiteUsed = 2;
+        gameCard.BaseDamage = level;
+        gameCard.CurrentDamage = gameCard.BaseDamage;
+        gameCard.spiteUsed = level + 1;
+        gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Do bonus damage equal to total Spite when played.";
+
+        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
 
         AngerDamageEvent angDmgEvent = new AngerDamageEvent();
         gameCard.AddEvent(angDmgEvent);
@@ -134,13 +202,13 @@ public class CardFactory : MonoBehaviour
 
     private static void GenerateFatigueAttack(GameCard gameCard, int level)
     {
-        gameCard.Title = "Fatigue";
-        gameCard.AbilityText = "Uses 1 Spite. Draw a card.";
+        gameCard.Title = "Fatigue";        
         gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Fatigue;
-        gameCard.BaseDamage = level;
+        gameCard.BaseDamage = level + 1;
         gameCard.CurrentDamage = gameCard.BaseDamage;
-        gameCard.spiteUsed = 1;
+        gameCard.spiteUsed = level;
+        gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Draw a card.";
 
         DealDamageEvent baseDmgEvent = new DealDamageEvent();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -151,7 +219,7 @@ public class CardFactory : MonoBehaviour
         //gameCard.AddEvent(cardDamageEvent);
 
         DrawCardsEvent drawEvent = new DrawCardsEvent();
-        drawEvent.numCards = level;
+        drawEvent.numCards = 1;
         gameCard.AddEvent(drawEvent);
     }
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 public class RulesManager : MonoBehaviour {
 
@@ -69,16 +70,59 @@ public class RulesManager : MonoBehaviour {
 
         if (gameCard == null) { return false; }
 
-        if (gameCard.cardType == GameCard.CardType.Action && ActionsLeft == 0) { return false; }
+        Debug.Log("CanPlayCard: " + gameCard.Title);
 
-        //if (gameCard.spiteUsed > SpiteLeft) { return false; }
+        if (gameCard.cardType == GameCard.CardType.Action && ActionsLeft == 0)
+        {
+            GameMessageManager.gameMessageManager.AddLine("You do not have enough Actions to play " + gameCard.Title + ".", false);
+            return false;
+        }
 
+        if (gameCard.spiteUsed > SpiteLeft) {
+            GameMessageManager.gameMessageManager.AddLine("You do not have enough Spite to play " + gameCard.Title + ".", false); 
+            return false;
+        }
+
+        Debug.Log("CanPlayCard = true");
         return true;
     }
 
-    public void PlayCard(GameObject card)
+    //public void ReparentAndPlayCard(GameObject cardObject, GameObject newParent)
+    //{
+    //    UIGrid currentGrid = cardObject.transform.parent.gameObject.GetComponent<UIGrid>();
+
+    //    cardObject.transform.parent = newParent.transform;
+
+    //    UIGrid destinationGrid = newParent.GetComponent<UIGrid>();
+
+    //    if (destinationGrid != null)
+    //    {
+    //        destinationGrid.repositionNow = true;
+    //    }
+
+    //    if (currentGrid != null)
+    //    {
+    //        currentGrid.repositionNow = true;
+    //    }
+
+    //    //have to enable/re-enable the scroll view to get it to update to the new parent
+    //    UIDragScrollView dragScrollView = cardObject.GetComponent<UIDragScrollView>();
+
+    //    if (dragScrollView != null)
+    //    {
+    //        //dragScrollView.scrollView = handScrollView;
+    //        dragScrollView.enabled = false;
+    //        dragScrollView.enabled = true;
+    //    }
+
+    //    NGUITools.MarkParentAsChanged(cardObject);
+
+    //    PlayCard(cardObject);
+    //}
+
+    public void PlayCard(GameObject cardObject)
     {
-        CardController cardController = card.GetComponent<CardController>();
+        CardController cardController = cardObject.GetComponent<CardController>();
 
         if (cardController == null) { return; }
 
@@ -86,19 +130,32 @@ public class RulesManager : MonoBehaviour {
 
         if (gameCard == null) { return; }
 
+        StringBuilder sb = new StringBuilder("Playing " + gameCard.Title + ". ");
+
         if (gameCard.cardType == GameCard.CardType.Action)
         {
             ActionsLeft--;
+            sb.Append("-1 Action ");
         }
 
-        SpiteTotal += gameCard.spiteAdded;
-        SpiteLeft += gameCard.spiteAdded;
+        if (gameCard.spiteUsed > 0)
+        {
+            SpiteLeft -= gameCard.spiteUsed;
+            sb.Append("-" + gameCard.spiteUsed + " Spite ");               
+        }
 
-        SpiteLeft -= gameCard.spiteUsed;
+        if (gameCard.spiteAdded > 0)
+        {
+            SpiteTotal += gameCard.spiteAdded;
+            SpiteLeft += gameCard.spiteAdded;
+            sb.Append("+" + gameCard.spiteAdded + " Spite ");     
+        }
 
-        cardController.UpdateCurrentZone();
+        GameMessageManager.gameMessageManager.AddLine(sb.ToString(), false);
+        
+        //cardController.UpdateCurrentZone();
 
-        CardEventManager.cardEventManager.QueueEvents(card);
+        CardEventManager.cardEventManager.QueueEvents(cardObject);
 
     }
 

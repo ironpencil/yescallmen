@@ -85,7 +85,7 @@ public class GameCard : MonoBehaviour
     }
 
     [SerializeField]
-    private int baseDamagePrvt = 1;
+    private int baseDamagePrvt = 0;
     public int BaseDamage
     {
         get { return baseDamagePrvt; }
@@ -96,7 +96,7 @@ public class GameCard : MonoBehaviour
     }
 
     [SerializeField]
-    public int currentDamagePrvt = 1;
+    public int currentDamagePrvt = 0;
     public int CurrentDamage
     {
         get { return currentDamagePrvt; }
@@ -105,7 +105,7 @@ public class GameCard : MonoBehaviour
             currentDamagePrvt = value;
             if (damageLabel != null)
             {
-                if (cardType == CardType.Argument)
+                if (BaseDamage > 0)
                 {
                     damageLabel.text = currentDamagePrvt.ToString() + " DMG";
                 }
@@ -169,6 +169,19 @@ public class GameCard : MonoBehaviour
         Level = Level;
     }
     #endregion
+
+    [ContextMenu("Level Up")]
+    public void LevelUp()
+    {
+        ChangeLevel(Level + 1);
+    }
+
+    public void ChangeLevel(int newLevel)
+    {
+        this.cardDefinition.Level = newLevel;
+
+        CardFactory.cardFactory.SetupCard(this, this.cardDefinition);
+    }
 
     public void Start () {
         FindCardLabels();

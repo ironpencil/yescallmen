@@ -1120,12 +1120,14 @@ MonoBehaviour:
   damageLabel: {fileID: 11400010}
   cardDefinition: {fileID: 0}
   cardType: 1
-  damageType: 3
+  damageType: 0
+  spiteUsed: 0
+  spiteAdded: 0
   levelPrvt: 1
   titlePrvt: 
   textPrvt: 
-  baseDamagePrvt: 1
-  currentDamagePrvt: 1
+  baseDamagePrvt: 0
+  currentDamagePrvt: 0
   cardEvents: []
 --- !u!1001 &100100000
 Prefab:

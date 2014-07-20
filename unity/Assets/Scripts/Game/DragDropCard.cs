@@ -15,7 +15,7 @@ public class DragDropCard : UIDragDropItem {
                 allowedToDrag = false;
                 break;
             case CardContainer.CardZone.Hand:
-                allowedToDrag = TurnManager.turnManager.CanPlayCards();
+                allowedToDrag = true;
                 break;
             case CardContainer.CardZone.Play:
                 allowedToDrag = false;
@@ -25,6 +25,12 @@ public class DragDropCard : UIDragDropItem {
                 break;
             case CardContainer.CardZone.Discard:
                 allowedToDrag = false;
+                break;
+            case CardContainer.CardZone.Display:
+                allowedToDrag = CardDisplayController.cardDisplayController.CurrentDisplayMode == CardDisplayController.DisplayMode.Selection;
+                break;
+            case CardContainer.CardZone.Selection:
+                allowedToDrag = true;
                 break;
             default:
                 allowedToDrag = false;
@@ -67,22 +73,28 @@ public class DragDropCard : UIDragDropItem {
                         surface = surface.transform.parent.gameObject;
                     }
                 }
+            }            
+            
+            //if we're not allowed to drag to the destination, null the surface. card well return to original parent.
+            if (!CardZoneManager.cardZoneManager.CanDragCardToZone(this, surface))
+            {
+                surface = null;
             }
+        }
+      
+		base.OnDragDropRelease(surface);
 
-            CardContainer.CardZone surfaceZone = CardZoneManager.FindObjectZone(surface);
+        if (surface != null)
+        {
+            CardContainer.CardZone previousZone = cardController.CurrentZone;
 
-            Debug.Log("Surface zone = " + surfaceZone.ToString());
-            switch (surfaceZone)
+            switch (previousZone)
             {
                 case CardContainer.CardZone.None:
                     break;
                 case CardContainer.CardZone.Hand:
                     break;
                 case CardContainer.CardZone.Play:
-                    if (!RulesManager.rulesManager.CanPlayCard(gameObject))
-                    {
-                        surface = null;
-                    }
                     break;
                 case CardContainer.CardZone.Attached:
                     break;
@@ -90,17 +102,13 @@ public class DragDropCard : UIDragDropItem {
                     break;
                 case CardContainer.CardZone.Display:
                     break;
+                case CardContainer.CardZone.Selection:
+                    CardSelectionController.cardSelectionController.FilledSlots--;
+                    break;
                 default:
                     break;
             }
-        }
 
-        
-
-		base.OnDragDropRelease(surface);
-
-        if (surface != null)
-        {
             Debug.Log("Dropped " + gameObject.name + " now a child of " + gameObject.transform.parent.gameObject.name);
 
             cardController.UpdateCurrentZone();
@@ -134,6 +142,10 @@ public class DragDropCard : UIDragDropItem {
                         }
                     }
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
+                    break;
+                case CardContainer.CardZone.Selection:
+                    NGUITools.BringForward(gameObject);
+                    CardSelectionController.cardSelectionController.FilledSlots++;
                     break;
                 default:
                     break;

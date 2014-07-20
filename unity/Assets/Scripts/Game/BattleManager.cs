@@ -5,6 +5,9 @@ public class BattleManager : MonoBehaviour {
 
     public static BattleManager battleManager;
 
+    public int argumentsWon = 0;
+    public int argumentsLost = 0;
+
     public int playerMaxAnger = 100;
     public int PlayerMaxAnger
     {
@@ -137,6 +140,11 @@ public class BattleManager : MonoBehaviour {
         //EnemyCurrentAnger = EnemyMaxAnger;
         //EnemyCurrentFatigue = EnemyMaxFatigue;
         //EnemyCurrentConfusion = EnemyMaxConfusion;
+        if (argumentsLost > 0 || argumentsWon > 0)
+        {
+            EnemyActionManager.enemyActionManager.NextEnemy();
+        }
+        EnemyMaxHP = EnemyActionManager.enemyActionManager.MaxHP;
         EnemyCurrentHP = EnemyMaxHP;
     }
 

@@ -191,6 +191,36 @@ public class CardController : MonoBehaviour {
         {
             CurrentZone = CardContainer.CardZone.None;
         }
+
+        DragDropCard ddCard = gameObject.GetComponent<DragDropCard>();
+
+        if (ddCard != null)
+        {
+            switch (CurrentZone)
+            {
+                case CardContainer.CardZone.None:
+                    break;
+                case CardContainer.CardZone.Hand:
+                    ddCard.restriction = UIDragDropItem.Restriction.Vertical;
+                    break;
+                case CardContainer.CardZone.Play:
+                    ddCard.restriction = UIDragDropItem.Restriction.Vertical;
+                    break;
+                case CardContainer.CardZone.Attached:
+                    break;
+                case CardContainer.CardZone.Discard:
+                    ddCard.restriction = UIDragDropItem.Restriction.None;
+                    break;
+                case CardContainer.CardZone.Display:
+                    ddCard.restriction = UIDragDropItem.Restriction.None;
+                    break;
+                case CardContainer.CardZone.Selection:
+                    ddCard.restriction = UIDragDropItem.Restriction.None;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public bool CanAttach(CardController cardController)

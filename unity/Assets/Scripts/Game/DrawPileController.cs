@@ -21,12 +21,7 @@ public class DrawPileController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-	}
-
-    public void Draw()
-    {
-        DrawCardToZone(CardContainer.CardZone.Hand);
-    }
+	}    
 
     public GameObject DrawCard()
     {
@@ -47,9 +42,13 @@ public class DrawPileController : MonoBehaviour {
             CardDefinition nextCard = DeckManager.deckManager.DrawFromDeck(false, false);
 
             if (nextCard != null)
-            {
-                GameMessageManager.gameMessageManager.AddLine("Drew card: " + nextCard.CardName, false);
+            {                
                 newCard = CardFactory.cardFactory.CreateCard(nextCard, gameObject);
+                GameCard gameCard = newCard.GetComponent<GameCard>();
+                if (gameCard != null)
+                {
+                    GameMessageManager.gameMessageManager.AddLine("Drew card: " + gameCard.Title, false);
+                }
             }
             //newCard = CardFactory.cardFactory.CreateCard(cardName, 1, gameObject);
         }

@@ -12,7 +12,8 @@ public class CardContainer : MonoBehaviour {
         Play,
         Attached,
         Discard,
-        Display
+        Display,
+        Selection
     }
 	// Use this for initialization
 	void Start () {

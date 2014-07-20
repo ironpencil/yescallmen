@@ -20,11 +20,6 @@ public class TurnManager : MonoBehaviour {
     private TurnState currentTurnState = TurnState.OutOfBattle;
     public TurnState CurrentState { get { return currentTurnState; } }
 
-    public bool CanPlayCards()
-    {
-        return CurrentState == TurnState.PlayerActive;
-    }
-
 	// Use this for initialization
 	void Start () {
         turnManager = this;	
@@ -158,13 +153,23 @@ public class TurnManager : MonoBehaviour {
         if (currentTurnState == TurnState.EnemyTurn ||
             currentTurnState == TurnState.StartBattle)
         {
-            //do player draw phase
-            currentTurnState = TurnState.PlayerDraw;
-            DrawPileController.drawPile.DrawToFullHand();
-            ChangeState(TurnState.PlayerActive);
+            if (BattleManager.battleManager.IsPlayerAlive())
+            {
+                //do player draw phase
+                currentTurnState = TurnState.PlayerDraw;
+                DrawPileController.drawPile.DrawToFullHand();
+                //ChangeState(TurnState.PlayerActive);
+                StartCoroutine(ChangeToStateAfterSeconds(TurnState.PlayerActive, 1.5f));
 
-            //set a new turn
-            RulesManager.rulesManager.ResetTurn();
+                //set a new turn
+                RulesManager.rulesManager.ResetTurn();
+            }
+            else
+            {
+                BattleManager.battleManager.argumentsLost++;
+                BattleManager.battleManager.PlayerCurrentAnger = BattleManager.battleManager.PlayerMaxAnger;
+                ChangeState(TurnState.OutOfBattle);
+            }
         }
     }
 
@@ -183,11 +188,13 @@ public class TurnManager : MonoBehaviour {
             if (BattleManager.battleManager.IsEnemyAlive())
             {
                 currentTurnState = TurnState.EnemyTurn;
-                ChangeState(TurnState.PlayerDraw);
+                EnemyActionManager.enemyActionManager.TakeTurn();
             }
             else
-            {
-                ChangeState(TurnState.OutOfBattle);
+            {                
+                BattleManager.battleManager.argumentsWon++;
+                CardGainController.cardGainController.GainBattleWonCard();
+                StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.OutOfBattle));
             }    
         }
     }
@@ -201,4 +208,28 @@ public class TurnManager : MonoBehaviour {
         DeckManager.deckManager.ShuffleDiscardIntoDeck();
     }
 
+    public IEnumerator ChangeToStateAfterSeconds(TurnState newState, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        ChangeState(newState);
+    }
+
+    public IEnumerator ChangeToStateWhenDisplayEmpty(TurnState newState)
+    {
+        while (CardDisplayController.cardDisplayController.displayedCards.Count > 0)
+        {
+            yield return new WaitForSeconds(0.25f);
+            Debug.Log("Cards left in display: " + CardDisplayController.cardDisplayController.displayedCards.Count);
+        }
+
+        Debug.Log("Changing to Out of Battle State");
+
+        ChangeState(newState);
+    }
+
+
+    public bool CanPlayCards()
+    {
+        return CurrentState == TurnState.PlayerActive;
+    }
 }
