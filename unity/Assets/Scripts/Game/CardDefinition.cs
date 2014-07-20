@@ -10,9 +10,13 @@ public class CardDefinition : ScriptableObject
 
     public int Level;
 
-    public CardDefinition(CardFactory.CardName cardName, int level)
+    public static CardDefinition GetNewInstance(CardFactory.CardName cardName, int level)
     {
-        CardName = cardName;
-        Level = level;
+        CardDefinition card = ScriptableObject.CreateInstance<CardDefinition>();
+
+        card.CardName = cardName;
+        card.Level = level;
+
+        return card;
     }
 }

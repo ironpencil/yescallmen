@@ -37,22 +37,22 @@ public class DeckManager : MonoBehaviour {
 
         //    CardFactory.CardName randomCard = (CardFactory.CardName)cardNames.GetValue(random);
 
-        //    AddCardToDeck(new CardDefinition(randomCard, 1));
+        //    AddCardToDeck(CardDefinition.CreateInstance(randomCard, 1));
         //}
 
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
+        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.AngerAttack, 1));
 
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
+        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.FatigueAttack, 1));
 
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
+        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.ConfusionAttack, 1));
 
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.Trasher, 1));
+        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.Trasher, 1));
 
-        AddCardToDeck(new CardDefinition(CardFactory.CardName.NotAllMen, 1));
+        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.NotAllMen, 1));
 
         for (int i = 0; i < 7; i++)
         {
-            AddCardToDeck(new CardDefinition(CardFactory.CardName.Spite, 1));
+            AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.Spite, 1));
         }        
 
         ShuffleDeck();

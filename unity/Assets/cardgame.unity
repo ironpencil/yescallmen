@@ -5074,7 +5074,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 83.5999985
+  aspectRatio: 68.5999985
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -9170,7 +9170,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 45
+  aspectRatio: 39
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -13509,7 +13509,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5573771
+  aspectRatio: 2.14754105
   mType: 2
   mFillDirection: 4
   mFillAmount: 1

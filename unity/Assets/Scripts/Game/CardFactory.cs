@@ -58,7 +58,7 @@ public class CardFactory : MonoBehaviour
 
     public GameObject CreateCard(CardName cardName, int level, GameObject parent)
     {
-        return CreateCard(new CardDefinition(cardName, level), parent);
+        return CreateCard(CardDefinition.GetNewInstance(cardName, level), parent);
     }
 
     public GameCard SetupCard(GameCard gameCard, CardDefinition cardDefinition)
@@ -155,7 +155,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = 1;
         gameCard.CurrentDamage = 1;
 
-        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
         baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
         gameCard.AddEvent(baseDmgEvent);
@@ -171,13 +171,14 @@ public class CardFactory : MonoBehaviour
         gameCard.spiteUsed = level;
         gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Reveal top card of deck. If it is an Argument, put it into play for free. Otherwise, discard it.";
 
-        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
         baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
         gameCard.AddEvent(baseDmgEvent);
 
-        ConfusionArgumentEvent confEvent = new ConfusionArgumentEvent();
+        ConfusionArgumentEvent confEvent = ScriptableObject.CreateInstance<ConfusionArgumentEvent>();
         gameCard.AddEvent(confEvent);
+
 
     }
 
@@ -191,12 +192,12 @@ public class CardFactory : MonoBehaviour
         gameCard.spiteUsed = level + 1;
         gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Do bonus damage equal to total Spite when played.";
 
-        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
         baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
         gameCard.AddEvent(baseDmgEvent);
 
-        AngerDamageEvent angDmgEvent = new AngerDamageEvent();
+        AngerDamageEvent angDmgEvent = ScriptableObject.CreateInstance<AngerDamageEvent>();
         gameCard.AddEvent(angDmgEvent);
     }
 
@@ -210,7 +211,7 @@ public class CardFactory : MonoBehaviour
         gameCard.spiteUsed = level;
         gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Draw a card.";
 
-        DealDamageEvent baseDmgEvent = new DealDamageEvent();
+        DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
         baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
         gameCard.AddEvent(baseDmgEvent);
@@ -218,7 +219,7 @@ public class CardFactory : MonoBehaviour
         //DealCardDamageEvent cardDamageEvent = new DealCardDamageEvent();
         //gameCard.AddEvent(cardDamageEvent);
 
-        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        DrawCardsEvent drawEvent = ScriptableObject.CreateInstance<DrawCardsEvent>();
         drawEvent.numCards = 1;
         gameCard.AddEvent(drawEvent);
     }

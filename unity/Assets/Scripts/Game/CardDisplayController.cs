@@ -165,7 +165,7 @@ public class CardDisplayController : MonoBehaviour {
     {
         if (displayedCard.destinationZone != CardContainer.CardZone.None)
         {
-            GameObject destinationObject = FindDestinationObject(displayedCard.destinationZone);
+            //GameObject destinationObject = FindDestinationObject(displayedCard.destinationZone);
 
             //Debug.Log("Card being moved from " + displayedCard.cardObject.gameObject.ToString() +
             //    " to " + destinationObject.ToString());

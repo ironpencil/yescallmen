@@ -9,10 +9,10 @@ public class CardGainController : MonoBehaviour {
 	void Start () {
         cardGainController = this;
 
-        battleWonCards.Add(new CardDefinition(CardFactory.CardName.AngerAttack, 2));
-        battleWonCards.Add(new CardDefinition(CardFactory.CardName.FatigueAttack, 2));
-        battleWonCards.Add(new CardDefinition(CardFactory.CardName.ConfusionAttack, 2));
-        battleWonCards.Add(new CardDefinition(CardFactory.CardName.Spite, 2));
+        battleWonCards.Add(CardDefinition.GetNewInstance(CardFactory.CardName.AngerAttack, 2));
+        battleWonCards.Add(CardDefinition.GetNewInstance(CardFactory.CardName.FatigueAttack, 2));
+        battleWonCards.Add(CardDefinition.GetNewInstance(CardFactory.CardName.ConfusionAttack, 2));
+        battleWonCards.Add(CardDefinition.GetNewInstance(CardFactory.CardName.Spite, 2));
 	}
 
     private List<CardDefinition> battleWonCards = new List<CardDefinition>();    
