@@ -5,8 +5,41 @@ public class BattleManager : MonoBehaviour {
 
     public static BattleManager battleManager;
 
-    public int argumentsWon = 0;
-    public int argumentsLost = 0;
+    //public int argumentsWon = 0;
+    //public int ArgumentsWon
+    //{
+    //    get
+    //    {
+    //        return argumentsWon;
+    //    }
+    //    set
+    //    {
+    //        argumentsWon = value;
+
+    //        //save the arguments won back to Globals
+    //        Globals.GetInstance().PlayerBattlesWon = argumentsWon;
+    //    }
+    //}
+
+    //public int argumentsLost = 0;
+    //public int ArgumentsLost
+    //{
+    //    get
+    //    {
+    //        return argumentsLost;
+    //    }
+    //    set
+    //    {
+    //        argumentsLost = value;
+
+    //        //save the arguments won back to Globals
+    //        Globals.GetInstance().PlayerBattlesLost = argumentsLost;
+    //    }
+    //}
+
+    public int BattlesPerShow = 2;
+
+    public int BattleNumber = 0;
 
     public int playerMaxAnger = 100;
     public int PlayerMaxAnger
@@ -16,6 +49,9 @@ public class BattleManager : MonoBehaviour {
         {
             playerMaxAnger = Mathf.Max(1, value);
             playerAngerLabel.text = PlayerCurrentAnger.ToString() + " / " + PlayerMaxAnger;
+
+            //save the max HP change back to Globals
+            Globals.GetInstance().PlayerMaxHP = value;
         }
     }
     
@@ -25,7 +61,7 @@ public class BattleManager : MonoBehaviour {
         get { return playerCurrentAnger; }
         set
         {
-            playerCurrentAnger = Mathf.Min(PlayerMaxAnger, value);
+            playerCurrentAnger = Mathf.Max(0, value);
             playerAngerLabel.text = PlayerCurrentAnger.ToString() + " / " + PlayerMaxAnger;
         }
     }
@@ -132,7 +168,7 @@ public class BattleManager : MonoBehaviour {
 
     public bool IsPlayerAlive()
     {
-        return PlayerCurrentAnger > 0;
+        return PlayerCurrentAnger < PlayerMaxAnger;
     }
 
     public void StartNewBattle()
@@ -140,12 +176,14 @@ public class BattleManager : MonoBehaviour {
         //EnemyCurrentAnger = EnemyMaxAnger;
         //EnemyCurrentFatigue = EnemyMaxFatigue;
         //EnemyCurrentConfusion = EnemyMaxConfusion;
-        if (argumentsLost > 0 || argumentsWon > 0)
-        {
-            EnemyActionManager.enemyActionManager.NextEnemy();
-        }
+
+        BattleNumber++;
+
+        EnemyActionManager.enemyActionManager.NextEnemy(Globals.GetInstance().PlayerLevel, BattleNumber);
+
         EnemyMaxHP = EnemyActionManager.enemyActionManager.MaxHP;
         EnemyCurrentHP = EnemyMaxHP;
+
     }
 
     public UILabel playerAngerLabel;
@@ -188,7 +226,7 @@ public class BattleManager : MonoBehaviour {
 
     public int DamagePlayer(int value)
     {
-        PlayerCurrentAnger = PlayerCurrentAnger - value;
+        PlayerCurrentAnger = PlayerCurrentAnger + value;
 
         return PlayerCurrentAnger;
     }
@@ -209,8 +247,11 @@ public class BattleManager : MonoBehaviour {
         EnemyMaxHP = EnemyMaxHP;
         EnemyCurrentHP = EnemyMaxHP;
 
-        PlayerMaxAnger = PlayerMaxAnger;
-        PlayerCurrentAnger = PlayerMaxAnger;
+        PlayerMaxAnger = Globals.GetInstance().PlayerMaxHP;
+        PlayerCurrentAnger = 0;
+
+        //ArgumentsWon = Globals.GetInstance().PlayerBattlesWon;
+        //ArgumentsLost = Globals.GetInstance().PlayerBattlesLost;
 	}
 	
 	// Update is called once per frame

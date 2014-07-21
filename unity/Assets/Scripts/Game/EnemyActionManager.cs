@@ -5,6 +5,8 @@ public class EnemyActionManager : MonoBehaviour {
 
     public static EnemyActionManager enemyActionManager;
 
+    public string EnemyName = "Caller";
+
     public int Level = 1;
 
     public int MaxHP = 10;
@@ -23,14 +25,21 @@ public class EnemyActionManager : MonoBehaviour {
 
     public void TakeTurn()
     {
+        GameMessageManager.gameMessageManager.AddLine(EnemyName + " makes their case, raising your anger by " + Damage + "!", false);
         BattleManager.battleManager.DamagePlayer(Damage);
         TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerDraw);
     }
 
-    public void NextEnemy()
+    public void NextEnemy(int playerLevel, int battleNumber)
     {
-        Level++;
-        MaxHP += 2;
-        Damage++;
+        
+        int adjustedLevel = playerLevel + battleNumber - Globals.GetInstance().PlayerBattlesLost;
+
+        Level = Mathf.Max(1, adjustedLevel);
+
+        MaxHP = Level * 10;
+
+        Damage = Level;
+
     }
 }

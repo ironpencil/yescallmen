@@ -12,20 +12,26 @@ public class GameMessageManager : MonoBehaviour {
 
     public int charsPerSecond = 50;
 
+    public bool isFinished = true;
+
 	// Use this for initialization
 	void Start () {
         gameMessageManager = this;
         typewriter = labelObject.GetComponent<IPTypewriterEffect>();
+
+        typewriter.onFinished.Add(new EventDelegate(OnFinished));
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
         typewriter.charsPerSecond = charsPerSecond;        
+
 	}
 
     public void SetText(string text, bool instant)
     {
+        isFinished = false;
         typewriter.SetText(text);        
         typewriter.isActive = true;
 
@@ -43,6 +49,7 @@ public class GameMessageManager : MonoBehaviour {
 
     public void AddLine(string text, bool instant)
     {
+        isFinished = false;
         typewriter.AddText("\r\n" + text);
         typewriter.isActive = true;
 
@@ -52,5 +59,10 @@ public class GameMessageManager : MonoBehaviour {
         }
 
         messageScrollview.ResetPosition();
+    }
+
+    private void OnFinished() {
+        Debug.Log("Finished!");
+        isFinished = true;
     }
 }

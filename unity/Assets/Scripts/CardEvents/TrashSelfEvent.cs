@@ -9,7 +9,7 @@ public class TrashSelfEvent : CardEvent
 
     public override bool Execute()
     {
-
+        DeckManager.deckManager.TrashCard(gameCard.cardDefinition);
         Destroy(this.gameCard.gameObject);
 
         eventFinished = true;

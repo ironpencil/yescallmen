@@ -14,6 +14,8 @@ public class GameCard : MonoBehaviour
 
     public CardDefinition cardDefinition;
 
+    public bool isGainedCard = false;
+
     public enum CardType
     {
         None,
@@ -173,7 +175,9 @@ public class GameCard : MonoBehaviour
     [ContextMenu("Level Up")]
     public void LevelUp()
     {
+        DeckManager.deckManager.TrashCard(cardDefinition); 
         ChangeLevel(Level + 1);
+        DeckManager.deckManager.GainCard(cardDefinition);
     }
 
     public void ChangeLevel(int newLevel)

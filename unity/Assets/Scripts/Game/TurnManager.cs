@@ -14,7 +14,8 @@ public class TurnManager : MonoBehaviour {
         PlayerDraw,
         PlayerActive,        
         PlayerCleanup,    
-        StartBattle
+        StartBattle,
+        EndShow
     }
     
     private TurnState currentTurnState = TurnState.OutOfBattle;
@@ -55,13 +56,29 @@ public class TurnManager : MonoBehaviour {
             case TurnState.StartBattle:
                 DoStartBattle();
                 break;
+            case TurnState.EndShow:
+                DoEndShow();
+                break;
             default:
                 break;
         }
     }
 
+    private void DoEndShow()
+    {
+        currentTurnState = TurnState.EndShow;
+
+        Globals.GetInstance().SaveSession();
+
+        Application.LoadLevel("outofbattle");
+        //end the show, clean up, go back to outofbattle scene
+
+    }
+
     private void DoStartBattle()
     {
+        Globals.GetInstance().PlayerFinishedLastShow = false;
+
         currentTurnState = TurnState.StartBattle;
         BattleManager.battleManager.StartNewBattle();
 
@@ -100,7 +117,7 @@ public class TurnManager : MonoBehaviour {
             {
                 if (gameCard.cardDefinition != null)
                 {
-                    DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition);
+                    DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
                 }
             }
 
@@ -128,7 +145,7 @@ public class TurnManager : MonoBehaviour {
             {
                 if (gameCard.cardDefinition != null)
                 {
-                    DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition);
+                    DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
                 }
             }
 
@@ -166,12 +183,10 @@ public class TurnManager : MonoBehaviour {
             }
             else
             {
-                BattleManager.battleManager.argumentsLost++;
-                BattleManager.battleManager.PlayerCurrentAnger = BattleManager.battleManager.PlayerMaxAnger;
-                ChangeState(TurnState.OutOfBattle);
+                DoBattleLost();
             }
         }
-    }
+    }    
 
     private void DoPlayerInactive()
     {
@@ -191,21 +206,61 @@ public class TurnManager : MonoBehaviour {
                 EnemyActionManager.enemyActionManager.TakeTurn();
             }
             else
-            {                
-                BattleManager.battleManager.argumentsWon++;
-                CardGainController.cardGainController.GainBattleWonCard();
-                StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.OutOfBattle));
+            {
+                DoBattleWon();
             }    
         }
+    }
+
+    private void DoBattleWon()
+    {
+        Globals.GetInstance().PlayerBattlesWon++;
+        if (BattleManager.battleManager.BattleNumber >= BattleManager.battleManager.BattlesPerShow)
+        {
+            //we've finished the show
+            GameMessageManager.gameMessageManager.AddLine("\"Looks like we're just about out of time for today's show.\"", false);
+            GameMessageManager.gameMessageManager.AddLine("", false);
+
+            Globals.GetInstance().PlayerLevel++;
+
+            CardGainController.cardGainController.GainFinishedShowCard();
+            Globals.GetInstance().PlayerFinishedLastShow = true;
+            StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.EndShow));
+        }
+        else
+        {
+            GameMessageManager.gameMessageManager.AddLine("\"Ha, another caller who couldn't take the heat!\"", false);
+            GameMessageManager.gameMessageManager.AddLine("", false);
+
+            CardGainController.cardGainController.GainBattleWonCard();
+            StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.OutOfBattle));
+        }
+        
+    }
+
+    private void DoBattleLost()
+    {
+        Globals.GetInstance().PlayerBattlesLost++;
+        //BattleManager.battleManager.PlayerCurrentAnger = BattleManager.battleManager.PlayerMaxAnger;
+
+        GameMessageManager.gameMessageManager.AddLine("\"I CAN'T HANDLE ANY MORE OF THESE IDIOTS TONIGHT!\"", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+
+        CardGainController.cardGainController.GainBattleLostCard();
+        Globals.GetInstance().PlayerFinishedLastShow = false;
+        StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.EndShow));        
     }
 
     private void DoOutOfBattle()
     {
         currentTurnState = TurnState.OutOfBattle;
 
+        GameMessageManager.gameMessageManager.SetText("Are you ready for the next caller?", false);
 
         DiscardHand();
         DeckManager.deckManager.ShuffleDiscardIntoDeck();
+
+        Globals.GetInstance().SaveSession();
     }
 
     public IEnumerator ChangeToStateAfterSeconds(TurnState newState, float seconds)
@@ -226,7 +281,6 @@ public class TurnManager : MonoBehaviour {
 
         ChangeState(newState);
     }
-
 
     public bool CanPlayCards()
     {

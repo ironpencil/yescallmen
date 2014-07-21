@@ -138,7 +138,7 @@ public class DragDropCard : UIDragDropItem {
                     {
                         if (gameCard.cardDefinition != null)
                         {
-                            DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition);
+                            DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
                         }
                     }
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;

@@ -177,6 +177,8 @@ public class CardDisplayController : MonoBehaviour {
 
         removeCards.Add(displayedCard);
 
+        GameCard gameCard = displayedCard.cardObject.GetComponent<GameCard>();
+
         switch (displayedCard.destinationZone)
         {
             case CardContainer.CardZone.None:
@@ -188,7 +190,7 @@ public class CardDisplayController : MonoBehaviour {
                 break;
             case CardContainer.CardZone.Discard:
                 NGUITools.BringForward(displayedCard.cardObject);
-                DeckManager.deckManager.AddCardToDiscard(DeckManager.GetCardDefinition(displayedCard.cardObject));
+                DeckManager.deckManager.AddCardToDiscard(DeckManager.GetCardDefinition(displayedCard.cardObject), gameCard.isGainedCard);
                 break;
             default:
                 break;

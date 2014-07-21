@@ -12,7 +12,6 @@ public class DeckManager : MonoBehaviour {
     //end of the list is the top, beginning is the bottom
     List<CardDefinition> discard = new List<CardDefinition>();
 
-
     public delegate void OnShuffleDiscardIntoDeck();
 
     public OnShuffleDiscardIntoDeck onShuffleDiscardIntoDeck;
@@ -40,20 +39,34 @@ public class DeckManager : MonoBehaviour {
         //    AddCardToDeck(CardDefinition.CreateInstance(randomCard, 1));
         //}
 
-        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.AngerAttack, 1));
+        List<CardDefinition> startCards = new List<CardDefinition>(Globals.GetInstance().DeckContents);
 
-        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.FatigueAttack, 1));
+        bool initializeNewDeck = false;
 
-        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.ConfusionAttack, 1));
-
-        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.Trasher, 1));
-
-        AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.NotAllMen, 1));
-
-        for (int i = 0; i < 7; i++)
+        if (startCards.Count == 0)
         {
-            AddCardToDeck(CardDefinition.GetNewInstance(CardFactory.CardName.Spite, 1));
-        }        
+            initializeNewDeck = true;
+            startCards.Add(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
+
+            startCards.Add(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
+
+            startCards.Add(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
+
+            startCards.Add(new CardDefinition(CardFactory.CardName.Trasher, 1));
+
+            startCards.Add(new CardDefinition(CardFactory.CardName.NotAllMen, 1));
+
+            for (int i = 0; i < 7; i++)
+            {
+                startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
+            }
+        }
+
+            foreach (CardDefinition card in startCards)
+            {
+                AddCardToDeck(card, initializeNewDeck);
+            }
+
 
         ShuffleDeck();
 	
@@ -85,12 +98,12 @@ public class DeckManager : MonoBehaviour {
         deck.Shuffle();
     }
 
-    public void AddCardToDeck(CardDefinition card)
+    public void AddCardToDeck(CardDefinition card, bool doGainCard)
     {
-        AddCardToDeck(card, true);
+        AddCardToDeck(card, doGainCard, true);
     }
 
-    public void AddCardToDeck(CardDefinition card, bool top)
+    public void AddCardToDeck(CardDefinition card, bool doGainCard, bool top)
     {
         if (top)
         {
@@ -100,11 +113,31 @@ public class DeckManager : MonoBehaviour {
         {
             deck.Insert(0, card);
         }
+
+        if (doGainCard)
+        {
+            GainCard(card);
+        }
     }
 
-    public void AddCardToDiscard(CardDefinition card)
+    public void AddCardToDiscard(CardDefinition card, bool doGainCard)
     {
         discard.Add(card);
+
+        if (doGainCard)
+        {
+            GainCard(card);
+        }
+    }
+
+    public void GainCard(CardDefinition card)
+    {
+        Globals.GetInstance().DeckContents.Add(card);
+    }
+
+    public void TrashCard(CardDefinition card)
+    {
+        Globals.GetInstance().DeckContents.Remove(card);
     }
 
     public static CardDefinition GetCardDefinition(GameObject cardObject)

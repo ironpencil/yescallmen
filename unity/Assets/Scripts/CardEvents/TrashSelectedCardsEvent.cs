@@ -48,6 +48,7 @@ public class TrashSelectedCardsEvent : CardEvent
             if (CardSelectionController.cardSelectionController.Result == CardSelectionController.SelectionResult.OK)
             {
                 Debug.Log("OSF: Destroy!");
+                DeckManager.deckManager.TrashCard(card.gameCard.cardDefinition);
                 Destroy(card.gameObject);
             }
             else

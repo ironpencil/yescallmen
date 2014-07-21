@@ -58,7 +58,7 @@ public class CardFactory : MonoBehaviour
 
     public GameObject CreateCard(CardName cardName, int level, GameObject parent)
     {
-        return CreateCard(CardDefinition.GetNewInstance(cardName, level), parent);
+        return CreateCard(new CardDefinition(cardName, level), parent);
     }
 
     public GameCard SetupCard(GameCard gameCard, CardDefinition cardDefinition)

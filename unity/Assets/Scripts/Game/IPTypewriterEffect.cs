@@ -15,7 +15,7 @@ using System.Collections.Generic;
 public class IPTypewriterEffect : MonoBehaviour
 {
     static public IPTypewriterEffect current;
-
+    
     struct FadeEntry
     {
         public int index;
@@ -273,5 +273,6 @@ public class IPTypewriterEffect : MonoBehaviour
     public void SetText(string text)
     {
         mFullText = text;
+        mLabel.text = text;
     }
 }
