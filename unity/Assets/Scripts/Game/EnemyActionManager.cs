@@ -35,11 +35,11 @@ public class EnemyActionManager : MonoBehaviour {
         
         int adjustedLevel = playerLevel + battleNumber - Globals.GetInstance().PlayerBattlesLost;
 
-        Level = Mathf.Max(1, adjustedLevel);
+        Level = Mathf.Max(2, adjustedLevel);
 
         MaxHP = Level * 10;
 
-        Damage = Level;
+        Damage = Mathf.Max(1, Level - 1);
 
     }
 }

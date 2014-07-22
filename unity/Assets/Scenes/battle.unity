@@ -1299,6 +1299,7 @@ MonoBehaviour:
   damageType: 3
   spiteUsed: 0
   spiteAdded: 0
+  actionsAdded: 0
   levelPrvt: 1
   titlePrvt: Placeholder
   textPrvt: Placeholder card.
@@ -2000,6 +2001,7 @@ MonoBehaviour:
   SlotCount: 1
   CardsRequired: 0
   Finished: 0
+  CanCancel: 1
   Slots:
   - {fileID: 1874991885}
   - {fileID: 941822143}
@@ -3878,6 +3880,7 @@ MonoBehaviour:
   damageType: 3
   spiteUsed: 0
   spiteAdded: 0
+  actionsAdded: 0
   levelPrvt: 1
   titlePrvt: Placeholder
   textPrvt: Placeholder card.
@@ -4780,7 +4783,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 68.5999985
+  aspectRatio: 83.5999985
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -8792,7 +8795,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 39
+  aspectRatio: 45
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -9216,6 +9219,14 @@ Prefab:
     - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: DoLoadPlayerPrefs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: PlayerMaxHP
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
@@ -11863,7 +11874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8883f479b008c41b222299e2b937e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BattlesPerShow: 2
+  BattlesPerShow: 5
   BattleNumber: 0
   playerMaxAnger: 50
   playerCurrentAnger: 50
@@ -11882,6 +11893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8257982d59a7e4eb5ab154c1b541e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deck: []
+  discard: []
   deckCount: 0
   discardCount: 0
 --- !u!114 &1819080654
@@ -13197,7 +13210,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.14754105
+  aspectRatio: 2.5573771
   mType: 2
   mFillDirection: 4
   mFillAmount: 1
@@ -14339,18 +14352,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f9dfab333ebec4ba23d66416dc3135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMaxHP: 50
+  PlayerMaxHP: 100
   PlayerLevel: 1
   PlayerBattlesWon: 0
   PlayerBattlesLost: 0
   PlayerTotalShows: 0
-  PlayerFeministsConverted: 0
   PlayerConvertedUnit: 0
   PlayerFinishedLastShow: 0
   FirstShowOfSession: 1
   DeckContents: []
   DoLoadPlayerPrefs: 1
-  FeministsConvertedString: 
+  FeministsConvertedString: None
 --- !u!4 &2128300348
 Transform:
   m_ObjectHideFlags: 0

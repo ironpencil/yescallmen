@@ -15,21 +15,29 @@ public class LevelSelectedCardsEvent : CardEvent
     public string OKButtonText = "Level Up";
     public string CancelButtonText = "No Thanks";
 
+    public bool canCancel = false;
+
     public CardContainer.CardZone cardSource = CardContainer.CardZone.Hand;
+
+    public CardContainer.CardZone cardDestination = CardContainer.CardZone.Hand;
 
     public override bool Execute()
     {
         CardSelectionController.ButtonOption buttons = (numRequiredCards > 0 ? CardSelectionController.ButtonOption.okOnly : 
                                                                     CardSelectionController.ButtonOption.okCancel);
 
+        if (canCancel) { buttons = CardSelectionController.ButtonOption.okCancel; }
+
         CardSelectionController csc = CardSelectionController.cardSelectionController;
 
-        csc.Setup(promptText, buttons, numCards, numRequiredCards, cardSource);
+        csc.Setup(promptText, buttons, canCancel, numCards, numRequiredCards, cardSource);
 
         csc.OKButtonText = OKButtonText;
         csc.CancelButtonText = CancelButtonText;
 
         csc.onFinish += OnSelectionFinished;
+
+        csc.canSlotCard += CanLevelCard;
 
         TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
         csc.Show();
@@ -49,16 +57,33 @@ public class LevelSelectedCardsEvent : CardEvent
             {
                 Debug.Log("OSF: Level Up!");
                 card.gameCard.LevelUp();
+                CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, cardDestination);
             }
+            else
+            {
                 Debug.Log("OSF: Return!");
                 //put cards back in hand
-                CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.Hand);
+                CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, cardSource);
+            }
         }
 
         CardSelectionController.cardSelectionController.Close();
 
         eventFinished = true;
         TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);
+    }
+
+    private bool CanLevelCard(CardController card)
+    {
+        //can only level Argument and Spite cards
+        if (card.gameCard.cardType == GameCard.CardType.Argument ||
+            card.gameCard.cardType == GameCard.CardType.Spite)
+        {
+            return true;
+        }
+
+        GameMessageManager.gameMessageManager.AddLine("Only Argument cards and Spite cards can level up.", false);
+        return false;
     }
 
 }

@@ -22,13 +22,15 @@ public class CardSelectionController : MonoBehaviour {
             if (Buttons == ButtonOption.okCancel)
             {
                 Debug.Log("Filled slots changed to " + filledSlots + ".");
-                OKButton.isEnabled = (filledSlots > 0);
+                OKButton.isEnabled = (filledSlots > 0 && filledSlots >= CardsRequired);
                 Debug.Log("OKButton.isEnabled should be " + (filledSlots > 0).ToString() + " and is " + OKButton.isEnabled + ".");
             }
         }
     }
 
     public bool Finished = false;
+
+    public bool CanCancel = true;
 
     public List<CardSlotController> Slots = new List<CardSlotController>();
     public UIGrid SlotGrid;
@@ -37,6 +39,10 @@ public class CardSelectionController : MonoBehaviour {
     public UILabel OKButtonLabel;
     public UIButton CancelButton;
     public UILabel CancelButtonLabel;
+
+    public delegate bool CanSlotCard(CardController card);
+
+    public CanSlotCard canSlotCard;
 
     public enum SelectionResult
     {
@@ -71,13 +77,15 @@ public class CardSelectionController : MonoBehaviour {
 
     public OnFinish onFinish;
 
-    public void Setup(string promptText, ButtonOption buttons, int slotCount, int cardsRequired, CardContainer.CardZone cardSource)
+    public void Setup(string promptText, ButtonOption buttons, bool canCancel, int slotCount, int cardsRequired, CardContainer.CardZone cardSource)
     {
         PromptLabel.text = promptText;
         SlotCount = slotCount;
         CardsRequired = cardsRequired;
 
         SourceCardZone = cardSource;
+
+        CanCancel = canCancel;
 
         int slotsActivated = 0;
         foreach (CardSlotController slot in Slots)
@@ -98,7 +106,7 @@ public class CardSelectionController : MonoBehaviour {
             CancelButton.gameObject.SetActive(true);
             CancelButtonText = cancelButtonDefaultText;
 
-            //we disable OK button if Cancelled button exists
+            //we disable OK button if Cancel button exists
             //and enable it when cards are added
             OKButton.isEnabled = false;
         }
@@ -113,7 +121,7 @@ public class CardSelectionController : MonoBehaviour {
         if (CardsRequired > 0)
         {
             OKButton.isEnabled = false;
-            CancelButton.isEnabled = false;
+            CancelButton.isEnabled = CanCancel;
         }
 
         SlotGrid.repositionNow = true;
@@ -156,6 +164,14 @@ public class CardSelectionController : MonoBehaviour {
         }
 
         Finished = false;
+
+        foreach (CardSlotController cardSlot in Slots)
+        {
+            if (cardSlot.gameObject.activeSelf)
+            {
+                NGUITools.BringForward(cardSlot.gameObject);
+            }
+        }
     }
 
     public void Close()
@@ -171,8 +187,11 @@ public class CardSelectionController : MonoBehaviour {
         SourceCardZone = CardContainer.CardZone.None;
         FilledSlots = 0;
 
+        CanCancel = true;
+
         StartCoroutine(SetInactiveAfterSeconds(1.0f));
         onFinish = null;
+        canSlotCard = null;
     }
 
     private IEnumerator SetInactiveAfterSeconds(float seconds)

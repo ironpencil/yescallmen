@@ -894,6 +894,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: PlayerMaxHP
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
   m_RootGameObject: {fileID: 988823244}
@@ -1367,7 +1371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f9dfab333ebec4ba23d66416dc3135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMaxHP: 50
+  PlayerMaxHP: 100
   PlayerLevel: 1
   PlayerBattlesWon: 0
   PlayerBattlesLost: 0
@@ -1377,7 +1381,7 @@ MonoBehaviour:
   FirstShowOfSession: 1
   DeckContents: []
   DoLoadPlayerPrefs: 1
-  FeministsConvertedString: 
+  FeministsConvertedString: None
 --- !u!4 &988823246
 Transform:
   m_ObjectHideFlags: 0

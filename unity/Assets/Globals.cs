@@ -274,5 +274,5 @@ public class Globals : MonoBehaviour
 
     }
 
-    public string FeministsConvertedString = "";
+    public string FeministsConvertedString = "None";
 }

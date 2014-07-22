@@ -44,7 +44,12 @@ public class CardGainController : MonoBehaviour {
         rewardCards.Add(new CardDefinition(CardFactory.CardName.FatigueAttack, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.ConfusionAttack, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Spite, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.HealCard, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Trasher, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Village, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Smithy, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.SpiteChecker, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.DblLeveler, atLevel));
 
         return rewardCards;
     }
@@ -54,6 +59,7 @@ public class CardGainController : MonoBehaviour {
         List<CardDefinition> rewardCards = new List<CardDefinition>();
 
         rewardCards.Add(new CardDefinition(CardFactory.CardName.NotAllMen, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.IncreaseMaxAnger, atLevel));
 
         return rewardCards;
     }

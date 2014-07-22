@@ -127,6 +127,11 @@ public class CardZoneManager : MonoBehaviour {
         if (cardSlot.GetChildList().size > 0) { return false; }
 
         //if no card in slot, then check to make sure this card matches whatever restrictions are currently in place
+        if (CardSelectionController.cardSelectionController.canSlotCard != null)
+        {
+            bool canSlotCard = CardSelectionController.cardSelectionController.canSlotCard(card.cardController);
+            if (!canSlotCard) { return false; }
+        }
 
         //don't allow to drag from a zone that isn't valid
         if (card.cardController.CurrentZone != CardSelectionController.cardSelectionController.SourceCardZone)
@@ -195,22 +200,27 @@ public class CardZoneManager : MonoBehaviour {
     }
 
     public void MoveCardToZone(GameObject cardObject, CardContainer.CardZone newZone)
-    {
+    {        
+
         UIGrid currentGrid = cardObject.transform.parent.gameObject.GetComponent<UIGrid>();
-
-        GameObject newParent = GetZoneContainer(newZone);
-
-        cardObject.transform.parent = newParent.transform;
 
         CardController cardController = cardObject.GetComponent<CardController>();
 
-        cardController.UpdateCurrentZone();
-
-        UIGrid destinationGrid = newParent.GetComponent<UIGrid>();
-
-        if (destinationGrid != null)
+        if (newZone != CardContainer.CardZone.None)
         {
-            destinationGrid.repositionNow = true;
+
+            GameObject newParent = GetZoneContainer(newZone);
+
+            cardObject.transform.parent = newParent.transform;            
+
+            cardController.UpdateCurrentZone();
+
+            UIGrid destinationGrid = newParent.GetComponent<UIGrid>();
+
+            if (destinationGrid != null)
+            {
+                destinationGrid.repositionNow = true;
+            }
         }
 
         if (currentGrid != null)
@@ -229,5 +239,23 @@ public class CardZoneManager : MonoBehaviour {
         }
 
         NGUITools.MarkParentAsChanged(cardObject);
+
+
+        switch (newZone)
+        {
+            case CardContainer.CardZone.None:
+                Destroy(cardObject);
+                break;
+            case CardContainer.CardZone.Hand:
+                break;
+            case CardContainer.CardZone.Play:
+                break;
+            case CardContainer.CardZone.Discard:
+                NGUITools.BringForward(cardObject);
+                DeckManager.deckManager.AddCardToDiscard(DeckManager.GetCardDefinition(cardObject), cardController.gameCard.isGainedCard);
+                break;
+            default:
+                break;
+        }
     }
 }

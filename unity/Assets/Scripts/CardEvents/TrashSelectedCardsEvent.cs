@@ -17,14 +17,18 @@ public class TrashSelectedCardsEvent : CardEvent
 
     public CardContainer.CardZone cardSource = CardContainer.CardZone.Hand;
 
+    public bool canCancel = false;
+
     public override bool Execute()
     {
         CardSelectionController.ButtonOption buttons = (numRequiredCards > 0 ? CardSelectionController.ButtonOption.okOnly : 
                                                                     CardSelectionController.ButtonOption.okCancel);
 
+        if (canCancel) { buttons = CardSelectionController.ButtonOption.okCancel; }
+
         CardSelectionController csc = CardSelectionController.cardSelectionController;
 
-        csc.Setup(promptText, buttons, numCards, numRequiredCards, cardSource);
+        csc.Setup(promptText, buttons, canCancel, numCards, numRequiredCards, cardSource);
 
         csc.OKButtonText = OKButtonText;
         csc.CancelButtonText = CancelButtonText;
@@ -49,13 +53,13 @@ public class TrashSelectedCardsEvent : CardEvent
             {
                 Debug.Log("OSF: Destroy!");
                 DeckManager.deckManager.TrashCard(card.gameCard.cardDefinition);
-                Destroy(card.gameObject);
+                UnityEngine.Object.Destroy(card.gameObject);
             }
             else
             {
                 Debug.Log("OSF: Return!");
                 //put cards back in hand
-                CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.Hand);
+                CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, cardSource);
             }
         }
 

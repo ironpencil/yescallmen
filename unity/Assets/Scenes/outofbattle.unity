@@ -112,7 +112,7 @@ MonoBehaviour:
   FirstShowOfSession: 1
   DeckContents: []
   DoLoadPlayerPrefs: 1
-  FeministsConvertedString: 
+  FeministsConvertedString: None
 --- !u!4 &12338113
 Transform:
   m_ObjectHideFlags: 0
@@ -1524,6 +1524,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1305762599}
   - 114: {fileID: 1305762598}
+  - 114: {fileID: 1305762600}
   m_Layer: 8
   m_Name: OutOfBattleManager
   m_TagString: Untagged
@@ -1558,6 +1559,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1305762600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1305762597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b39b0ced62109f49a35db13a32d314f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointsLabel: {fileID: 209240273}
 --- !u!1001 &1376662645
 Prefab:
   m_ObjectHideFlags: 0

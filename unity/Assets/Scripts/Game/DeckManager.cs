@@ -7,10 +7,10 @@ public class DeckManager : MonoBehaviour {
 
     public static DeckManager deckManager;
     //end of the list is the top, beginning is the bottom
-    List<CardDefinition> deck = new List<CardDefinition>();
+    public List<CardDefinition> deck = new List<CardDefinition>();
     
     //end of the list is the top, beginning is the bottom
-    List<CardDefinition> discard = new List<CardDefinition>();
+    public List<CardDefinition> discard = new List<CardDefinition>();
 
     public delegate void OnShuffleDiscardIntoDeck();
 
@@ -52,9 +52,9 @@ public class DeckManager : MonoBehaviour {
 
             startCards.Add(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
 
-            startCards.Add(new CardDefinition(CardFactory.CardName.Trasher, 1));
+            //startCards.Add(new CardDefinition(CardFactory.CardName.Trasher, 1));
 
-            startCards.Add(new CardDefinition(CardFactory.CardName.NotAllMen, 1));
+            //startCards.Add(new CardDefinition(CardFactory.CardName.NotAllMen, 1));
 
             for (int i = 0; i < 7; i++)
             {

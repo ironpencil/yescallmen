@@ -143,7 +143,7 @@ public class DragDropCard : UIDragDropItem {
                     }
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
                     break;
-                case CardContainer.CardZone.Selection:
+                case CardContainer.CardZone.Selection:                    
                     NGUITools.BringForward(gameObject);
                     CardSelectionController.cardSelectionController.FilledSlots++;
                     break;

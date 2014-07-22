@@ -138,6 +138,12 @@ public class RulesManager : MonoBehaviour {
             sb.Append("-1 Action ");
         }
 
+        if (gameCard.actionsAdded > 0)
+        {
+            ActionsLeft += gameCard.actionsAdded;
+            sb.Append("+" + gameCard.actionsAdded + " Actions ");
+        }
+
         if (gameCard.spiteUsed > 0)
         {
             SpiteLeft -= gameCard.spiteUsed;

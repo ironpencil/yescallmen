@@ -163,8 +163,10 @@ public class CardDisplayController : MonoBehaviour {
 
     protected void MoveCardToDestination(DisplayedCard displayedCard)
     {
-        if (displayedCard.destinationZone != CardContainer.CardZone.None)
-        {
+        removeCards.Add(displayedCard);
+
+        //if (displayedCard.destinationZone != CardContainer.CardZone.None)
+        //{
             //GameObject destinationObject = FindDestinationObject(displayedCard.destinationZone);
 
             //Debug.Log("Card being moved from " + displayedCard.cardObject.gameObject.ToString() +
@@ -173,28 +175,28 @@ public class CardDisplayController : MonoBehaviour {
             CardZoneManager.cardZoneManager.MoveCardToZone(displayedCard.cardObject, displayedCard.destinationZone);
 
             //ReparentCard(displayedCard.cardObject, destinationObject);
-        }
+        //}
 
-        removeCards.Add(displayedCard);
+        
 
-        GameCard gameCard = displayedCard.cardObject.GetComponent<GameCard>();
+        //GameCard gameCard = displayedCard.cardObject.GetComponent<GameCard>();
 
-        switch (displayedCard.destinationZone)
-        {
-            case CardContainer.CardZone.None:
-                Destroy(displayedCard.cardObject);
-                break;
-            case CardContainer.CardZone.Hand:
-                break;
-            case CardContainer.CardZone.Play:
-                break;
-            case CardContainer.CardZone.Discard:
-                NGUITools.BringForward(displayedCard.cardObject);
-                DeckManager.deckManager.AddCardToDiscard(DeckManager.GetCardDefinition(displayedCard.cardObject), gameCard.isGainedCard);
-                break;
-            default:
-                break;
-        }
+        //switch (displayedCard.destinationZone)
+        //{
+        //    case CardContainer.CardZone.None:
+        //        Destroy(displayedCard.cardObject);
+        //        break;
+        //    case CardContainer.CardZone.Hand:
+        //        break;
+        //    case CardContainer.CardZone.Play:
+        //        break;
+        //    case CardContainer.CardZone.Discard:
+        //        NGUITools.BringForward(displayedCard.cardObject);
+        //        DeckManager.deckManager.AddCardToDiscard(DeckManager.GetCardDefinition(displayedCard.cardObject), gameCard.isGainedCard);
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     public void MoveCardToDestination(GameObject cardObject, CardContainer.CardZone destination)

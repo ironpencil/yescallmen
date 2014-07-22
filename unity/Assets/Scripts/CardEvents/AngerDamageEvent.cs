@@ -12,7 +12,7 @@ public class AngerDamageEvent : CardEvent
     {
         int damage = RulesManager.rulesManager.SpiteTotal;
 
-        damage = damage * gameCard.Level;
+        //damage = damage * gameCard.Level;
 
         //Debug.Log("Anger played. Damage=" + damage + " Level=" + gameCard.Level);
 

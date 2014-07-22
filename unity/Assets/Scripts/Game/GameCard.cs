@@ -41,6 +41,8 @@ public class GameCard : MonoBehaviour
 
     public int spiteAdded = 0;
 
+    public int actionsAdded = 0;
+
     [SerializeField]
     private int levelPrvt = 1;
     public int Level
@@ -51,7 +53,14 @@ public class GameCard : MonoBehaviour
             levelPrvt = value;
             if (levelLabel != null)
             {
-                levelLabel.text = "LVL " + levelPrvt;
+                if (value > 0)
+                {
+                    levelLabel.text = "LVL " + levelPrvt;
+                }
+                else
+                {
+                    levelLabel.text = "";
+                }
             }
         }
     }
@@ -175,12 +184,16 @@ public class GameCard : MonoBehaviour
     [ContextMenu("Level Up")]
     public void LevelUp()
     {
-        DeckManager.deckManager.TrashCard(cardDefinition); 
-        ChangeLevel(Level + 1);
-        DeckManager.deckManager.GainCard(cardDefinition);
+        //can't level up a card that has a level of 0
+        if (Level > 0)
+        {
+            DeckManager.deckManager.TrashCard(cardDefinition);
+            ChangeLevel(Level + 1);
+            DeckManager.deckManager.GainCard(cardDefinition);
+        }
     }
 
-    public void ChangeLevel(int newLevel)
+    private void ChangeLevel(int newLevel)
     {
         this.cardDefinition.Level = newLevel;
 
