@@ -53,6 +53,10 @@ public class TrashSelectedCardsEvent : CardEvent
             {
                 Debug.Log("OSF: Destroy!");
                 DeckManager.deckManager.TrashCard(card.gameCard.cardDefinition);
+
+                //remember card in case an event later wants to reference it
+                gameCard.rememberedCards.Add(card.gameCard.cardDefinition);
+
                 UnityEngine.Object.Destroy(card.gameObject);
             }
             else

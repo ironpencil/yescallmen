@@ -11,6 +11,7 @@ public class CardZoneManager : MonoBehaviour {
     public GameObject discardContainer;
     public GameObject displayContainer;
     public GameObject selectionContainer;
+    public GameObject deckContainer;
 
 	// Use this for initialization
 	void Start () {
@@ -63,6 +64,9 @@ public class CardZoneManager : MonoBehaviour {
             case CardContainer.CardZone.Selection:
                 targetObject = selectionContainer;
                 break;
+            case CardContainer.CardZone.Deck:
+                targetObject = deckContainer;
+                break;
             default:
                 break;
         }
@@ -112,11 +116,19 @@ public class CardZoneManager : MonoBehaviour {
             case CardContainer.CardZone.Selection:
                 canDragCard = CanDragToSlot(card, surface);
                 break;
+            case CardContainer.CardZone.Deck:
+                canDragCard = CanDragToDeck(card, surface);
+                break;
             default:
                 break;
         }
 
         return canDragCard;
+    }
+
+    private bool CanDragToDeck(DragDropCard card, GameObject surface)
+    {
+        return false;
     }
 
     private bool CanDragToSlot(DragDropCard card, GameObject slot)
@@ -252,7 +264,11 @@ public class CardZoneManager : MonoBehaviour {
                 break;
             case CardContainer.CardZone.Discard:
                 NGUITools.BringForward(cardObject);
-                DeckManager.deckManager.AddCardToDiscard(DeckManager.GetCardDefinition(cardObject), cardController.gameCard.isGainedCard);
+                DeckManager.deckManager.AddCardToDiscard(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
+                break;
+            case CardContainer.CardZone.Deck:
+                DeckManager.deckManager.AddCardToDeck(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
+                Destroy(cardObject);
                 break;
             default:
                 break;

@@ -132,6 +132,8 @@ public class GameCard : MonoBehaviour
 
     public List<CardEvent> cardEvents = new List<CardEvent>();
 
+    public List<CardDefinition> rememberedCards = new List<CardDefinition>();
+
     public void AddEvent(CardEvent cardEvent)
     {
         cardEvent.gameCard = this;

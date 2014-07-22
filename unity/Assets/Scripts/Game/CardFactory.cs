@@ -25,9 +25,11 @@ public class CardFactory : MonoBehaviour
         HealCard,
         Village,
         Smithy,
-        DblLeveler,
+        Leveler,
         SpiteChecker,
-        IncreaseMaxAnger
+        IncreaseMaxAnger,
+        Lab,
+        Warehouse
     }
 
     public GameObject CreateCard(CardDefinition cardDefinition)
@@ -107,16 +109,22 @@ public class CardFactory : MonoBehaviour
                 GenerateVillage(gameCard, level);
                 break;
             case CardName.Smithy:
-                GenerateSmith(gameCard, level);
+                GenerateSmithy(gameCard, level);
                 break;
-            case CardName.DblLeveler:
-                GenerateDblLeveler(gameCard, level);
+            case CardName.Leveler:
+                GenerateLeveler(gameCard, level);
                 break;
             case CardName.SpiteChecker:
                 GenerateSpiteChecker(gameCard, level);
                 break;
             case CardName.IncreaseMaxAnger:
                 GenerateIncreaseMaxAngerCard(gameCard, level);
+                break;
+            case CardName.Lab:
+                GenerateLab(gameCard, level);
+                break;
+            case CardName.Warehouse:
+                GenerateWarehouse(gameCard, level);
                 break;
             default:
                 break;
@@ -133,11 +141,57 @@ public class CardFactory : MonoBehaviour
         return gameCard;
     }
 
+    private void GenerateWarehouse(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Warehouse";
+        gameCard.AbilityText = "Action. +3 Cards, +1 Action, +1 Spite. Must discard 3 cards.";
+        gameCard.cardType = GameCard.CardType.Action;
+
+        gameCard.actionsAdded = 1;
+        gameCard.spiteAdded = 1;
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = 3;
+        drawEvent.drawToZone = CardContainer.CardZone.Hand;
+
+        gameCard.AddEvent(drawEvent);
+
+        DiscardCardsEvent discardEvent = new DiscardCardsEvent();
+        discardEvent.numCards = 3;
+        discardEvent.numRequiredCards = 3;
+        discardEvent.promptText = "You must discard 3 cards.";
+
+        gameCard.AddEvent(discardEvent);
+    }
+
+    private void GenerateLab(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Lab";
+        gameCard.AbilityText = "Action. +2 Cards, +1 Action. May put 1 card from hand on top of deck.";
+        gameCard.cardType = GameCard.CardType.Action;
+
+        gameCard.actionsAdded = 1;
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = 2;
+        drawEvent.drawToZone = CardContainer.CardZone.Hand;
+
+        gameCard.AddEvent(drawEvent);
+
+        PutCardsOnDeckEvent deckEvent = new PutCardsOnDeckEvent();
+        deckEvent.numCards = 1;
+        deckEvent.numRequiredCards = 0;
+        deckEvent.promptText = "Put a card from hand on top of deck.";
+
+        gameCard.AddEvent(deckEvent);
+    }
+
     private void GenerateIncreaseMaxAngerCard(GameCard gameCard, int level)
     {
         gameCard.Title = "Raise Max Anger";
-        gameCard.AbilityText = "Special (No Action). Draw 5 cards. Raise Max Anger by 10. Trash this card when played.";
+        gameCard.AbilityText = "Special (No Action). +5 Cards, +1 Action. Raise Max Anger by 20. Trash this card when played.";
         gameCard.cardType = GameCard.CardType.Special;
+        gameCard.actionsAdded = 1;
 
         DrawCardsEvent drawEvent = new DrawCardsEvent();
         drawEvent.numCards = 5;
@@ -147,7 +201,7 @@ public class CardFactory : MonoBehaviour
 
         ChangeAngerEvent healEvent = new ChangeAngerEvent();
         healEvent.useTotalSpite = false;
-        healEvent.angerAmount = 10;
+        healEvent.angerAmount = 20;
         healEvent.changeMaxAnger = true;
 
         gameCard.AddEvent(healEvent);
@@ -159,7 +213,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateSpiteChecker(GameCard gameCard, int level)
     {
         gameCard.Title = "Spite Checker";
-        gameCard.AbilityText = "Action. Gain 1 Card. Gain 1 Action. If you have more than 10 Total Spite, gain an additional card and action.";
+        gameCard.AbilityText = "Action. +1 Card, +1 Action. If you have 10 or more Total Spite: +1 Card, +1 Action.";
         gameCard.cardType = GameCard.CardType.Action;
 
         gameCard.actionsAdded = 1;
@@ -186,27 +240,29 @@ public class CardFactory : MonoBehaviour
         
     }
 
-    private void GenerateDblLeveler(GameCard gameCard, int level)
+    private void GenerateLeveler(GameCard gameCard, int level)
     {
         gameCard.Title = "Remake";
-        gameCard.AbilityText = "Action. Level up exactly 2 cards from your hand, then discard them.";
+        gameCard.AbilityText = "Action. May level up 1 card from hand, then discard it.";
         gameCard.cardType = GameCard.CardType.Action;
 
         LevelSelectedCardsEvent levelEvent = new LevelSelectedCardsEvent();
-        levelEvent.numCards = 2;
-        levelEvent.numRequiredCards = 2;
-        levelEvent.promptText = "Level up 2 cards from your hand. They will then be discarded.";
+        levelEvent.numCards = 1;
+        levelEvent.numRequiredCards = 0;
+        levelEvent.promptText = "Level up a card from your hand, then discard it.";
         levelEvent.cardDestination = CardContainer.CardZone.Discard;
         levelEvent.canCancel = true;
 
         gameCard.AddEvent(levelEvent);
     }
 
-    private void GenerateSmith(GameCard gameCard, int level)
+    private void GenerateSmithy(GameCard gameCard, int level)
     {
         gameCard.Title = "Smithy";
-        gameCard.AbilityText = "Action. Draw 3 cards.";
+        gameCard.AbilityText = "Action. +3 Cards, +1 Spite.";
         gameCard.cardType = GameCard.CardType.Action;
+
+        gameCard.spiteAdded = 1;
 
         DrawCardsEvent drawEvent = new DrawCardsEvent();
         drawEvent.numCards = 3;
@@ -219,7 +275,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateVillage(GameCard gameCard, int level)
     {
         gameCard.Title = "Village";
-        gameCard.AbilityText = "Action. Draw a card. Gain 2 Actions. Gain 1 Spite.";
+        gameCard.AbilityText = "Action. +1 Card, +2 Actions, +1 Spite.";
         gameCard.cardType = GameCard.CardType.Action;
 
         gameCard.actionsAdded = 2;
@@ -235,7 +291,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateHealCard(GameCard gameCard, int level)
     {
         gameCard.Title = "Heal";
-        gameCard.AbilityText = "Action. Lower current Anger by Total Spite.";
+        gameCard.AbilityText = "Action. Reduce Current Anger by Total Spite.";
         gameCard.cardType = GameCard.CardType.Action;
 
         ChangeAngerEvent healEvent = new ChangeAngerEvent();
@@ -248,8 +304,9 @@ public class CardFactory : MonoBehaviour
     private void GenerateNotAllMen(GameCard gameCard, int level)
     {
         gameCard.Title = "Not All Men";
-        gameCard.AbilityText = "Special (No Action). Draw 5 cards. May level up 1 card from hand. Trash this card when played.";
+        gameCard.AbilityText = "Special (No Action).\r\n+5 Cards, +1 Action. May level up 1 card from hand, then return it to your hand. Trash this card when played.";
         gameCard.cardType = GameCard.CardType.Special;
+        gameCard.actionsAdded = 1;
 
         DrawCardsEvent drawEvent = new DrawCardsEvent();
         drawEvent.numCards = 5;
@@ -260,7 +317,7 @@ public class CardFactory : MonoBehaviour
         LevelSelectedCardsEvent levelEvent = new LevelSelectedCardsEvent();
         levelEvent.numCards = 1;
         levelEvent.numRequiredCards = 0;
-        levelEvent.promptText = "You may level up a card from your hand.";
+        levelEvent.promptText = "Level up a card from your hand, then return it to hand.";
 
         gameCard.AddEvent(levelEvent);
 
@@ -271,7 +328,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateTrasher(GameCard gameCard, int level)
     {
         gameCard.Title = "Trasher";
-        gameCard.AbilityText = "Action. Draw 1 card. Gain 1 Action. May trash (remove from game) 1 card from hand.";
+        gameCard.AbilityText = "Action. +1 Card, +1 Action. May Trash 1 card from hand. If you do: +1 Card, +1 Action.";
         gameCard.cardType = GameCard.CardType.Action;
 
         gameCard.actionsAdded = 1;
@@ -285,16 +342,22 @@ public class CardFactory : MonoBehaviour
         TrashSelectedCardsEvent trashEvent = new TrashSelectedCardsEvent();
         trashEvent.numCards = 1;
         trashEvent.numRequiredCards = 0;
-        trashEvent.promptText = "You may trash a card from your hand.";
+        trashEvent.promptText = "Trash a card from your hand.";
 
         gameCard.AddEvent(trashEvent);
+
+        TrasherBenefitEvent benefitEvent = new TrasherBenefitEvent();
+        benefitEvent.numExtraActions = 1;
+        benefitEvent.numExtraCards = 1;
+
+        gameCard.AddEvent(benefitEvent);
 
     }
 
     private void GenerateSpite(GameCard gameCard, int level)
     {
         gameCard.Title = "Spite";
-        gameCard.AbilityText = "Gain " + level + " Spite.";
+        gameCard.AbilityText = "+" + level + " Spite.";
         gameCard.cardType = GameCard.CardType.Spite;
         gameCard.spiteAdded = level;
         gameCard.BaseDamage = 1;
@@ -311,10 +374,10 @@ public class CardFactory : MonoBehaviour
         gameCard.Title = "Confusion";        
         gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Confusion;
-        gameCard.BaseDamage = level + 2;
+        gameCard.BaseDamage = level * 3;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level;
-        gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Reveal top card of deck. If it is an Argument, put it into play for free. Otherwise, discard it.";
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\nReveal top card of deck. If it is an Argument, play it for free. Otherwise, discard it.";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -329,13 +392,15 @@ public class CardFactory : MonoBehaviour
 
     private static void GenerateAngerAttack(GameCard gameCard, int level)
     {
+        int maxBonusDamage = level * 5;
+
         gameCard.Title = "Anger";        
         gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Anger;
         gameCard.BaseDamage = level;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level + 1;
-        gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Do bonus damage equal to Total Spite when played.";
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\nDo bonus damage equal to Total Spite, up to " + maxBonusDamage + ".";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -343,6 +408,7 @@ public class CardFactory : MonoBehaviour
         gameCard.AddEvent(baseDmgEvent);
 
         AngerDamageEvent angDmgEvent = ScriptableObject.CreateInstance<AngerDamageEvent>();
+        angDmgEvent.maxDamage = maxBonusDamage;
         gameCard.AddEvent(angDmgEvent);
     }
 
@@ -351,10 +417,10 @@ public class CardFactory : MonoBehaviour
         gameCard.Title = "Fatigue";        
         gameCard.cardType = GameCard.CardType.Argument;
         gameCard.damageType = GameCard.DamageType.Fatigue;
-        gameCard.BaseDamage = level + 1;
+        gameCard.BaseDamage = level * 3;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level;
-        gameCard.AbilityText = "Argument. Uses " + gameCard.spiteUsed + " Spite. Draw a card.";
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\n+1 Card.";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;

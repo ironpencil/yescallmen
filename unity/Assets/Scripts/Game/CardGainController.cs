@@ -49,7 +49,7 @@ public class CardGainController : MonoBehaviour {
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Village, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Smithy, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.SpiteChecker, atLevel));
-        rewardCards.Add(new CardDefinition(CardFactory.CardName.DblLeveler, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Leveler, atLevel));
 
         return rewardCards;
     }

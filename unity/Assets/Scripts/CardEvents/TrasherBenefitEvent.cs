@@ -4,13 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class SpiteCheckerEvent : CardEvent
-{
-    
-    public string spiteTotalVariable = "SpiteTotal";
-
-    public int spiteThreshold = 10;
-
+public class TrasherBenefitEvent : CardEvent
+{   
     public int numExtraCards = 1;
     public int numExtraActions = 1;
 
@@ -18,17 +13,8 @@ public class SpiteCheckerEvent : CardEvent
 
     public override bool Execute()
     {
-        string spiteTotal;
-        int spiteValue;
 
-        //if the variable doesn't exist, or we can't parse it, set spiteValue to 0
-        if (!gameCard.eventVariables.TryGetValue(spiteTotalVariable, out spiteTotal) ||
-            !int.TryParse(spiteTotal, out spiteValue))
-        {
-                spiteValue = 0;        
-        }
-
-        if (spiteValue >= spiteThreshold)
+        if (gameCard.rememberedCards.Count > 0)
         {
             DrawPileController drawPile = DrawPileController.drawPile;
 

@@ -32,6 +32,9 @@ public class DragDropCard : UIDragDropItem {
             case CardContainer.CardZone.Selection:
                 allowedToDrag = true;
                 break;
+            case CardContainer.CardZone.Deck:
+                allowedToDrag = false;
+                break;
             default:
                 allowedToDrag = false;
                 break;
@@ -133,7 +136,7 @@ public class DragDropCard : UIDragDropItem {
                     break;
                 case CardContainer.CardZone.Discard:
                     NGUITools.BringForward(gameObject);
-                    GameCard gameCard = gameObject.GetComponent<GameCard>();
+                    GameCard gameCard = cardController.gameCard;
                     if (gameCard != null)
                     {
                         if (gameCard.cardDefinition != null)
@@ -146,6 +149,10 @@ public class DragDropCard : UIDragDropItem {
                 case CardContainer.CardZone.Selection:                    
                     NGUITools.BringForward(gameObject);
                     CardSelectionController.cardSelectionController.FilledSlots++;
+                    break;
+                case CardContainer.CardZone.Deck:
+                    DeckManager.deckManager.AddCardToDeck(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
+                    Destroy(cardController.gameObject);
                     break;
                 default:
                     break;

@@ -7,6 +7,7 @@ using UnityEngine;
 public class AngerDamageEvent : CardEvent
 {
 
+    public int maxDamage = 5;
 
     public override bool Execute()
     {
@@ -15,6 +16,8 @@ public class AngerDamageEvent : CardEvent
         //damage = damage * gameCard.Level;
 
         //Debug.Log("Anger played. Damage=" + damage + " Level=" + gameCard.Level);
+
+        damage = Mathf.Min(maxDamage, damage);
 
         BattleManager.battleManager.DamageEnemy(GameCard.DamageType.Anger, damage);
 
