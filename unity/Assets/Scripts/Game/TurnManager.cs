@@ -82,6 +82,13 @@ public class TurnManager : MonoBehaviour {
         currentTurnState = TurnState.StartBattle;
         BattleManager.battleManager.StartNewBattle();
 
+        GameMessageManager.gameMessageManager.AddLine("How to Play: Play cards by dragging them to the play area.", false);
+        GameMessageManager.gameMessageManager.AddLine("After each turn, all cards in play and in hand will be sent to the Discard Pile.", false);
+        GameMessageManager.gameMessageManager.AddLine("When you have to draw a card and there are none in the Draw Pile, Discard Pile will be shuffled to make a new Draw Pile.", false);
+        GameMessageManager.gameMessageManager.AddLine("Spite cards can be played for free to increase Spite.", false);
+        GameMessageManager.gameMessageManager.AddLine("Argument cards use Spite when played. Action cards use Actions when played.", false);
+        GameMessageManager.gameMessageManager.AddLine("Any changes you make to your deck during play by Trashing (removing) or Gaining (adding) cards are permanent, and your deck will persist across battles.", false);
+
         ChangeState(TurnState.PlayerDraw);
     }
 

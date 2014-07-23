@@ -31,6 +31,9 @@ public class NextBattle : MonoBehaviour {
 
     public void StartNextBattle()
     {
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.StartBattle);
+        if (TurnManager.turnManager.CurrentState == TurnManager.TurnState.OutOfBattle)
+        {
+            TurnManager.turnManager.ChangeState(TurnManager.TurnState.StartBattle);
+        }
     }
 }

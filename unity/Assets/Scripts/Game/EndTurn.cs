@@ -32,6 +32,9 @@ public class EndTurn : MonoBehaviour {
 
     public void EndPlayerTurn()
     {
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerCleanup);
+        if (TurnManager.turnManager.CurrentState == TurnManager.TurnState.PlayerActive)
+        {
+            TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerCleanup);
+        }
     }
 }

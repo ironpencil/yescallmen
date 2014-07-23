@@ -131,6 +131,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 92
@@ -224,6 +225,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 102
@@ -574,6 +576,7 @@ MonoBehaviour:
     relative: 1
     absolute: -5
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: .80392158}
   mPivot: 7
   mWidth: 100
@@ -661,7 +664,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3002
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -980,6 +983,7 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 88
@@ -1266,6 +1270,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -1364,6 +1369,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 98
@@ -1451,7 +1457,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3006
+  startingRenderQueue: 3004
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -1582,6 +1588,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -1731,6 +1738,7 @@ MonoBehaviour:
     relative: 1
     absolute: -5
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .760784328, g: .760784328, b: .760784328, a: 1}
   mPivot: 4
   mWidth: 458
@@ -1848,6 +1856,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 114
@@ -1925,9 +1934,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 345014622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc1bf488fc3345a41bad73504e63dce1, type: 3}
+  m_Script: {fileID: 11500000, guid: ae942c9068183dc40a9d01f648273726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  showInPanelTool: 1
+  generateNormals: 0
+  widgetsAreStatic: 0
+  cullWhileDragging: 0
+  alwaysOnScreen: 0
+  anchorOffset: 0
+  renderQueue: 0
+  startingRenderQueue: 3009
+  mAlpha: 1
+  mClipping: 0
+  mClipRange: {x: 0, y: 0, z: 300, w: 200}
+  mClipSoftness: {x: 4, y: 4}
+  mDepth: 29
+  mSortingOrder: 0
+  mClipOffset: {x: 0, y: 0}
 --- !u!114 &345014625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,6 +2112,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 60
@@ -2162,6 +2204,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 142
@@ -2253,6 +2296,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 102
@@ -2376,6 +2420,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 786
@@ -2635,6 +2680,7 @@ MonoBehaviour:
     relative: 1
     absolute: -2
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 96
@@ -2699,6 +2745,10 @@ Prefab:
     - target: {fileID: 400000, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: scrollWheelFactor
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
@@ -2853,6 +2903,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 142
@@ -3093,6 +3144,7 @@ MonoBehaviour:
     relative: 1
     absolute: -8
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 88
@@ -3190,6 +3242,7 @@ MonoBehaviour:
     relative: 1
     absolute: -5
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: .80392158}
   mPivot: 7
   mWidth: 100
@@ -3584,7 +3637,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3002
+  startingRenderQueue: 3005
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -3673,6 +3726,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -3947,6 +4001,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -4072,6 +4127,7 @@ MonoBehaviour:
     relative: 1
     absolute: -3
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .11403051, g: .110101432, b: .46274507, a: 1}
   mPivot: 7
   mWidth: 94
@@ -4151,6 +4207,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 98
@@ -4326,6 +4383,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 142
@@ -4370,7 +4428,7 @@ GameObject:
   - 4: {fileID: 755915657}
   - 114: {fileID: 755915658}
   m_Layer: 8
-  m_Name: Label
+  m_Name: CancelLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4417,11 +4475,12 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 142
   mHeight: 32
-  mDepth: 13
+  mDepth: 55
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -4534,6 +4593,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 40
@@ -4651,6 +4711,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -4717,6 +4778,7 @@ MonoBehaviour:
     relative: 1
     absolute: -70
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -4876,6 +4938,7 @@ MonoBehaviour:
     relative: 0
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .485294104, g: .485294104, b: .485294104, a: 1}
   mPivot: 4
   mWidth: 686
@@ -4989,7 +5052,7 @@ GameObject:
   - 4: {fileID: 914837416}
   - 114: {fileID: 914837417}
   m_Layer: 8
-  m_Name: Label
+  m_Name: OKLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5036,11 +5099,12 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 142
   mHeight: 32
-  mDepth: 15
+  mDepth: 56
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -5205,7 +5269,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3017
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -5270,6 +5334,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -5489,6 +5554,10 @@ Prefab:
     - target: {fileID: 400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalPosition.y
       value: .000354766846
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
@@ -5917,6 +5986,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -6015,7 +6085,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3021
+  startingRenderQueue: 3019
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -6229,6 +6299,7 @@ MonoBehaviour:
     relative: 1
     absolute: -25
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 96
@@ -6461,6 +6532,7 @@ MonoBehaviour:
     relative: 1
     absolute: -25
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 96
@@ -6540,6 +6612,7 @@ MonoBehaviour:
     relative: 1
     absolute: -70
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -6680,6 +6753,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 786
@@ -6773,6 +6847,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 142
@@ -6950,11 +7025,12 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
   mHeight: 40
-  mDepth: 12
+  mDepth: 50
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -7029,6 +7105,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 102
@@ -7151,6 +7228,7 @@ MonoBehaviour:
     relative: 1
     absolute: -2
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 538
@@ -7220,6 +7298,7 @@ MonoBehaviour:
     relative: 1
     absolute: 160
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 568
@@ -7311,6 +7390,7 @@ MonoBehaviour:
     relative: 1
     absolute: -3
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .11403051, g: .110101432, b: .46274507, a: 1}
   mPivot: 7
   mWidth: 94
@@ -7333,6 +7413,58 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: f95e07e3d350bf748b0c42b453a69d2e, type: 2}
   mSpriteName: Paper Background
   mFillCenter: 1
+--- !u!1001 &1324224139
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_RootMapOrder
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: DebugWidgetDepths
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+  m_RootGameObject: {fileID: 2128300345}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1330614581
 GameObject:
   m_ObjectHideFlags: 0
@@ -7468,7 +7600,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3017
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -7668,11 +7800,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: mDepth
-      value: 12
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: mDepth
-      value: 13
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalScale.x
@@ -7685,6 +7817,18 @@ Prefab:
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: m_Name
+      value: CancelLabel
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: DebugDepth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: DebugDepth
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
@@ -7834,11 +7978,12 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
   mHeight: 40
-  mDepth: 14
+  mDepth: 51
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8000,6 +8145,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
@@ -8139,6 +8285,7 @@ MonoBehaviour:
     relative: 1
     absolute: -70
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -8226,6 +8373,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 102
@@ -8318,6 +8466,7 @@ MonoBehaviour:
     relative: 1
     absolute: -8
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 85
@@ -8495,6 +8644,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
@@ -8573,6 +8723,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 40
@@ -8687,7 +8838,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3017
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -8752,6 +8903,7 @@ MonoBehaviour:
     relative: 1
     absolute: -70
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -8883,6 +9035,7 @@ MonoBehaviour:
     relative: .5
     absolute: 10
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 514
@@ -9106,6 +9259,7 @@ MonoBehaviour:
     relative: 0
     absolute: 2
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .485294104, g: .485294104, b: .485294104, a: 1}
   mPivot: 4
   mWidth: 468
@@ -9372,6 +9526,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 98
@@ -9462,6 +9617,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 46
@@ -9496,62 +9652,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!1001 &1497200819
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_RootMapOrder
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: DoLoadPlayerPrefs
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: PlayerMaxHP
-      value: 100
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-  m_RootGameObject: {fileID: 2128300345}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1498540541
 GameObject:
   m_ObjectHideFlags: 0
@@ -9611,6 +9711,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -9689,6 +9790,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 40
@@ -9847,6 +9949,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -9927,6 +10030,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -9997,7 +10101,7 @@ MonoBehaviour:
   disableDragIfFits: 0
   smoothDragStart: 1
   iOSDragEmulation: 1
-  scrollWheelFactor: 1
+  scrollWheelFactor: -1
   momentumAmount: 35
   horizontalScrollBar: {fileID: 0}
   verticalScrollBar: {fileID: 0}
@@ -10122,6 +10226,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 46
@@ -10295,6 +10400,7 @@ MonoBehaviour:
     relative: 1
     absolute: 25
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 741
@@ -10637,6 +10743,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
@@ -10724,6 +10831,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -11031,6 +11139,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
@@ -11202,6 +11311,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -11372,6 +11482,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
   m_RootGameObject: {fileID: 1643509307}
@@ -11434,6 +11548,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: .737254918}
   mPivot: 4
   mWidth: 102
@@ -11598,11 +11713,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: mDepth
-      value: 14
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: mDepth
-      value: 15
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalScale.x
@@ -11623,6 +11738,10 @@ Prefab:
     - target: {fileID: 400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
       propertyPath: m_LocalPosition.y
       value: .000354766846
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
+      propertyPath: m_Name
+      value: OKLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 2}
@@ -11753,6 +11872,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -11819,6 +11939,7 @@ MonoBehaviour:
     relative: 1
     absolute: -2
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 96
@@ -11985,6 +12106,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 150
@@ -12178,6 +12300,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 542
@@ -12285,7 +12408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8883f479b008c41b222299e2b937e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BattlesPerShow: 5
+  BattlesPerShow: 3
   BattleNumber: 0
   playerMaxAnger: 50
   playerCurrentAnger: 50
@@ -12450,6 +12573,7 @@ MonoBehaviour:
     relative: 1
     absolute: -5
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .760784328, g: .760784328, b: .760784328, a: 1}
   mPivot: 4
   mWidth: 676
@@ -12576,7 +12700,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3017
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -12671,6 +12795,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -12750,6 +12875,7 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 88
@@ -12863,6 +12989,7 @@ MonoBehaviour:
     relative: 1
     absolute: -70
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 110
@@ -12947,6 +13074,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 252
@@ -13026,6 +13154,7 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 88
@@ -13430,6 +13559,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -13523,6 +13653,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .737254918}
   mPivot: 4
   mWidth: 142
@@ -13614,6 +13745,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .343283594, g: .343283594, b: .343283594, a: .360784322}
   mPivot: 4
   mWidth: 786
@@ -13692,6 +13824,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 112
@@ -13931,6 +14064,7 @@ MonoBehaviour:
     relative: 1
     absolute: -8
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 88
@@ -14069,6 +14203,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 72
@@ -14160,6 +14295,7 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 88
@@ -14250,6 +14386,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 88
@@ -14340,6 +14477,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .139276028, b: 1, a: 1}
   mPivot: 4
   mWidth: 46
@@ -14432,6 +14570,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 568
@@ -14522,6 +14661,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 40
@@ -14612,6 +14752,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 64
@@ -14702,6 +14843,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 80
@@ -14740,7 +14882,7 @@ MonoBehaviour:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-  m_PrefabInternal: {fileID: 1497200819}
+  m_PrefabInternal: {fileID: 1324224139}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2128300348}
@@ -14757,7 +14899,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904,
     type: 2}
-  m_PrefabInternal: {fileID: 1497200819}
+  m_PrefabInternal: {fileID: 1324224139}
   m_GameObject: {fileID: 2128300345}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -14775,11 +14917,12 @@ MonoBehaviour:
   DeckContents: []
   DoLoadPlayerPrefs: 1
   FeministsConvertedString: None
+  DebugWidgetDepths: 0
 --- !u!4 &2128300348
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-  m_PrefabInternal: {fileID: 1497200819}
+  m_PrefabInternal: {fileID: 1324224139}
   m_GameObject: {fileID: 2128300345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -14852,6 +14995,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100

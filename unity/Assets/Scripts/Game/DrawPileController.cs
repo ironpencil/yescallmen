@@ -47,7 +47,7 @@ public class DrawPileController : MonoBehaviour {
                 GameCard gameCard = newCard.GetComponent<GameCard>();
                 if (gameCard != null)
                 {
-                    GameMessageManager.gameMessageManager.AddLine("Drew card: " + gameCard.Title, false);
+                    //GameMessageManager.gameMessageManager.AddLine("Drew card: " + gameCard.Title, false);
                 }
             }
             //newCard = CardFactory.cardFactory.CreateCard(cardName, 1, gameObject);

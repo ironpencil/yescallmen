@@ -29,7 +29,12 @@ public class CardFactory : MonoBehaviour
         SpiteChecker,
         IncreaseMaxAnger,
         Lab,
-        Warehouse
+        Warehouse,
+        Embassy,
+        Jack,
+        HealthAttack,
+        GainerAttack,
+        FreeAttack
     }
 
     public GameObject CreateCard(CardDefinition cardDefinition)
@@ -77,21 +82,19 @@ public class CardFactory : MonoBehaviour
 
         gameCard.Level = level;
 
+        //clear events in case this was an existing card
         gameCard.cardEvents.Clear();
 
         switch (cardDefinition.CardName)
         {
             case CardName.FatigueAttack:
                 GenerateFatigueAttack(gameCard, level);
-
                 break;
             case CardName.ConfusionAttack:
                 GenerateConfusionAttack(gameCard, level);
-
                 break;
             case CardName.AngerAttack:
                 GenerateAngerAttack(gameCard, level);
-
                 break;
             case CardName.Spite:
                 GenerateSpite(gameCard, level);
@@ -126,6 +129,21 @@ public class CardFactory : MonoBehaviour
             case CardName.Warehouse:
                 GenerateWarehouse(gameCard, level);
                 break;
+            case CardName.Embassy:
+                GenerateEmbassy(gameCard, level);
+                break;
+            case CardName.Jack:
+                GenerateJack(gameCard, level);
+                break;
+            case CardName.HealthAttack:
+                GenerateHealthAttack(gameCard, level);
+                break;
+            case CardName.GainerAttack:
+                GenerateGainerAttack(gameCard, level);
+                break;
+            case CardName.FreeAttack:
+                GenerateFreeAttack(gameCard, level);
+                break;
             default:
                 break;
         }
@@ -141,10 +159,117 @@ public class CardFactory : MonoBehaviour
         return gameCard;
     }
 
+    private static void GenerateFreeAttack(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Free Arg";
+        gameCard.cardType = GameCard.CardType.Argument;
+        gameCard.damageType = GameCard.DamageType.Fatigue;
+        gameCard.BaseDamage = level * 3;
+        gameCard.CurrentDamage = gameCard.BaseDamage;
+        gameCard.spiteUsed = 0;
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\nTrash this card when played.";
+
+        DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
+
+        TrashSelfEvent trashEvent = new TrashSelfEvent();
+        gameCard.AddEvent(trashEvent);
+
+    }
+
+    private static void GenerateGainerAttack(GameCard gameCard, int level)
+    {
+        int spiteCardLevel = level+1;
+
+        gameCard.Title = "Gainer Arg";
+        gameCard.cardType = GameCard.CardType.Argument;
+        gameCard.damageType = GameCard.DamageType.Fatigue;
+        gameCard.BaseDamage = level * 3;
+        gameCard.CurrentDamage = gameCard.BaseDamage;
+        gameCard.spiteUsed = level + 3;
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\nGain a Level " + spiteCardLevel + " Spite card, putting it into your hand.";
+
+        DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
+
+        GainCardEvent gainEvent = ScriptableObject.CreateInstance<GainCardEvent>();
+        gainEvent.cardToGain = new CardDefinition(CardName.Spite, spiteCardLevel);
+        gainEvent.addToZone = CardContainer.CardZone.Hand;
+
+        gameCard.AddEvent(gainEvent);
+
+    }
+
+    private static void GenerateHealthAttack(GameCard gameCard, int level)
+    {
+        int bonusDamage = level * 2;
+        gameCard.Title = "HealthCheckArg";
+        gameCard.cardType = GameCard.CardType.Argument;
+        gameCard.damageType = GameCard.DamageType.Fatigue;
+        gameCard.BaseDamage = level * 3;
+        gameCard.CurrentDamage = gameCard.BaseDamage;
+        gameCard.spiteUsed = level;
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\nIf Current Anger is over half of Max Anger, do " + bonusDamage + " bonus damage.";
+
+        DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
+        baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
+        baseDmgEvent.damageAmountSource = DealDamageEvent.ValueSource.Card;
+        gameCard.AddEvent(baseDmgEvent);
+
+        HealthCheckDamageEvent bonusDmgEvent = ScriptableObject.CreateInstance<HealthCheckDamageEvent>();
+        bonusDmgEvent.bonusDamage = bonusDamage;
+        bonusDmgEvent.maxAngerPercent = 0.5;
+        gameCard.AddEvent(bonusDmgEvent);
+        
+    }
+
+    private void GenerateJack(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Jack";
+        gameCard.AbilityText = "Action. +2 Cards, +2 Actions, +2 Spite. Trash this card when played.";
+        gameCard.cardType = GameCard.CardType.Action;
+
+        gameCard.actionsAdded = 2;
+        gameCard.spiteAdded = 2;
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = 2;
+        drawEvent.drawToZone = CardContainer.CardZone.Hand;
+
+        gameCard.AddEvent(drawEvent);
+
+        TrashSelfEvent trashEvent = new TrashSelfEvent();
+        gameCard.AddEvent(trashEvent);
+    }
+
+    private void GenerateEmbassy(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Embassy";
+        gameCard.AbilityText = "Action. +5 Cards. Must then discard 2 cards.";
+        gameCard.cardType = GameCard.CardType.Action;
+
+        DrawCardsEvent drawEvent = new DrawCardsEvent();
+        drawEvent.numCards = 5;
+        drawEvent.drawToZone = CardContainer.CardZone.Hand;
+
+        gameCard.AddEvent(drawEvent);
+
+        DiscardCardsEvent discardEvent = new DiscardCardsEvent();
+        discardEvent.numCards = 2;
+        discardEvent.numRequiredCards = 2;
+        discardEvent.promptText = "You must discard 2 cards.";
+
+        gameCard.AddEvent(discardEvent);
+    }
+
     private void GenerateWarehouse(GameCard gameCard, int level)
     {
         gameCard.Title = "Warehouse";
-        gameCard.AbilityText = "Action. +3 Cards, +1 Action, +1 Spite. Must discard 3 cards.";
+        gameCard.AbilityText = "Action. +3 Cards, +1 Action, +1 Spite. Must then discard 3 cards.";
         gameCard.cardType = GameCard.CardType.Action;
 
         gameCard.actionsAdded = 1;
@@ -420,7 +545,9 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level * 3;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level;
-        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\n+1 Card.";
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\n+1 Card, +1 Action.";
+
+        gameCard.actionsAdded = 1;
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;

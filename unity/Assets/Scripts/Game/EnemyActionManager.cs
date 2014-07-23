@@ -33,13 +33,13 @@ public class EnemyActionManager : MonoBehaviour {
     public void NextEnemy(int playerLevel, int battleNumber)
     {
         
-        int adjustedLevel = playerLevel + battleNumber - Globals.GetInstance().PlayerBattlesLost;
+        int adjustedLevel = playerLevel + battleNumber - 1 - Globals.GetInstance().PlayerBattlesLost;
 
-        Level = Mathf.Max(2, adjustedLevel);
+        Level = Mathf.Max(1, adjustedLevel);
 
-        MaxHP = Level * 10;
+        MaxHP = Level * 20;
 
-        Damage = Mathf.Max(1, Level - 1);
+        Damage = Level;
 
     }
 }

@@ -130,6 +130,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 960
@@ -370,6 +371,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .685895324, g: .24437125, b: .897058845, a: 1}
   mPivot: 4
   mWidth: 150
@@ -449,6 +451,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .152941182}
   mPivot: 4
   mWidth: 150
@@ -829,6 +832,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .152941182}
   mPivot: 4
   mWidth: 150
@@ -895,8 +899,8 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: PlayerMaxHP
-      value: 100
+      propertyPath: titleLabel
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
@@ -960,6 +964,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .23880595, g: .197638646, b: .121185109, a: 1}
   mPivot: 4
   mWidth: 142
@@ -1135,6 +1140,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .23880595, g: .197638646, b: .121185109, a: 1}
   mPivot: 4
   mWidth: 142
@@ -1382,6 +1388,7 @@ MonoBehaviour:
   DeckContents: []
   DoLoadPlayerPrefs: 1
   FeministsConvertedString: None
+  DebugWidgetDepths: 0
 --- !u!4 &988823246
 Transform:
   m_ObjectHideFlags: 0
@@ -1477,6 +1484,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: .0294117928, b: 1, a: 1}
   mPivot: 4
   mWidth: 960
@@ -1543,20 +1551,21 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 172
-  mHeight: 56
+  mWidth: 770
+  mHeight: 312
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.07142854
+  aspectRatio: 2.46794868
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 7a48ea22e80d1ac4b97fdd87f9009546, type: 2}
-  mText: Title
-  mFontSize: 56
+  mText: Shitty Placeholder Title Screen
+  mFontSize: 28
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1565,7 +1574,7 @@ MonoBehaviour:
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
-  mOverflow: 2
+  mOverflow: 0
   mMaterial: {fileID: 0}
   mApplyGradient: 1
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
@@ -1584,7 +1593,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1380078009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 106, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2114028452}
@@ -1820,6 +1829,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .685895324, g: .24437125, b: .897058845, a: 1}
   mPivot: 4
   mWidth: 150

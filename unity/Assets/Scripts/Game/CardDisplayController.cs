@@ -54,6 +54,8 @@ public class CardDisplayController : MonoBehaviour {
 	// Use this for initialization
 	public virtual void Start () {
         cardDisplayController = this;
+        NGUITools.SetActive(OKButton.gameObject, false);
+        NGUITools.SetActive(CancelButton.gameObject, false);
 	}
 	
 	// Update is called once per frame
@@ -82,12 +84,12 @@ public class CardDisplayController : MonoBehaviour {
         {
             if (showOKButton != OKButton.gameObject.activeSelf)
             {
-                OKButton.gameObject.SetActive(showOKButton);
+                NGUITools.SetActive(OKButton.gameObject, showOKButton);                
             }
 
             if (showCancelButton != CancelButton.gameObject.activeSelf)
             {
-                CancelButton.gameObject.SetActive(showCancelButton);
+                NGUITools.SetActive(CancelButton.gameObject, showCancelButton);
             }
 
             if (numCardsSelected >= numCardsToSelect)
@@ -118,8 +120,14 @@ public class CardDisplayController : MonoBehaviour {
         OKButtonLabel.text = "OK";
         CancelButtonLabel.text = "Cancel";
 
-        OKButton.gameObject.SetActive(false);
-        CancelButton.gameObject.SetActive(false);
+        if (OKButton.gameObject.activeSelf)
+        {
+            NGUITools.SetActive(OKButton.gameObject, false);
+        }
+        
+        if (CancelButton.gameObject.activeSelf) {
+            NGUITools.SetActive(CancelButton.gameObject, false);
+        }        
     }
 
     public void DoOK()

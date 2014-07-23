@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 public class Globals : MonoBehaviour
 {
@@ -47,13 +48,12 @@ public class Globals : MonoBehaviour
 
         if (DoLoadPlayerPrefs)
         {
+            Debug.Log("DoLoadPlayerPrefs = true");
             LoadSession();
         }
     }
 
-    #endregion
-
-    
+    #endregion    
 
     public void LoadSession()
     {
@@ -62,7 +62,10 @@ public class Globals : MonoBehaviour
         PlayerBattlesWon = PlayerPrefs.GetInt(KEY_PLAYER_BATTLES_WON, PlayerBattlesWon);
         PlayerBattlesLost = PlayerPrefs.GetInt(KEY_PLAYER_BATTLES_LOST, PlayerBattlesLost);
 
-        string deckString = PlayerPrefs.GetString(KEY_DECK_CONTENTS, "");
+        Debug.Log("HasKey(" + KEY_DECK_CONTENTS + ") = " + PlayerPrefs.HasKey(KEY_DECK_CONTENTS).ToString());
+        string deckString = PlayerPrefs.GetString(KEY_DECK_CONTENTS);
+        Debug.Log("deckString = " + deckString);
+        
 
         if (!deckString.Equals(""))
         {
@@ -83,6 +86,8 @@ public class Globals : MonoBehaviour
 
         }
 
+        Debug.Log("Deck Size = " + DeckContents.Count);
+
         CalculateFeministsConverted();
     }
 
@@ -102,7 +107,10 @@ public class Globals : MonoBehaviour
                 }
             }
         }
-        catch { }
+        catch (Exception e)
+        {
+            Debug.Log("Error Loading Deck: " + e.Message);
+        }
 
         return deck;
     }
@@ -114,7 +122,7 @@ public class Globals : MonoBehaviour
         try
         {
 
-            Debug.Log("Current Directory = " + Directory.GetCurrentDirectory());
+            //Debug.Log("Current Directory = " + Directory.GetCurrentDirectory());
             using (MemoryStream stream = new MemoryStream())
             {
                 BinaryFormatter bin = new BinaryFormatter();
@@ -129,7 +137,10 @@ public class Globals : MonoBehaviour
                 //PlayerPrefs.SetString(DECK_CONTENTS, deckString);
             }
         }
-        catch { }
+        catch (Exception e)
+        {
+            Debug.Log("Error Saving Deck: " + e.Message);
+        }
 
         return deckString;
     }
@@ -275,4 +286,15 @@ public class Globals : MonoBehaviour
     }
 
     public string FeministsConvertedString = "None";
+    public bool DebugWidgetDepths = false;
+
+    public static void IPBringForward(GameObject go)
+    {
+
+    }
+
+    public static void IPChangeDepth(GameObject go, int newDepth)
+    {
+
+    }
 }

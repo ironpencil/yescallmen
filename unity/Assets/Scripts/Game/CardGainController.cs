@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 public class CardGainController : MonoBehaviour {
 
@@ -38,18 +40,32 @@ public class CardGainController : MonoBehaviour {
 
     private List<CardDefinition> GenerateBattleRewardCards(int atLevel, bool allowRares)
     {
+
         List<CardDefinition> rewardCards = new List<CardDefinition>();
 
-        rewardCards.Add(new CardDefinition(CardFactory.CardName.AngerAttack, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Spite, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.FatigueAttack, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.ConfusionAttack, atLevel));
-        rewardCards.Add(new CardDefinition(CardFactory.CardName.Spite, atLevel));
-        rewardCards.Add(new CardDefinition(CardFactory.CardName.HealCard, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.AngerAttack, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.HealthAttack, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.GainerAttack, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.FreeAttack, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Trasher, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.HealCard, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Village, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Smithy, atLevel));
-        rewardCards.Add(new CardDefinition(CardFactory.CardName.SpiteChecker, atLevel));
         rewardCards.Add(new CardDefinition(CardFactory.CardName.Leveler, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.SpiteChecker, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Lab, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Warehouse, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Embassy, atLevel));
+        rewardCards.Add(new CardDefinition(CardFactory.CardName.Jack, atLevel));
+
+        while (rewardCards.Count > 10)
+        {
+            //we use 1 instead of 0 because we never want to remove Spite, that should always be available to buy
+            rewardCards.RemoveAt(UnityEngine.Random.Range(1, rewardCards.Count));
+        }
 
         return rewardCards;
     }

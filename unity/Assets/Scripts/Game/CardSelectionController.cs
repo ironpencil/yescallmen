@@ -19,12 +19,12 @@ public class CardSelectionController : MonoBehaviour {
         set
         {
             filledSlots = value;
-            if (Buttons == ButtonOption.okCancel)
-            {
+            //if (Buttons == ButtonOption.okCancel)
+            //{
                 Debug.Log("Filled slots changed to " + filledSlots + ".");
                 OKButton.isEnabled = (filledSlots > 0 && filledSlots >= CardsRequired);
                 Debug.Log("OKButton.isEnabled should be " + (filledSlots > 0).ToString() + " and is " + OKButton.isEnabled + ".");
-            }
+            //}
         }
     }
 
@@ -92,18 +92,19 @@ public class CardSelectionController : MonoBehaviour {
         {
             if (slotsActivated < SlotCount)
             {
-                slot.gameObject.SetActive(true);
+                NGUITools.SetActive(slot.gameObject, true);
                 slotsActivated++;
             }
             else
             {
-                slot.gameObject.SetActive(false);
+                NGUITools.SetActive(slot.gameObject, false);
             }
         }
 
         if (buttons == ButtonOption.okCancel)
         {
-            CancelButton.gameObject.SetActive(true);
+            NGUITools.SetActive(CancelButton.gameObject, true);
+            CancelButton.isEnabled = true;
             CancelButtonText = cancelButtonDefaultText;
 
             //we disable OK button if Cancel button exists
@@ -112,10 +113,11 @@ public class CardSelectionController : MonoBehaviour {
         }
         else
         {
-            CancelButton.gameObject.SetActive(false);
+            NGUITools.SetActive(CancelButton.gameObject, false);
         }
 
-        OKButton.gameObject.SetActive(true);
+        NGUITools.SetActive(OKButton.gameObject, true);
+        OKButton.isEnabled = false;
         OKButtonText = okButtonDefaultText;
 
         if (CardsRequired > 0)
@@ -172,6 +174,20 @@ public class CardSelectionController : MonoBehaviour {
                 NGUITools.BringForward(cardSlot.gameObject);
             }
         }
+
+        if (OKButton.gameObject.activeSelf)
+        {
+            NGUITools.BringForward(OKButton.gameObject);
+        }
+
+        if (CancelButton.gameObject.activeSelf)
+        {
+            NGUITools.BringForward(CancelButton.gameObject);
+        }
+
+        //Globals.GetInstance().DebugWidgetDepths = true;
+
+        //NGUITools.PushBack(backgroundWidget.gameObject);
     }
 
     public void Close()
@@ -192,6 +208,8 @@ public class CardSelectionController : MonoBehaviour {
         StartCoroutine(SetInactiveAfterSeconds(1.0f));
         onFinish = null;
         canSlotCard = null;
+
+        //Globals.GetInstance().DebugWidgetDepths = false;
     }
 
     private IEnumerator SetInactiveAfterSeconds(float seconds)

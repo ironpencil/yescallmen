@@ -108,7 +108,7 @@ MonoBehaviour:
   PlayerBattlesLost: 0
   PlayerTotalShows: 0
   PlayerConvertedUnit: 0
-  PlayerFinishedLastShow: 0
+  PlayerFinishedLastShow: 1
   FirstShowOfSession: 1
   DeckContents: []
   DoLoadPlayerPrefs: 1
@@ -1767,6 +1767,10 @@ Prefab:
     - target: {fileID: 400000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: PlayerFinishedLastShow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}

@@ -39,12 +39,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f9dfab333ebec4ba23d66416dc3135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMaxHP: 50
+  PlayerMaxHP: 100
   PlayerLevel: 1
   PlayerBattlesWon: 0
   PlayerBattlesLost: 0
+  PlayerTotalShows: 0
+  PlayerConvertedUnit: 0
+  PlayerFinishedLastShow: 0
+  FirstShowOfSession: 1
   DeckContents: []
   DoLoadPlayerPrefs: 1
+  FeministsConvertedString: None
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
