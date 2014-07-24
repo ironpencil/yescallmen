@@ -281,10 +281,10 @@ public class TurnManager : MonoBehaviour {
         while (CardDisplayController.cardDisplayController.displayedCards.Count > 0)
         {
             yield return new WaitForSeconds(0.25f);
-            Debug.Log("Cards left in display: " + CardDisplayController.cardDisplayController.displayedCards.Count);
+            //Debug.Log("Cards left in display: " + CardDisplayController.cardDisplayController.displayedCards.Count);
         }
 
-        Debug.Log("Changing to Out of Battle State");
+        //Debug.Log("Changing to Out of Battle State");
 
         ChangeState(newState);
     }

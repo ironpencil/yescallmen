@@ -21,6 +21,23 @@ public class DiscardCardsEvent : CardEvent
 
     public override bool Execute()
     {
+        //first check to see if we have the required number of cards in the source zone
+        List<CardController> cardsInZone = CardZoneManager.cardZoneManager.GetCardsInZone(cardSource);
+        int numCardsInZone = cardsInZone.Count;
+
+        //if we require cards but don't have enough in the zone, don't bother displaying selection window
+        if (numRequiredCards > numCardsInZone)
+        {
+            GameMessageManager.gameMessageManager.AddLine("Not enough cards for " + gameCard.Title + ". Discarding all cards.", false);
+            //we don't, so just move all cards there
+            foreach (CardController card in cardsInZone)
+            {
+                SelectCard(card);
+            }
+            eventFinished = true;
+            return eventFinished;
+        }
+
         CardSelectionController.ButtonOption buttons = (numRequiredCards > 0 ? CardSelectionController.ButtonOption.okOnly : 
                                                                     CardSelectionController.ButtonOption.okCancel);
 
@@ -35,7 +52,7 @@ public class DiscardCardsEvent : CardEvent
 
         csc.onFinish += OnSelectionFinished;
 
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
+        //TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
         csc.Show();
 
         eventFinished = false;
@@ -51,12 +68,7 @@ public class DiscardCardsEvent : CardEvent
         {
             if (CardSelectionController.cardSelectionController.Result == CardSelectionController.SelectionResult.OK)
             {
-                Debug.Log("OSF: Destroy!");
-                //DeckManager.deckManager.TrashCard(card.gameCard.cardDefinition);
-                CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.Discard);
-
-                //remember card in case an event later wants to reference it
-                gameCard.rememberedCards.Add(card.gameCard.cardDefinition);                
+                SelectCard(card);
             }
             else
             {
@@ -69,7 +81,17 @@ public class DiscardCardsEvent : CardEvent
         CardSelectionController.cardSelectionController.Close();
 
         eventFinished = true;
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);
+        //TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);
+    }
+
+    private void SelectCard(CardController card)
+    {
+        Debug.Log("OSF: Destroy!");
+        //DeckManager.deckManager.TrashCard(card.gameCard.cardDefinition);
+        CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.Discard);
+
+        //remember card in case an event later wants to reference it
+        gameCard.rememberedCards.Add(card.gameCard.cardDefinition);   
     }
 
 }

@@ -36,7 +36,7 @@ public class SpiteCheckerEvent : CardEvent
             {
                 for (int i = 0; i < numExtraCards; i++)
                 {
-                    drawPile.DrawCardToZone(drawToZone);
+                    drawPile.DrawCardToZone(drawToZone, Globals.GetInstance().SHORT_DISPLAY_TIME);
                 }
             }
 

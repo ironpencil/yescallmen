@@ -35,7 +35,7 @@ public class PutCardsOnDeckEvent : CardEvent
 
         csc.onFinish += OnSelectionFinished;
 
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
+        //TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
         csc.Show();
 
         eventFinished = false;
@@ -66,7 +66,7 @@ public class PutCardsOnDeckEvent : CardEvent
         CardSelectionController.cardSelectionController.Close();
 
         eventFinished = true;
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);
+        //TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);
     }
 
 }

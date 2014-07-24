@@ -75,6 +75,9 @@ public class CardEventManager : MonoBehaviour
                 {
                     if (executionQueue.Count > 0)
                     {
+                        //when we grab an event, set the state to inactive
+                        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
+
                         currentEvent = executionQueue.Dequeue();
 
                         //start the next event. if the event finishes immediately, we can loop again and grab another
@@ -84,6 +87,9 @@ public class CardEventManager : MonoBehaviour
                     {
                         //no event in process, and no events in queue
                         processNextEvent = false;
+
+                        //when we have no events left, set the state to active
+                        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);                        
                     }
                 }
 

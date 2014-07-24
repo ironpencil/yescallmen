@@ -55,6 +55,7 @@ public class Globals : MonoBehaviour
 
     #endregion    
 
+    #region persistence
     public void LoadSession()
     {
         PlayerMaxHP = PlayerPrefs.GetInt(KEY_PLAYER_MAX_HP, PlayerMaxHP);
@@ -191,6 +192,7 @@ public class Globals : MonoBehaviour
 
         CalculateFeministsConverted();
     }
+    #endregion
 
     private const string KEY_PLAYER_MAX_HP = "playerMaxHP";
     private const string KEY_DECK_CONTENTS = "deckContents";
@@ -198,6 +200,9 @@ public class Globals : MonoBehaviour
     private const string KEY_PLAYER_BATTLES_WON = "playerBattlesWon";
     private const string KEY_PLAYER_BATTLES_LOST = "playerBattlesLost";
     private const string KEY_PLAYER_TOTAL_SHOWS = "playerTotalShows";
+
+    public float SHORT_DISPLAY_TIME = 0.2f;
+    public float LONG_DISPLAY_TIME = 1.0f;
 
 
     public static int DEFAULT_PLAYER_MAX_HP = 50;

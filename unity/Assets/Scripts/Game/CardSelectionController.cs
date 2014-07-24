@@ -28,6 +28,9 @@ public class CardSelectionController : MonoBehaviour {
         }
     }
 
+    private bool shouldShow = false;
+
+    
     public bool Finished = false;
 
     public bool CanCancel = true;
@@ -157,6 +160,7 @@ public class CardSelectionController : MonoBehaviour {
 
     public void Show()
     {
+        shouldShow = true;
         NGUITools.SetActive(this.gameObject, true);
 
         TweenScale tweenScale = gameObject.GetComponent<TweenScale>();
@@ -205,6 +209,7 @@ public class CardSelectionController : MonoBehaviour {
 
         CanCancel = true;
 
+        shouldShow = false;
         StartCoroutine(SetInactiveAfterSeconds(1.0f));
         onFinish = null;
         canSlotCard = null;
@@ -215,7 +220,10 @@ public class CardSelectionController : MonoBehaviour {
     private IEnumerator SetInactiveAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        NGUITools.SetActive(this.gameObject, false);
+        if (!shouldShow)
+        {
+            NGUITools.SetActive(this.gameObject, false);
+        }
     }
 
     private void Finish()

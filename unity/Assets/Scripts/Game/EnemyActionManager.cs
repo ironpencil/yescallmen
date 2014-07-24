@@ -39,7 +39,7 @@ public class EnemyActionManager : MonoBehaviour {
 
         MaxHP = Level * 20;
 
-        Damage = Level;
+        Damage = Level * 3;
 
     }
 }

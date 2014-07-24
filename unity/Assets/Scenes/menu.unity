@@ -902,6 +902,10 @@ Prefab:
       propertyPath: titleLabel
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
+      propertyPath: SHORT_DISPLAY_TIME
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
   m_RootGameObject: {fileID: 988823244}
@@ -1377,6 +1381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f9dfab333ebec4ba23d66416dc3135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SHORT_DISPLAY_TIME: .5
+  LONG_DISPLAY_TIME: 1
   PlayerMaxHP: 100
   PlayerLevel: 1
   PlayerBattlesWon: 0

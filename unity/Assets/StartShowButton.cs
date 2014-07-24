@@ -59,7 +59,7 @@ public class StartShowButton : MonoBehaviour {
                     GameMessageManager.gameMessageManager.AddLine("You're getting fan email from all over the country!", false);
                     break;
                 case 9:
-                    GameMessageManager.gameMessageManager.AddLine("You show is now one of the most popular shows in the world!", false);
+                    GameMessageManager.gameMessageManager.AddLine("Your show is now one of the most popular shows in the world!", false);
                     break;
                 case 10:
                     GameMessageManager.gameMessageManager.AddLine("Are there even that many people on the planet?!", false);

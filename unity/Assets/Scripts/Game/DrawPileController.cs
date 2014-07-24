@@ -56,36 +56,19 @@ public class DrawPileController : MonoBehaviour {
         return newCard;
     }
 
+    public GameObject DrawCardToZone(CardContainer.CardZone destinationZone, float displayTime)
+    {
+        GameObject newCard = DrawCard();
+
+        CardDisplayController.cardDisplayController.DisplayCard(newCard, destinationZone, displayTime);
+
+        return newCard;
+    }
+
     public GameObject DrawCardToZone(CardContainer.CardZone destinationZone)
     {
 
-        //NGUITools.AddChild(HandTable.gameObject, CardPrefab);
-        GameObject newCard = DrawCard();
-
-        
-        //GameObject newCard = NGUITools.AddChild(gameObject, CardPrefab);
-
-        //newCard.transform.localPosition = CardPrefab.transform.localPosition;
-
-        //NGUITools.BringForward(NewCard);
-
-        //if (TweenDrawCard != null)
-        //{
-        //    TweenDrawCard.from = NewCard.transform.position;
-        //    TweenDrawCard.to = DisplayPosition;
-        //    TweenDrawCard.PlayForward();
-        //}
-
-        //ReParentNewCard(newCard);
-
-
-        CardDisplayController.cardDisplayController.DisplayCard(newCard, destinationZone, 1.0f);
-        
-        //DisplayCard(newCard, destinationZone);
-
-        return newCard;
-
-        //HandTable.repositionNow = true;
+        return DrawCardToZone(destinationZone, Globals.GetInstance().LONG_DISPLAY_TIME);
     }
 
     public void DrawToFullHand()

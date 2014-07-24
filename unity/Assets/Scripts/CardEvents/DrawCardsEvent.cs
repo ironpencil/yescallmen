@@ -15,17 +15,31 @@ public class DrawCardsEvent : CardEvent
     {
         DrawPileController drawPile = DrawPileController.drawPile;
 
+        bool drewCards = false;
+
         if (drawPile != null)
         {
 
             for (int i = 0; i < numCards; i++)
             {
-                drawPile.DrawCardToZone(drawToZone);
+                if (drawPile.DrawCardToZone(drawToZone, Globals.GetInstance().SHORT_DISPLAY_TIME) != null)
+                {
+                    drewCards = true;
+                }
+                
             }
         }
 
-        eventFinished = true;
+        eventFinished = !drewCards;
         return eventFinished;
+    }
+
+    public override void Update()
+    {
+        if (CardDisplayController.cardDisplayController.displayedCards.Count == 0)
+        {
+            eventFinished = true;
+        }
     }
 
 }

@@ -184,15 +184,18 @@ public class GameCard : MonoBehaviour
     #endregion
 
     [ContextMenu("Level Up")]
-    public void LevelUp()
+    public bool LevelUp()
     {
+        bool leveledCard = false;
         //can't level up a card that has a level of 0
         if (Level > 0)
         {
             DeckManager.deckManager.TrashCard(cardDefinition);
             ChangeLevel(Level + 1);
             DeckManager.deckManager.GainCard(cardDefinition);
+            leveledCard = true;
         }
+        return leveledCard;
     }
 
     private void ChangeLevel(int newLevel)

@@ -39,7 +39,7 @@ public class LevelSelectedCardsEvent : CardEvent
 
         csc.canSlotCard += CanLevelCard;
 
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
+        //TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerInactive);
         csc.Show();
 
         eventFinished = false;
@@ -74,7 +74,7 @@ public class LevelSelectedCardsEvent : CardEvent
         CardSelectionController.cardSelectionController.Close();
 
         eventFinished = true;
-        TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);
+        //TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerActive);
     }
 
     private bool CanLevelCard(CardController card)

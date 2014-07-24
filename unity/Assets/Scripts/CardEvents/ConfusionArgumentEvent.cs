@@ -26,13 +26,13 @@ public class ConfusionArgumentEvent : CardEvent
                 waitForCard = true;
                 if (gameCard.cardType == GameCard.CardType.Argument)
                 {
-                    CardDisplayController.cardDisplayController.DisplayCard(topCard, CardContainer.CardZone.Play, 1.0f);
+                    CardDisplayController.cardDisplayController.DisplayCard(topCard, CardContainer.CardZone.Play, Globals.GetInstance().LONG_DISPLAY_TIME);
                     gameCard.spiteUsed = 0;
                     playCard = true;
                 }
                 else
                 {
-                    CardDisplayController.cardDisplayController.DisplayCard(topCard, CardContainer.CardZone.Discard, 1.0f);
+                    CardDisplayController.cardDisplayController.DisplayCard(topCard, CardContainer.CardZone.Deck, Globals.GetInstance().LONG_DISPLAY_TIME);
                 }
             }
 
