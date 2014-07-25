@@ -12,6 +12,8 @@ public class GameCard : MonoBehaviour
     public UILabel levelLabel;
     public UILabel damageLabel;
 
+    public UISprite cardSprite;
+
     public CardDefinition cardDefinition;
 
     public bool isGainedCard = false;
