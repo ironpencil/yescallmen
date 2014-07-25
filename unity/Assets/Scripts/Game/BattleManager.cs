@@ -182,8 +182,7 @@ public class BattleManager : MonoBehaviour {
         EnemyActionManager.enemyActionManager.NextEnemy(Globals.GetInstance().PlayerLevel, BattleNumber);
 
         EnemyMaxHP = EnemyActionManager.enemyActionManager.MaxHP;
-        EnemyCurrentHP = EnemyMaxHP;
-
+        EnemyCurrentHP = EnemyMaxHP;        
     }
 
     public UILabel playerAngerLabel;

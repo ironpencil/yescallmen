@@ -75,7 +75,7 @@ public class CardGainController : MonoBehaviour {
         List<CardDefinition> rewardCards = new List<CardDefinition>();
 
         rewardCards.Add(new CardDefinition(CardFactory.CardName.NotAllMen, atLevel));
-        rewardCards.Add(new CardDefinition(CardFactory.CardName.IncreaseMaxAnger, atLevel));
+        //rewardCards.Add(new CardDefinition(CardFactory.CardName.IncreaseMaxAnger, atLevel));
 
         return rewardCards;
     }
@@ -99,6 +99,6 @@ public class CardGainController : MonoBehaviour {
 
             cdc.DisplayCard(newCard, CardContainer.CardZone.None);
         }
-        GameMessageManager.gameMessageManager.AddLine("You may gain a new card by dragging it to the Discard Pile.", false);
+        GameMessageManager.gameMessageManager.AddLine("[You may gain a new card by dragging it to the Discard Pile.]", false);
     }
 }

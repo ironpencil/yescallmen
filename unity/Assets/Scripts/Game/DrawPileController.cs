@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class DrawPileController : MonoBehaviour {
 
@@ -71,13 +72,17 @@ public class DrawPileController : MonoBehaviour {
         return DrawCardToZone(destinationZone, Globals.GetInstance().LONG_DISPLAY_TIME);
     }
 
-    public void DrawToFullHand()
+    public List<GameObject> DrawToFullHand()
     {
+        List<GameObject> cardObjects = new List<GameObject>();
+
         int currentHandSize = CardZoneManager.cardZoneManager.GetCardsInZone(CardContainer.CardZone.Hand).Count;
 
         for (int i = currentHandSize; i < maximumHandSize; i++)
         {
-            DrawCardToZone(CardContainer.CardZone.Hand);
+            cardObjects.Add(DrawCardToZone(CardContainer.CardZone.Hand));
         }
+
+        return cardObjects;
     }
 }

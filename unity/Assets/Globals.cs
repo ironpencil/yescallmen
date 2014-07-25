@@ -46,6 +46,8 @@ public class Globals : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
+        DEFAULT_PLAYER_MAX_HP = PlayerMaxHP;
+
         if (DoLoadPlayerPrefs)
         {
             Debug.Log("DoLoadPlayerPrefs = true");
@@ -205,9 +207,9 @@ public class Globals : MonoBehaviour
     public float LONG_DISPLAY_TIME = 1.0f;
 
 
-    public static int DEFAULT_PLAYER_MAX_HP = 50;
+    public int DEFAULT_PLAYER_MAX_HP = 100;
     
-    public int PlayerMaxHP = 50;
+    public int PlayerMaxHP = 100;
     public int PlayerLevel = 1;
     public int PlayerBattlesWon = 0;
     public int PlayerBattlesLost = 0;
@@ -293,13 +295,13 @@ public class Globals : MonoBehaviour
     public string FeministsConvertedString = "None";
     public bool DebugWidgetDepths = false;
 
-    public static void IPBringForward(GameObject go)
+    public enum GameScene
     {
-
+        Title,
+        Studio,
+        Battle
     }
 
-    public static void IPChangeDepth(GameObject go, int newDepth)
-    {
+    public GameScene LastScene = GameScene.Title;
 
-    }
 }

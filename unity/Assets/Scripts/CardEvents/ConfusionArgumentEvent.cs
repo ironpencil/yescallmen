@@ -32,7 +32,7 @@ public class ConfusionArgumentEvent : CardEvent
                 }
                 else
                 {
-                    CardDisplayController.cardDisplayController.DisplayCard(topCard, CardContainer.CardZone.Deck, Globals.GetInstance().LONG_DISPLAY_TIME);
+                    CardDisplayController.cardDisplayController.DisplayCard(topCard, CardContainer.CardZone.Discard, Globals.GetInstance().LONG_DISPLAY_TIME);
                 }
             }
 
@@ -53,7 +53,7 @@ public class ConfusionArgumentEvent : CardEvent
                 
                 if (playCard)
                 {
-                    RulesManager.rulesManager.PlayCard(topCard);
+                    RulesManager.rulesManager.PlayCard(topCard, false);
                 }
             }
         }

@@ -120,8 +120,8 @@ public class CardFactory : MonoBehaviour
             case CardName.SpiteChecker:
                 GenerateSpiteChecker(gameCard, level);
                 break;
-            case CardName.IncreaseMaxAnger:
-                GenerateIncreaseMaxAngerCard(gameCard, level);
+            case CardName.IncreaseMaxAnger: //invalid
+                GenerateInvalidCard(gameCard, level);
                 break;
             case CardName.Lab:
                 GenerateLab(gameCard, level);
@@ -311,6 +311,16 @@ public class CardFactory : MonoBehaviour
         gameCard.AddEvent(deckEvent);
     }
 
+    private void GenerateInvalidCard(GameCard gameCard, int level)
+    {
+        gameCard.Title = "Invalid Card";
+        gameCard.AbilityText = "Special (No Action). Trash this card when played.";
+        gameCard.cardType = GameCard.CardType.Special;
+
+        TrashSelfEvent trashEvent = new TrashSelfEvent();
+        gameCard.AddEvent(trashEvent);
+    }
+
     private void GenerateIncreaseMaxAngerCard(GameCard gameCard, int level)
     {
         gameCard.Title = "Raise Max Anger";
@@ -432,7 +442,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateNotAllMen(GameCard gameCard, int level)
     {
         gameCard.Title = "Not All Men";
-        gameCard.AbilityText = "Special (No Action).\r\n+5 Cards, +1 Action. Level up all cards in hand. Trash this card when played.";
+        gameCard.AbilityText = "Special (No Action).\r\n+5 Cards, +1 Action, +25 Max Anger. Level up all cards in hand. Trash this card when played.";
         gameCard.cardType = GameCard.CardType.Special;
         gameCard.actionsAdded = 1;
 
@@ -442,10 +452,17 @@ public class CardFactory : MonoBehaviour
 
         gameCard.AddEvent(drawEvent);
 
+        ChangeAngerEvent healEvent = new ChangeAngerEvent();
+        healEvent.useTotalSpite = false;
+        healEvent.angerAmount = 25;
+        healEvent.changeMaxAnger = true;
+
+        gameCard.AddEvent(healEvent);
+
         LevelAllCardsEvent levelEvent = new LevelAllCardsEvent();
         levelEvent.cardSource = CardContainer.CardZone.Hand;
 
-        gameCard.AddEvent(levelEvent);
+        gameCard.AddEvent(levelEvent);        
 
         TrashSelfEvent trashEvent = new TrashSelfEvent();
         gameCard.AddEvent(trashEvent);
@@ -503,7 +520,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level * 3;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level;
-        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\nReveal top card of deck. If it is an Argument, play it for free. Otherwise, put it back.";
+        gameCard.AbilityText = "Argument. -" + gameCard.spiteUsed + " Spite.\r\nReveal top card of deck. If it is an Argument, play it for free. Otherwise, discard it.";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;

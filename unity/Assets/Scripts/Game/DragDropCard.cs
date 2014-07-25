@@ -123,7 +123,7 @@ public class DragDropCard : UIDragDropItem {
                     break;
                 case CardContainer.CardZone.Play:
                     //card was moved to play, trigger its event
-                    RulesManager.rulesManager.PlayCard(gameObject);                    
+                    RulesManager.rulesManager.PlayCard(gameObject, true);                    
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = true;
                     break;                
                 case CardContainer.CardZone.Attached:

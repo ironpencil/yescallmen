@@ -1383,6 +1383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SHORT_DISPLAY_TIME: .5
   LONG_DISPLAY_TIME: 1
+  DEFAULT_PLAYER_MAX_HP: 100
   PlayerMaxHP: 100
   PlayerLevel: 1
   PlayerBattlesWon: 0
@@ -1395,6 +1396,7 @@ MonoBehaviour:
   DoLoadPlayerPrefs: 1
   FeministsConvertedString: None
   DebugWidgetDepths: 0
+  LastScene: 0
 --- !u!4 &988823246
 Transform:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class StartGameButton : MonoBehaviour {
 
     public void StartGame()
     {
+        Globals.GetInstance().LastScene = Globals.GameScene.Title;
         Application.LoadLevel("outofbattle");
     }
 }

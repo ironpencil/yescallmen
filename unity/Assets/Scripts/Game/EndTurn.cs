@@ -32,8 +32,10 @@ public class EndTurn : MonoBehaviour {
 
     public void EndPlayerTurn()
     {
+        Debug.Log("EndPlayerTurnButton. Current State = " + TurnManager.turnManager.CurrentState.ToString());
         if (TurnManager.turnManager.CurrentState == TurnManager.TurnState.PlayerActive)
         {
+            Debug.Log("Ending Turn. Current State = " + TurnManager.turnManager.CurrentState.ToString());
             TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerCleanup);
         }
     }

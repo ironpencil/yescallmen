@@ -102,17 +102,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f9dfab333ebec4ba23d66416dc3135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMaxHP: 50
+  SHORT_DISPLAY_TIME: .200000003
+  LONG_DISPLAY_TIME: 1
+  DEFAULT_PLAYER_MAX_HP: 100
+  PlayerMaxHP: 100
   PlayerLevel: 1
   PlayerBattlesWon: 0
   PlayerBattlesLost: 0
   PlayerTotalShows: 0
   PlayerConvertedUnit: 0
-  PlayerFinishedLastShow: 1
+  PlayerFinishedLastShow: 0
   FirstShowOfSession: 1
   DeckContents: []
   DoLoadPlayerPrefs: 1
   FeministsConvertedString: None
+  DebugWidgetDepths: 0
+  LastScene: 0
 --- !u!4 &12338113
 Transform:
   m_ObjectHideFlags: 0
@@ -232,6 +237,7 @@ MonoBehaviour:
     relative: .5
     absolute: 10
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 514
@@ -322,6 +328,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 324
@@ -499,6 +506,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 542
@@ -579,6 +587,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 556
@@ -658,6 +667,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: .152941182}
   mPivot: 4
   mWidth: 150
@@ -942,6 +952,7 @@ MonoBehaviour:
     relative: 1
     absolute: 5
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 970
@@ -1020,6 +1031,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 188
@@ -1241,6 +1253,7 @@ MonoBehaviour:
     relative: 1
     absolute: 5
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .693103433, g: .766621888, b: 1, a: .435294122}
   mPivot: 4
   mWidth: 970
@@ -1386,6 +1399,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .690196097, g: .588235319, b: .407843143, a: 1}
   mPivot: 4
   mWidth: 150
@@ -1570,6 +1584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b39b0ced62109f49a35db13a32d314f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanStartShow: 0
   PointsLabel: {fileID: 209240273}
 --- !u!1001 &1376662645
 Prefab:
@@ -1768,10 +1783,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: PlayerFinishedLastShow
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
   m_RootGameObject: {fileID: 12338111}
@@ -1863,6 +1874,7 @@ MonoBehaviour:
     relative: 1
     absolute: -2
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 538
@@ -1929,6 +1941,7 @@ MonoBehaviour:
     relative: 1
     absolute: -4
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: .23880595, g: .197638646, b: .121185109, a: 1}
   mPivot: 4
   mWidth: 142
@@ -2021,6 +2034,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 556

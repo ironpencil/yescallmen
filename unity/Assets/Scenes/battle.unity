@@ -2746,10 +2746,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 11400012, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
-      propertyPath: scrollWheelFactor
-      value: -1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
   m_RootGameObject: {fileID: 85336046}
@@ -4947,7 +4943,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 68.5999985
+  aspectRatio: 83.5999985
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -5213,7 +5209,11 @@ MonoBehaviour:
   duration: 1
   steeperCurves: 0
   tweenGroup: 0
-  onFinished: []
+  onFinished:
+  - mTarget: {fileID: 1819080656}
+    mMethodName: StartStateMachine
+    mParameters: []
+    oneShot: 0
   eventReceiver: {fileID: 0}
   callWhenFinished: 
   from: {x: 0, y: 0, z: 0}
@@ -9272,7 +9272,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 39
+  aspectRatio: 45
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -10105,7 +10105,7 @@ MonoBehaviour:
   disableDragIfFits: 0
   smoothDragStart: 1
   iOSDragEmulation: 1
-  scrollWheelFactor: -1
+  scrollWheelFactor: 1
   momentumAmount: 35
   horizontalScrollBar: {fileID: 0}
   verticalScrollBar: {fileID: 0}
@@ -12346,6 +12346,7 @@ GameObject:
   - 114: {fileID: 1819080657}
   - 114: {fileID: 1819080658}
   - 114: {fileID: 1819080659}
+  - 114: {fileID: 1819080660}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -12412,7 +12413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8883f479b008c41b222299e2b937e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BattlesPerShow: 3
+  BattlesPerShow: 1
   BattleNumber: 0
   playerMaxAnger: 50
   playerCurrentAnger: 50
@@ -12478,6 +12479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5febe7c5b52b1924ea023a04f1be027e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameScale: {fileID: 935774888}
 --- !u!114 &1819080657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12516,6 +12518,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdc7626f36a578b4d98afa0da76f357b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1819080660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1819080647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da99723483a20174cade27c4399c07a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1825231404
@@ -13758,7 +13771,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.14754105
+  aspectRatio: 2.5573771
   mType: 2
   mFillDirection: 4
   mFillAmount: 1
@@ -14912,6 +14925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SHORT_DISPLAY_TIME: .5
   LONG_DISPLAY_TIME: 1
+  DEFAULT_PLAYER_MAX_HP: 100
   PlayerMaxHP: 100
   PlayerLevel: 1
   PlayerBattlesWon: 0
@@ -14924,6 +14938,7 @@ MonoBehaviour:
   DoLoadPlayerPrefs: 1
   FeministsConvertedString: None
   DebugWidgetDepths: 0
+  LastScene: 0
 --- !u!4 &2128300348
 Transform:
   m_ObjectHideFlags: 0

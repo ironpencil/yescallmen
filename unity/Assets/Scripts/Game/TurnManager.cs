@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class TurnManager : MonoBehaviour {
 
     public static TurnManager turnManager;
+
+    public UITweener gameScale;
 
     public enum TurnState
     {
@@ -18,12 +21,12 @@ public class TurnManager : MonoBehaviour {
         EndShow
     }
     
-    private TurnState currentTurnState = TurnState.OutOfBattle;
+    private TurnState currentTurnState = TurnState.EndShow;
     public TurnState CurrentState { get { return currentTurnState; } }
 
 	// Use this for initialization
 	void Start () {
-        turnManager = this;	
+        turnManager = this;
 	}
 	
 	// Update is called once per frame
@@ -31,12 +34,23 @@ public class TurnManager : MonoBehaviour {
 	
 	}
 
+    private bool started = false;
+
+    public void StartStateMachine()
+    {
+        if (!started)
+        {
+            ChangeState(TurnState.StartBattle);
+            started = true;
+        }
+    }
+
     public void ChangeState(TurnState newState)
     {
         switch (newState)
         {
             case TurnState.OutOfBattle:
-                DoOutOfBattle();
+                StartCoroutine(DoOutOfBattle());
                 break;
             case TurnState.EnemyTurn:
                 DoEnemyTurn();
@@ -57,19 +71,57 @@ public class TurnManager : MonoBehaviour {
                 DoStartBattle();
                 break;
             case TurnState.EndShow:
-                DoEndShow();
+                StartCoroutine(DoEndShow());
                 break;
             default:
                 break;
         }
     }
 
-    private void DoEndShow()
+    private IEnumerator DoEndShow()
     {
         currentTurnState = TurnState.EndShow;
 
         Globals.GetInstance().SaveSession();
 
+        string finishText = "";
+
+        if (Globals.GetInstance().PlayerFinishedLastShow)
+        {
+            finishText = "\"Well that's all the time we have for tonight's show. Join me next time on #YesCallMen to get more TRUTH BOMBS dropped on you.\"";
+        }
+        else
+        {
+            finishText = "\"I'M DONE! I'M JUST DONE!! MAYBE WE'LL BE BACK TOMORROW, AND HOPEFULLY THESE STUPID FEMINAZIS WILL STOP WITH THEIR BULLSHIT!\"";
+        }
+
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+
+        while (!GameMessageManager.gameMessageManager.isFinished)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        GameMessageManager.gameMessageManager.SetText("", true);
+        GameMessageManager.gameMessageManager.AddLine(finishText, false);
+
+        while (!GameMessageManager.gameMessageManager.isFinished)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(4.0f);
+
+        gameScale.PlayReverse();
+
+        yield return new WaitForSeconds(1.0f);
+
+        Globals.GetInstance().LastScene = Globals.GameScene.Battle;
         Application.LoadLevel("outofbattle");
         //end the show, clean up, go back to outofbattle scene
 
@@ -77,33 +129,44 @@ public class TurnManager : MonoBehaviour {
 
     private void DoStartBattle()
     {
+        Debug.Log("Starting Battle");
         Globals.GetInstance().PlayerFinishedLastShow = false;
 
         currentTurnState = TurnState.StartBattle;
         BattleManager.battleManager.StartNewBattle();
 
-        GameMessageManager.gameMessageManager.AddLine("How to Play: Play cards by dragging them to the play area.", false);
-        GameMessageManager.gameMessageManager.AddLine("After each turn, all cards in play and in hand will be sent to the Discard Pile.", false);
-        GameMessageManager.gameMessageManager.AddLine("When you have to draw a card and there are none in the Draw Pile, Discard Pile will be shuffled to make a new Draw Pile.", false);
-        GameMessageManager.gameMessageManager.AddLine("Spite cards can be played for free to increase Spite.", false);
-        GameMessageManager.gameMessageManager.AddLine("Argument cards use Spite when played. Action cards use Actions when played.", false);
-        GameMessageManager.gameMessageManager.AddLine("Any changes you make to your deck during play by Trashing (removing) or Gaining (adding) cards are permanent, and your deck will persist across battles.", false);
+        GameMessageManager.gameMessageManager.AddLine("\"Jane from Callingsville, you're on the air, go ahead.\"", false);
 
-        ChangeState(TurnState.PlayerDraw);
+        //GameMessageManager.gameMessageManager.AddLine("How to Play: Play cards by dragging them to the play area.", false);
+        //GameMessageManager.gameMessageManager.AddLine("After each turn, all cards in play and in hand will be sent to the Discard Pile.", false);
+        //GameMessageManager.gameMessageManager.AddLine("When you have to draw a card and there are none in the Draw Pile, Discard Pile will be shuffled to make a new Draw Pile.", false);
+        //GameMessageManager.gameMessageManager.AddLine("Spite cards can be played for free to increase Spite.", false);
+        //GameMessageManager.gameMessageManager.AddLine("Argument cards use Spite when played. Action cards use Actions when played.", false);
+        //GameMessageManager.gameMessageManager.AddLine("Any changes you make to your deck during play by Trashing (removing) or Gaining (adding) cards are permanent, and your deck will persist across battles.", false);
+        
+        //enemy goes first
+        //StartCoroutine(ChangeToStateWhenMessageFinished(TurnState.EnemyTurn, Globals.GetInstance().SHORT_DISPLAY_TIME));
+        ChangeState(TurnState.EnemyTurn);
+        //ChangeState(TurnState.PlayerDraw);
     }
 
     private void DoPlayerCleanup()
     {
         if (currentTurnState == TurnState.PlayerActive)
         {
+            CardEventManager.cardEventManager.TurnOffProcessing();
+
             currentTurnState = TurnState.PlayerCleanup;
 
             DiscardHand();
             CleanupCardsInPlay();
 
             GameMessageManager.gameMessageManager.SetText("", true);
+            GameMessageManager.gameMessageManager.AddLine("\"" + MRAManager.instance.GetHostArgument() + "\"", false);
 
             ChangeState(TurnState.EnemyTurn);
+            //StartCoroutine(ChangeToStateWhenMessageFinished(TurnState.EnemyTurn, Globals.GetInstance().SHORT_DISPLAY_TIME));
+            
         }
     }
 
@@ -169,28 +232,49 @@ public class TurnManager : MonoBehaviour {
             currentTurnState == TurnState.PlayerInactive)
         {
             currentTurnState = TurnState.PlayerActive;
+            CardEventManager.cardEventManager.TurnOnProcessing();
         }
     }
 
     private void DoPlayerDraw()
     {
+        //Debug.Log("DoPlayerDraw()::Enter");
         if (currentTurnState == TurnState.EnemyTurn ||
             currentTurnState == TurnState.StartBattle)
         {
+            //Debug.Log("DoPlayerDraw()::CurrentState==" + currentTurnState.ToString());
             if (BattleManager.battleManager.IsPlayerAlive())
             {
+                //Debug.Log("DoPlayerDraw()::IsPlayerAlive==true");
                 //do player draw phase
                 currentTurnState = TurnState.PlayerDraw;
-                DrawPileController.drawPile.DrawToFullHand();
+                List<GameObject> cardsDrawn = DrawPileController.drawPile.DrawToFullHand();
                 //ChangeState(TurnState.PlayerActive);
-                StartCoroutine(ChangeToStateAfterSeconds(TurnState.PlayerActive, 1.5f));
+                //StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.PlayerActive, 1.0f));
 
+                if (cardsDrawn.Count > 0)
+                {
+                    string cardDrawText = "[Drawing new hand. Drew cards: ";
+                    List<string> cardNames = new List<string>();
+                    foreach (GameObject card in cardsDrawn)
+                    {
+                        GameCard gameCard = card.GetComponent<GameCard>();
+                        cardNames.Add(gameCard.Title);
+                    }
+                    cardDrawText += string.Join(", ", cardNames.ToArray()) + "]";
+
+                    //GameMessageManager.gameMessageManager.AddLine(cardDrawText, false);                    
+                }
+               
                 //set a new turn
                 RulesManager.rulesManager.ResetTurn();
+
+                StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.PlayerActive, Globals.GetInstance().SHORT_DISPLAY_TIME));
             }
             else
             {
-                DoBattleLost();
+                //Debug.Log("DoPlayerDraw()::IsPlayerAlive==false");
+                StartCoroutine(DoBattleLost());
             }
         }
     }    
@@ -205,7 +289,8 @@ public class TurnManager : MonoBehaviour {
 
     private void DoEnemyTurn()
     {
-        if (currentTurnState == TurnState.PlayerCleanup)
+        if (currentTurnState == TurnState.PlayerCleanup ||
+            currentTurnState == TurnState.StartBattle)
         {
             if (BattleManager.battleManager.IsEnemyAlive())
             {
@@ -214,55 +299,79 @@ public class TurnManager : MonoBehaviour {
             }
             else
             {
-                DoBattleWon();
+                StartCoroutine(DoBattleWon());
             }    
         }
     }
 
-    private void DoBattleWon()
+    private IEnumerator DoBattleWon()
     {
+        while (!GameMessageManager.gameMessageManager.isFinished)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
         Globals.GetInstance().PlayerBattlesWon++;
+        MRAManager.instance.AddAnotherStrangeQuote();
+
+        GameMessageManager.gameMessageManager.AddLine("The caller screams in frustration, then the line goes dead.", false);
+        GameMessageManager.gameMessageManager.AddLine("\"Ha, another caller who couldn't take the heat!\"", false);
+
         if (BattleManager.battleManager.BattleNumber >= BattleManager.battleManager.BattlesPerShow)
         {
             //we've finished the show
-            GameMessageManager.gameMessageManager.AddLine("\"Looks like we're just about out of time for today's show.\"", false);
-            GameMessageManager.gameMessageManager.AddLine("", false);
 
             Globals.GetInstance().PlayerLevel++;
 
             CardGainController.cardGainController.GainFinishedShowCard();
             Globals.GetInstance().PlayerFinishedLastShow = true;
-            StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.EndShow));
+            StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.EndShow, 0.0f));
         }
         else
         {
-            GameMessageManager.gameMessageManager.AddLine("\"Ha, another caller who couldn't take the heat!\"", false);
-            GameMessageManager.gameMessageManager.AddLine("", false);
 
             CardGainController.cardGainController.GainBattleWonCard();
-            StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.OutOfBattle));
+            StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.OutOfBattle, Globals.GetInstance().SHORT_DISPLAY_TIME));
         }
         
     }
 
-    private void DoBattleLost()
+    private IEnumerator DoBattleLost()
     {
+        while (!GameMessageManager.gameMessageManager.isFinished)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
         Globals.GetInstance().PlayerBattlesLost++;
+        MRAManager.instance.AddAnotherStrangeQuote();
         //BattleManager.battleManager.PlayerCurrentAnger = BattleManager.battleManager.PlayerMaxAnger;
 
         GameMessageManager.gameMessageManager.AddLine("\"I CAN'T HANDLE ANY MORE OF THESE IDIOTS TONIGHT!\"", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
 
         CardGainController.cardGainController.GainBattleLostCard();
         Globals.GetInstance().PlayerFinishedLastShow = false;
-        StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.EndShow));        
+        StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.EndShow, 0.0f));        
     }
 
-    private void DoOutOfBattle()
-    {
-        currentTurnState = TurnState.OutOfBattle;
+    private IEnumerator DoOutOfBattle()
+    {  
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
+        GameMessageManager.gameMessageManager.AddLine("", false);
 
-        GameMessageManager.gameMessageManager.SetText("Are you ready for the next caller?", false);
+        while (!GameMessageManager.gameMessageManager.isFinished)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        GameMessageManager.gameMessageManager.SetText("", true);
+        GameMessageManager.gameMessageManager.AddLine("\"Alright let's take the next caller.\"", false);
+
+        currentTurnState = TurnState.OutOfBattle;
 
         DiscardHand();
         DeckManager.deckManager.ShuffleDiscardIntoDeck();
@@ -276,18 +385,41 @@ public class TurnManager : MonoBehaviour {
         ChangeState(newState);
     }
 
-    public IEnumerator ChangeToStateWhenDisplayEmpty(TurnState newState)
+    public IEnumerator ChangeToStateWhenDisplayEmpty(TurnState newState, float additionalWaitTime)
     {
+        Debug.Log("Current State: " + currentTurnState.ToString());
         while (CardDisplayController.cardDisplayController.displayedCards.Count > 0)
+        {
+            yield return new WaitForSeconds(0.25f);
+            Debug.Log("Cards left in display: " + CardDisplayController.cardDisplayController.displayedCards.Count);
+        }
+
+        yield return new WaitForSeconds(additionalWaitTime);
+
+        Debug.Log("Changing to State: " + newState.ToString());
+
+        ChangeState(newState);
+    }
+
+    public IEnumerator ChangeToStateWhenMessageFinished(TurnState newState, float additionalWaitTime)
+    {
+        //Debug.Log("Waiting on Message to transition to " + newState.ToString());
+        while (!GameMessageManager.gameMessageManager.isFinished)
         {
             yield return new WaitForSeconds(0.25f);
             //Debug.Log("Cards left in display: " + CardDisplayController.cardDisplayController.displayedCards.Count);
         }
 
+        //Debug.Log("Message finished. Waiting for Additional time: " + additionalWaitTime);
+
+        yield return new WaitForSeconds(additionalWaitTime);
+
+        //Debug.Log("Wait over. Transitioning to new state.");
         //Debug.Log("Changing to Out of Battle State");
 
         ChangeState(newState);
     }
+
 
     public bool CanPlayCards()
     {

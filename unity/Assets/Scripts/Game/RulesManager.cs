@@ -74,12 +74,12 @@ public class RulesManager : MonoBehaviour {
 
         if (gameCard.cardType == GameCard.CardType.Action && ActionsLeft == 0)
         {
-            GameMessageManager.gameMessageManager.AddLine("You do not have enough Actions to play " + gameCard.Title + ".", false);
+            GameMessageManager.gameMessageManager.AddLine("[You do not have enough Actions to play " + gameCard.Title + ".]", false);
             return false;
         }
 
         if (gameCard.spiteUsed > SpiteLeft) {
-            GameMessageManager.gameMessageManager.AddLine("You do not have enough Spite to play " + gameCard.Title + ".", false); 
+            GameMessageManager.gameMessageManager.AddLine("[You do not have enough Spite to play " + gameCard.Title + ".]", false); 
             return false;
         }
 
@@ -120,7 +120,7 @@ public class RulesManager : MonoBehaviour {
     //    PlayCard(cardObject);
     //}
 
-    public void PlayCard(GameObject cardObject)
+    public void PlayCard(GameObject cardObject, bool printQuote)
     {
         CardController cardController = cardObject.GetComponent<CardController>();
 
@@ -129,6 +129,7 @@ public class RulesManager : MonoBehaviour {
         GameCard gameCard = cardController.gameCard;
 
         if (gameCard == null) { return; }
+
 
         StringBuilder sb = new StringBuilder("Playing " + gameCard.Title + ". ");
 
@@ -157,8 +158,13 @@ public class RulesManager : MonoBehaviour {
             sb.Append("+" + gameCard.spiteAdded + " Spite ");     
         }
 
-        GameMessageManager.gameMessageManager.AddLine(sb.ToString(), false);
-        
+        //GameMessageManager.gameMessageManager.AddLine("[" + sb.ToString() + "]", false);
+
+        if (printQuote && gameCard.cardType == GameCard.CardType.Argument)
+        {
+            GameMessageManager.gameMessageManager.AddLine("\"" + MRAManager.instance.GetHostArgument() + "\"", false);
+        }
+
         //cardController.UpdateCurrentZone();
 
         CardEventManager.cardEventManager.QueueEvents(cardObject);

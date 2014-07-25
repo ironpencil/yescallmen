@@ -38,7 +38,7 @@ public class PlayAllSpiteCards : MonoBehaviour {
             if (card.gameCard.cardType == GameCard.CardType.Spite)
             {
                 CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.Play);
-                RulesManager.rulesManager.PlayCard(card.gameObject);
+                RulesManager.rulesManager.PlayCard(card.gameObject, false);
             }
         }
     }

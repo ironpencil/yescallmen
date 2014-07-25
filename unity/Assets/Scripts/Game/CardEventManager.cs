@@ -41,8 +41,18 @@ public class CardEventManager : MonoBehaviour
 
     public void Start()
     {
-        processEvents = true;
+        //processEvents = true;
         cardEventManager = this;
+    }
+
+    public void TurnOnProcessing()
+    {
+        processEvents = true;
+    }
+
+    public void TurnOffProcessing()
+    {
+        processEvents = false;
     }
 
     public void Update()

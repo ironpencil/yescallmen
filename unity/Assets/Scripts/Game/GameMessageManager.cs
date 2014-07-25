@@ -15,7 +15,7 @@ public class GameMessageManager : MonoBehaviour {
     public bool isFinished = true;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         gameMessageManager = this;
         typewriter = labelObject.GetComponent<IPTypewriterEffect>();
 
@@ -61,8 +61,22 @@ public class GameMessageManager : MonoBehaviour {
         messageScrollview.ResetPosition();
     }
 
+    public void AddText(string text, bool instant)
+    {
+        isFinished = false;
+        typewriter.AddText(text);
+        typewriter.isActive = true;
+
+        if (instant)
+        {
+            typewriter.Finish();
+        }
+
+        messageScrollview.ResetPosition();
+    }
+
     private void OnFinished() {
-        Debug.Log("Finished!");
+        Debug.Log("Message Finished Displaying!");
         isFinished = true;
     }
 }
