@@ -24,7 +24,7 @@ public class StartShowButton : MonoBehaviour {
         //Globals.GetInstance().PlayerFinishedLastShow = true;
         //Globals.GetInstance().PlayerLevel++;
 
-        GameMessageManager.gameMessageManager.AddLine("\"Alright, here's our first caller of the evening...\"", false);
+        GameMessageManager.gameMessageManager.AddLine(">> Alright, here's our first caller of the evening...", false, GameMessageManager.gameMessageManager.HostColorHex);
 
         OutOfBattleManager.outOfBattleManager.CanStartShow = false;
 

@@ -99,6 +99,6 @@ public class CardGainController : MonoBehaviour {
 
             cdc.DisplayCard(newCard, CardContainer.CardZone.None);
         }
-        GameMessageManager.gameMessageManager.AddLine("[You may gain a new card by dragging it to the Discard Pile.]", false);
+        GameMessageManager.gameMessageManager.AddLine(">> You may gain a new card by dragging it to the Discard Pile.", false, GameMessageManager.gameMessageManager.SystemColorHex);
     }
 }

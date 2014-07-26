@@ -267,12 +267,14 @@ public class IPTypewriterEffect : MonoBehaviour
 
     public void AddText(string text)
     {
-        mFullText += text;        
+        mFullText += text;
+        isActive = true;
     }
 
     public void SetText(string text)
     {
         mFullText = text;
         mLabel.text = text;
+        isActive = true;
     }
 }

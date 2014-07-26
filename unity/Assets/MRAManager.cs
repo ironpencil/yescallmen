@@ -74,7 +74,7 @@ public class MRAManager : MonoBehaviour
         //prevent duplicates
         while (randomIndex == lastFeministArgIndex)
         {
-            randomIndex = UnityEngine.Random.Range(0, 5);
+            randomIndex = UnityEngine.Random.Range(0, feministArguments.Count);
         }
 
         lastFeministArgIndex = randomIndex;
@@ -174,7 +174,7 @@ public class MRAManager : MonoBehaviour
         "get sex whenever they want",
         "get so much maternity leave",
         "hate nice guys",
-        "hit men without consequences",
+        "hit men without suffering consequences",
         "make men look stupid in sitcoms",
         "make more money than men",
         "only date assholes",

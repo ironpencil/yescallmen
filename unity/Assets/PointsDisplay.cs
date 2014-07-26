@@ -33,65 +33,65 @@ public class PointsDisplay : MonoBehaviour {
             switch (Globals.GetInstance().PlayerLevel)
             {
                 case 2:
-                    GameMessageManager.gameMessageManager.AddLine("Looks like you may have convinced a couple viewers...", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Looks like you may have convinced a couple viewers...", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 3:
-                    GameMessageManager.gameMessageManager.AddLine("Looks like people in town are talking, and you have a few more fans...", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Looks like people in town are talking, and you have a few more fans...", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 4:
-                    GameMessageManager.gameMessageManager.AddLine("Looks like you've convinced quite a few people in town!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Looks like you've convinced quite a few people in town!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 5:
-                    GameMessageManager.gameMessageManager.AddLine("Wow, your show is really picking up! The whole town is raving!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Wow, your show is really picking up! The whole town is raving!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 6:
-                    GameMessageManager.gameMessageManager.AddLine("People in nearby cities have begun watching your show!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> People in nearby cities have begun watching your show!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 7:
-                    GameMessageManager.gameMessageManager.AddLine("Clips from your show have gone viral online!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Clips from your show have gone viral online!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 8:
-                    GameMessageManager.gameMessageManager.AddLine("You're getting fan email from all over the country!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> You're getting fan email from all over the country!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 9:
-                    GameMessageManager.gameMessageManager.AddLine("Your show is now one of the most popular shows in the world!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Your show is now one of the most popular shows in the world!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 10:
-                    GameMessageManager.gameMessageManager.AddLine("Are there even that many people on the planet?!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Are there even that many people on the planet?!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 11:
-                    GameMessageManager.gameMessageManager.AddLine("You have convinced every single living creature on the planet!", false);
-                    GameMessageManager.gameMessageManager.AddLine("Congratulations, you are the biggest asshole ever!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> You have convinced every single living creature on the planet! Congratulations, you are the biggest asshole ever!", false, GameMessageManager.gameMessageManager.SystemColorHex);
+                    //GameMessageManager.gameMessageManager.AddLine("Congratulations, you are the biggest asshole ever!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 12:
-                    GameMessageManager.gameMessageManager.AddLine("First contact. Aliens have come to Earth, and they want more of your show!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> First contact. Aliens have come to Earth, and they want more of your show!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 21:
-                    GameMessageManager.gameMessageManager.AddLine("You have converted the entire galaxy!", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> You have converted the entire galaxy!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 31:
-                    GameMessageManager.gameMessageManager.AddLine("Every living being in the universe watches your show constantly.", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Every living being in the universe watches your show constantly.", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 32:
-                    GameMessageManager.gameMessageManager.AddLine("Your message travels the known universe and into neighboring universes.", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Your message travels the known universe and into neighboring universes.", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 41:
-                    GameMessageManager.gameMessageManager.AddLine("Your message spans across all of reality.", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Your message spans across all of reality.", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 case 42:
-                    GameMessageManager.gameMessageManager.AddLine("Your message transcends time and space into alternate dimensions and realities.", false);
+                    GameMessageManager.gameMessageManager.AddLine(">> Your message transcends time and space into alternate dimensions and realities.", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     break;
                 default:
                     if (Globals.GetInstance().PlayerLevel > 50)
                     {
-                        GameMessageManager.gameMessageManager.AddLine("The reach of your message is literally unfathomable.", false);
-                        GameMessageManager.gameMessageManager.AddLine("All feminists that were, are, or ever will be now understand your truth.", false);
-                        GameMessageManager.gameMessageManager.AddLine("", false);
-                        GameMessageManager.gameMessageManager.AddLine("You are truly the worst.", false);
+                        GameMessageManager.gameMessageManager.AddLine(">> The reach of your message is literally unfathomable. All feminists that were, are, or ever will be now understand your truth. You are truly the worst.", false, GameMessageManager.gameMessageManager.SystemColorHex);
+                        //GameMessageManager.gameMessageManager.AddLine("All feminists that were, are, or ever will be now understand your truth.", false, GameMessageManager.gameMessageManager.SystemColorHex);
+                        //GameMessageManager.gameMessageManager.AddLine("", false);
+                        //GameMessageManager.gameMessageManager.AddLine("You are truly the worst.", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     }
                     else
                     {
-                        GameMessageManager.gameMessageManager.AddLine("Looks like you have more fans!", false);
+                        GameMessageManager.gameMessageManager.AddLine(">> Looks like you have more fans!", false, GameMessageManager.gameMessageManager.SystemColorHex);
                     }
                     break;
             }

@@ -41,9 +41,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 8f773931907f7f248809b7b1a6e36a13, type: 2}
   mSprites:
-  - name: cardbg
+  - name: fullcard
     x: 201
-    y: 232
+    y: 46
     width: 200
     height: 280
     borderLeft: 0
@@ -54,11 +54,24 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: fullcard
+  - name: fullcardsoft
     x: 0
-    y: 232
+    y: 46
     width: 200
     height: 280
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: messagebg
+    x: 0
+    y: 327
+    width: 507
+    height: 185
     borderLeft: 0
     borderRight: 0
     borderTop: 0

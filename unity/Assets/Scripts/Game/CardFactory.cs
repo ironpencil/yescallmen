@@ -180,7 +180,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level * 5;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = 0;
-        gameCard.AbilityText = "Argument\r\n\r\n-" + gameCard.spiteUsed + " Spite.\r\n\r\nTrash this card.";
+        gameCard.AbilityText = "Argument\r\n-" + gameCard.spiteUsed + " Spite.\r\n\r\nTrash this card.";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -202,7 +202,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level * 3;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level + 3;
-        gameCard.AbilityText = "Argument\r\n\r\n-" + gameCard.spiteUsed + " Spite.\r\n\r\nGain a Level " + spiteCardLevel + " Spite card, putting it into your hand.";
+        gameCard.AbilityText = "Argument\r\n-" + gameCard.spiteUsed + " Spite.\r\n\r\nGain a Level " + spiteCardLevel + " Spite card,  putting it into your hand.";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -226,7 +226,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level * 3;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level;
-        gameCard.AbilityText = "Argument\r\n\r\n-" + gameCard.spiteUsed + " Spite.\r\n\r\nIf Current Anger is more than half of Max Anger, do " + bonusDamage + " bonus damage.";
+        gameCard.AbilityText = "Argument\r\n-" + gameCard.spiteUsed + " Spite.\r\n\r\nIf Current Anger is more than half of Max Anger, do " + bonusDamage + " bonus damage.";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -327,7 +327,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateInvalidCard(GameCard gameCard, int level)
     {
         gameCard.Title = "Invalid Card";
-        gameCard.AbilityText = "Special (No Action)\r\n\r\nTrash this card.";
+        gameCard.AbilityText = "Special\r\n\r\nTrash this card.";
         gameCard.cardType = GameCard.CardType.Special;
 
         TrashSelfEvent trashEvent = new TrashSelfEvent();
@@ -337,7 +337,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateIncreaseMaxAngerCard(GameCard gameCard, int level)
     {
         gameCard.Title = "Raise Max Anger";
-        gameCard.AbilityText = "Special (No Action)\r\n\r\n+5 Cards\r\n+1 Action\r\n+50 Max Anger\r\n\r\nTrash this card.";
+        gameCard.AbilityText = "Special\r\n\r\n+5 Cards\r\n+1 Action\r\n+50 Max Anger\r\n\r\nTrash this card.";
         gameCard.cardType = GameCard.CardType.Special;
         gameCard.actionsAdded = 1;
 
@@ -391,7 +391,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateLeveler(GameCard gameCard, int level)
     {
         gameCard.Title = "Feminazis";
-        gameCard.AbilityText = "Action\r\n\r\nMay level up 2 cards from hand, then discard them.\r\nTrash this card.";
+        gameCard.AbilityText = "Action\r\n\r\nMay level up 2 cards from hand, then discard them.\r\n\r\nTrash this card.";
         gameCard.cardType = GameCard.CardType.Action;
 
         LevelSelectedCardsEvent levelEvent = new LevelSelectedCardsEvent();
@@ -455,7 +455,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateNotAllMen(GameCard gameCard, int level)
     {
         gameCard.Title = "Not All Men";
-        gameCard.AbilityText = "Special (No Action)\r\n\r\n+5 Cards\r\n+1 Action\r\n+25 Max Anger\r\n\r\nLevel up all cards in hand.\r\nTrash this card.";
+        gameCard.AbilityText = "Special\r\n(No Action)\r\n\r\n+5 Cards\r\n+1 Action\r\n+25 Max Anger\r\nLevel up all cards in your hand.\r\nTrash this card.";
         gameCard.cardType = GameCard.CardType.Special;
         gameCard.actionsAdded = 1;
 
@@ -484,7 +484,7 @@ public class CardFactory : MonoBehaviour
     private void GenerateTrasher(GameCard gameCard, int level)
     {
         gameCard.Title = "Wallet Rape";
-        gameCard.AbilityText = "Action\r\n\r\n+1 Card\r\n+1 Action\r\n\r\nMay Trash 1 card from hand. If you do:\r\n+1 Card\r\n+1 Action";
+        gameCard.AbilityText = "Action\r\n\r\n+1 Card\r\n+1 Action\r\n\r\nMay Trash 1 card from your hand.\r\nIf you do:\r\n+1 Card\r\n+1 Action";
         gameCard.cardType = GameCard.CardType.Action;
 
         gameCard.actionsAdded = 1;
@@ -533,7 +533,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level * 3;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level;
-        gameCard.AbilityText = "Argument\r\n\r\n-" + gameCard.spiteUsed + " Spite\r\n\r\nReveal top card of deck.\r\nIf it is an Argument, play it for free.\r\nOtherwise, discard it.";
+        gameCard.AbilityText = "Argument\r\n-" + gameCard.spiteUsed + " Spite\r\n\r\nReveal top card of deck. If it is an Argument, play it for free. Otherwise, discard it.";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -556,7 +556,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level + 1;
-        gameCard.AbilityText = "Argument\r\n\r\n-" + gameCard.spiteUsed + " Spite\r\n\r\nDo bonus damage equal to Total Spite, up to " + maxBonusDamage + ".";
+        gameCard.AbilityText = "Argument\r\n-" + gameCard.spiteUsed + " Spite\r\n\r\nDo bonus damage equal to Total Spite, up to " + maxBonusDamage + ".";
 
         DealDamageEvent baseDmgEvent = ScriptableObject.CreateInstance<DealDamageEvent>();
         baseDmgEvent.damageTypeSource = DealDamageEvent.ValueSource.Card;
@@ -576,7 +576,7 @@ public class CardFactory : MonoBehaviour
         gameCard.BaseDamage = level * 2;
         gameCard.CurrentDamage = gameCard.BaseDamage;
         gameCard.spiteUsed = level;
-        gameCard.AbilityText = "Argument\r\n\r\n-" + gameCard.spiteUsed + " Spite\r\n+1 Card\r\n+1 Action";
+        gameCard.AbilityText = "Argument\r\n-" + gameCard.spiteUsed + " Spite\r\n\r\n+1 Card\r\n+1 Action";
 
         gameCard.actionsAdded = 1;
 

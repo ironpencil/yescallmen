@@ -57,7 +57,7 @@ public class GameCard : MonoBehaviour
             {
                 if (value > 0)
                 {
-                    levelLabel.text = "LVL " + levelPrvt;
+                    levelLabel.text = "Lvl " + levelPrvt;
                 }
                 else
                 {
@@ -120,7 +120,7 @@ public class GameCard : MonoBehaviour
             {
                 if (BaseDamage > 0)
                 {
-                    damageLabel.text = currentDamagePrvt.ToString() + " DMG";
+                    damageLabel.text = currentDamagePrvt.ToString() + " Dmg";
                 }
                 else
                 {

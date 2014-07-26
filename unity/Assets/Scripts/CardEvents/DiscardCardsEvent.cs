@@ -28,7 +28,7 @@ public class DiscardCardsEvent : CardEvent
         //if we require cards but don't have enough in the zone, don't bother displaying selection window
         if (numRequiredCards > numCardsInZone)
         {
-            GameMessageManager.gameMessageManager.AddLine("Not enough cards for " + gameCard.Title + ". Discarding all cards.", false);
+            GameMessageManager.gameMessageManager.AddLine(">> Not enough cards for " + gameCard.Title + ". Discarding all cards.", false, GameMessageManager.gameMessageManager.SystemColorHex);
             //we don't, so just move all cards there
             foreach (CardController card in cardsInZone)
             {

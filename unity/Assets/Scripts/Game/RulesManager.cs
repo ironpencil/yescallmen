@@ -74,12 +74,12 @@ public class RulesManager : MonoBehaviour {
 
         if (gameCard.cardType == GameCard.CardType.Action && ActionsLeft == 0)
         {
-            GameMessageManager.gameMessageManager.AddLine("[You do not have enough Actions to play " + gameCard.Title + ".]", false);
+            GameMessageManager.gameMessageManager.AddLine(">> You do not have enough Actions to play " + gameCard.Title + ".", false, GameMessageManager.gameMessageManager.SystemColorHex);
             return false;
         }
 
         if (gameCard.spiteUsed > SpiteLeft) {
-            GameMessageManager.gameMessageManager.AddLine("[You do not have enough Spite to play " + gameCard.Title + ".]", false); 
+            GameMessageManager.gameMessageManager.AddLine(">> You do not have enough Spite to play " + gameCard.Title + ".", false, GameMessageManager.gameMessageManager.SystemColorHex); 
             return false;
         }
 
@@ -162,7 +162,9 @@ public class RulesManager : MonoBehaviour {
 
         if (printQuote && gameCard.cardType == GameCard.CardType.Argument)
         {
-            GameMessageManager.gameMessageManager.AddLine("\"" + MRAManager.instance.GetHostArgument() + "\"", false);
+            GameMessageManager.gameMessageManager.AddLine(">> " + MRAManager.instance.GetHostArgument(), false, 
+                GameMessageManager.gameMessageManager.HostColorHex);
+            //GameMessageManager.gameMessageManager.AddLine(">> " + MRAManager.instance.GetHostArgument() + "", false);
         }
 
         //cardController.UpdateCurrentZone();
