@@ -12,7 +12,7 @@ public class OutOfBattleManager : MonoBehaviour {
     {
         outOfBattleManager = this;
 
-        StartCoroutine(DoStartScene());
+        
     }
 	
 	// Update is called once per frame
@@ -21,11 +21,22 @@ public class OutOfBattleManager : MonoBehaviour {
 	
 	}
 
+    bool isStarted = false;
+
+    public void StartScene()
+    {
+        if (!isStarted)
+        {
+            isStarted = true;
+            StartCoroutine(DoStartScene());
+        }
+    }
+
     public UILabel PointsLabel;
 
     public IEnumerator DoStartScene() {
 
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.2f);
 
         Debug.Log("Last Scene = " + Globals.GetInstance().LastScene);
 
@@ -45,7 +56,7 @@ public class OutOfBattleManager : MonoBehaviour {
                     yield return new WaitForSeconds(0.1f);
                 }
 
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     yield return new WaitForSeconds(0.20f);
                     GameMessageManager.gameMessageManager.AddText(".", false);                    

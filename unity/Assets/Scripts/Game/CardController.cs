@@ -49,7 +49,7 @@ public class CardController : MonoBehaviour {
     void HoverOver()
     {
         if (CurrentZone == CardContainer.CardZone.Hand ||
-            CurrentZone == CardContainer.CardZone.Play ||
+            //CurrentZone == CardContainer.CardZone.Play ||
             CurrentZone == CardContainer.CardZone.Display)
         {
             NGUITools.BringForward(gameObject);
@@ -83,7 +83,7 @@ public class CardController : MonoBehaviour {
         //collider.enabled = false;
         UpdateCurrentZone();
         if (CurrentZone == CardContainer.CardZone.Hand ||
-            CurrentZone == CardContainer.CardZone.Play ||
+            //CurrentZone == CardContainer.CardZone.Play ||
             CurrentZone == CardContainer.CardZone.Display)
         {
             NGUITools.BringForward(gameObject);

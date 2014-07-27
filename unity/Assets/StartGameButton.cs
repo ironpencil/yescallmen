@@ -15,6 +15,15 @@ public class StartGameButton : MonoBehaviour {
 
     public void StartGame()
     {
+        StartCoroutine(DoStartGame());
+    }
+
+    public IEnumerator DoStartGame()
+    {
+        BarWipe.instance.DoWipe(false);
+
+        yield return new WaitForSeconds(1.25f);    
+
         Globals.GetInstance().LastScene = Globals.GameScene.Title;
         Application.LoadLevel("outofbattle");
     }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-    public List<GameObject> InactiveObjects;
+    public List<GameObject> ActivateObjects;
 
 	// Use this for initialization
 	void Start () {
-        foreach (GameObject go in InactiveObjects)
+        foreach (GameObject go in ActivateObjects)
         {
-            go.SetActive(false);            
+            go.SetActive(true);            
         }    
 	}
 	

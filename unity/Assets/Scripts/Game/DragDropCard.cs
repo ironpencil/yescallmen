@@ -119,6 +119,8 @@ public class DragDropCard : UIDragDropItem {
             switch (cardController.CurrentZone)
             {
                 case CardContainer.CardZone.Hand:
+                    CardZoneManager.cardZoneManager.handContainer.GetComponent<UIScrollView>().UpdatePosition();
+                    CardZoneManager.cardZoneManager.handContainer.GetComponent<UIScrollView>().ResetPosition();
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
                     break;
                 case CardContainer.CardZone.Play:

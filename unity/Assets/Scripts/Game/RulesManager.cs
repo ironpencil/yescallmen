@@ -171,6 +171,8 @@ public class RulesManager : MonoBehaviour {
 
         CardEventManager.cardEventManager.QueueEvents(cardObject);
 
+        NGUITools.BringForward(cardObject);
+
     }
 
     public void ResetTurn()

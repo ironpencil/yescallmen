@@ -117,9 +117,11 @@ public class TurnManager : MonoBehaviour {
 
         yield return new WaitForSeconds(4.0f);
 
-        gameScale.PlayReverse();
+        //gameScale.PlayReverse();
 
-        yield return new WaitForSeconds(1.0f);
+        BarWipe.instance.DoWipe(false);
+
+        yield return new WaitForSeconds(1.25f);
 
         Globals.GetInstance().LastScene = Globals.GameScene.Battle;
         Application.LoadLevel("outofbattle");

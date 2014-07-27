@@ -37,7 +37,11 @@ public class StartShowButton : MonoBehaviour {
         {
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
+
+        BarWipe.instance.DoWipe(false);
+
+        yield return new WaitForSeconds(1.25f);
 
         Globals.GetInstance().LastScene = Globals.GameScene.Studio;
         Application.LoadLevel("battle");
