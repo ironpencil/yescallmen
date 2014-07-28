@@ -7,6 +7,7 @@ public class DragDropCard : UIDragDropItem {
 
     protected override void OnDragDropStart()
     {
+        Debug.Log("Drag Enter: " + cardController.gameCard.Title + " - " + cardController.CurrentZone.ToString());
         bool allowedToDrag = false;
         //check to see if we're allowed to drag this item from wherever it is
         switch (cardController.CurrentZone)
@@ -48,6 +49,9 @@ public class DragDropCard : UIDragDropItem {
 
 	protected override void OnDragDropRelease (GameObject surface)
 	{
+        Debug.Log("Drop Enter: " + cardController.gameCard.Title + " - " + cardController.CurrentZone.ToString() + 
+            "\r\nSurface = " + (surface==null ? "null" : surface.ToString()));
+            
         if (surface != null)
         {
             bool validSurfaceFound = false;
@@ -84,8 +88,12 @@ public class DragDropCard : UIDragDropItem {
                 surface = null;
             }
         }
+
+        Debug.Log("Surface = " + (surface==null ? "null" : surface.ToString()));
       
 		base.OnDragDropRelease(surface);
+
+        Debug.Log("Drop Released: " + cardController.gameCard.Title + " - " + cardController.CurrentZone.ToString());
 
         if (surface != null)
         {
@@ -112,15 +120,17 @@ public class DragDropCard : UIDragDropItem {
                     break;
             }
 
-            Debug.Log("Dropped " + gameObject.name + " now a child of " + gameObject.transform.parent.gameObject.name);
+            Debug.Log("Dropped " + cardController.gameCard.Title + " now a child of " + gameObject.transform.parent.gameObject.name);
 
             cardController.UpdateCurrentZone();
+
+            Debug.Log("Drop Assigned: " + cardController.gameCard.Title + " - " + cardController.CurrentZone.ToString());
 
             switch (cardController.CurrentZone)
             {
                 case CardContainer.CardZone.Hand:
-                    CardZoneManager.cardZoneManager.handContainer.GetComponent<UIScrollView>().UpdatePosition();
-                    CardZoneManager.cardZoneManager.handContainer.GetComponent<UIScrollView>().ResetPosition();
+                    //CardZoneManager.cardZoneManager.handContainer.GetComponent<UIScrollView>().UpdatePosition();
+                    //CardZoneManager.cardZoneManager.handContainer.GetComponent<UIScrollView>().ResetPosition();
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
                     break;
                 case CardContainer.CardZone.Play:
@@ -159,8 +169,12 @@ public class DragDropCard : UIDragDropItem {
                 default:
                     break;
             }
+
+            Debug.Log("Drop Completed: " + cardController.gameCard.Title + " - " + cardController.CurrentZone.ToString());
                 
             //NGUITools.PushBack(gameObject);
         }
+
+        Debug.Log("Drop Exit: " + cardController.gameCard.Title + " - " + cardController.CurrentZone.ToString());
 	}
 }

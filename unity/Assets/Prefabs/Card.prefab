@@ -282,7 +282,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .882352948, g: .882352948, b: .882352948, a: 1}
   mPivot: 7
   mWidth: 100
@@ -333,7 +332,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .875, g: .875, b: .875, a: 1}
   mPivot: 7
   mWidth: 100
@@ -396,7 +394,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -455,7 +452,6 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 1, g: .113793075, b: .113793075, a: 1}
   mPivot: 4
   mWidth: 112
@@ -518,7 +514,6 @@ MonoBehaviour:
     relative: 1
     absolute: -22
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .113793075, g: .148352638, b: 1, a: 1}
   mPivot: 1
   mWidth: 190
@@ -595,7 +590,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .113793075, g: .148352638, b: 1, a: 1}
   mPivot: 4
   mWidth: 182
@@ -690,7 +684,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -807,14 +800,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
+      value: .000820812769
+      inSlope: 2.24768305
+      outSlope: 2.24768305
+      tangentMode: 0
+    - time: .941164851
+      value: 1.04097903
+      inSlope: -.784713745
+      outSlope: -.784713745
       tangentMode: 0
     - time: 1
-      value: 1
-      inSlope: -.588953376
-      outSlope: -.588953376
+      value: 1.00625002
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -892,7 +890,6 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .113793075, g: .148352638, b: 1, a: 1}
   mPivot: 4
   mWidth: 74

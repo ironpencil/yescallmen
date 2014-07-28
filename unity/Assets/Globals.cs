@@ -175,6 +175,11 @@ public class Globals : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public bool DoesSaveDataExist()
+    {
+        return PlayerPrefs.HasKey(KEY_PLAYER_LEVEL);
+    }
+
     public void ClearSaveData()
     {
         PlayerPrefs.DeleteAll();
@@ -190,7 +195,6 @@ public class Globals : MonoBehaviour
         PlayerLevel = 1;
         PlayerBattlesLost = 0;
         PlayerBattlesWon = 0;
-        PlayerTotalShows = 0;
 
         CalculateFeministsConverted();
     }
@@ -214,7 +218,7 @@ public class Globals : MonoBehaviour
     public int PlayerBattlesWon = 0;
     public int PlayerBattlesLost = 0;
 
-    public int PlayerTotalShows = 0;
+    public int PlayerShowsCompleted { get { return PlayerLevel + PlayerBattlesLost - 1; } }
 
     public long PlayerFeministsConverted = 0;
 

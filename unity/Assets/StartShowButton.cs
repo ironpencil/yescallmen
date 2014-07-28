@@ -3,30 +3,56 @@ using System.Collections;
 
 public class StartShowButton : MonoBehaviour {
 
-    private UIButton buttonScript;
+    //private UIButton buttonScript;
 
+    public bool debugPointsDisplay = false;
 	// Use this for initialization
 	void Start () {
-        buttonScript = gameObject.GetComponent<UIButton>();
+        //buttonScript = gameObject.GetComponent<UIButton>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (OutOfBattleManager.outOfBattleManager.CanStartShow != buttonScript.isEnabled)
-        {
-            buttonScript.isEnabled = OutOfBattleManager.outOfBattleManager.CanStartShow;
-        }	
+        //if (OutOfBattleManager.outOfBattleManager.CanStartShow != buttonScript.isEnabled)
+        //{
+        //    buttonScript.isEnabled = OutOfBattleManager.outOfBattleManager.CanStartShow;
+        //}	
 	}
+
+    bool showStarted = false;
+
+    public void OnClick()
+    {
+        if (!showStarted)
+        {
+            StartNextShow();
+        }
+    }
 
     public void StartNextShow()
     {
-        //GameMessageManager.gameMessageManager.SetText("", true);
-        //Globals.GetInstance().PlayerFinishedLastShow = true;
-        //Globals.GetInstance().PlayerLevel++;
+        if (debugPointsDisplay)
+        {
+            GameMessageManager.gameMessageManager.SetText("", true);
+            Globals.GetInstance().PlayerFinishedLastShow = true;
+            Globals.GetInstance().PlayerLevel++;
+            PointsDisplay.pointsDisplay.UpdatePointTotal();
 
-        GameMessageManager.gameMessageManager.AddLine(">> Alright, here's our first caller of the evening...", false, GameMessageManager.gameMessageManager.HostColorHex);
+            return;
+        }
 
-        OutOfBattleManager.outOfBattleManager.CanStartShow = false;
+        showStarted = true;
+
+        if (OutOfBattleManager.outOfBattleManager.CanStartShow)
+        {
+            GameMessageManager.gameMessageManager.AddLine(">> Alright, here's our first caller of the evening...", false, GameMessageManager.gameMessageManager.HostColorHex);
+        }
+        else
+        {
+            OutOfBattleManager.outOfBattleManager.FastStart = true;
+            GameMessageManager.gameMessageManager.SetText("", true);
+            GameMessageManager.gameMessageManager.AddLine(">> Enough waiting around, let's take our first caller...", false, GameMessageManager.gameMessageManager.HostColorHex);
+        }
 
         StartCoroutine(StartShow());
     }
@@ -37,11 +63,18 @@ public class StartShowButton : MonoBehaviour {
         {
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(0.5f);
 
-        BarWipe.instance.DoWipe(false);
-
-        yield return new WaitForSeconds(1.25f);
+        if (OutOfBattleManager.outOfBattleManager.FastStart)
+        {
+            BarWipe.instance.DoWipe(false, 0.5f);
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+            BarWipe.instance.DoWipe(false);
+            yield return new WaitForSeconds(1.25f);
+        }
 
         Globals.GetInstance().LastScene = Globals.GameScene.Studio;
         Application.LoadLevel("battle");

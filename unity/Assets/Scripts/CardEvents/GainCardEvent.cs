@@ -21,7 +21,9 @@ public class GainCardEvent : CardEvent
 
             GameCard gameCard = newCard.GetComponent<GameCard>();
 
-            gameCard.isGainedCard = true;
+            //gameCard.isGainedCard = true;
+
+            DeckManager.deckManager.GainCard(gameCard.cardDefinition);
 
             //GameMessageManager.gameMessageManager.AddLine("Drew card: " + gameCard.Title, false);
             CardDisplayController.cardDisplayController.DisplayCard(newCard, addToZone, 1.0f);

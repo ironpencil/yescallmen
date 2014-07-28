@@ -54,6 +54,19 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: animesleeve1
+    x: 452
+    y: 341
+    width: 100
+    height: 140
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: blackbar
     x: 1002
     y: 1346
@@ -67,9 +80,35 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: buttonDown
+    x: 1002
+    y: 1315
+    width: 125
+    height: 29
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: buttonUp
+    x: 1129
+    y: 1315
+    width: 125
+    height: 29
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: fullcard
     x: 0
-    y: 383
+    y: 5
     width: 200
     height: 280
     borderLeft: 0
@@ -81,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: fullcardsoft
-    x: 0
-    y: 101
+    x: 202
+    y: 5
     width: 200
     height: 280
     borderLeft: 0
@@ -94,23 +133,75 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: host
-    x: 509
-    y: 681
-    width: 120
+    x: 452
+    y: 483
+    width: 140
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: messagebg
+    x: 452
+    y: 665
+    width: 507
+    height: 185
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: paintingHost
+    x: 594
+    y: 483
+    width: 140
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: paintingInfinite
+    x: 736
+    y: 494
+    width: 147
     height: 169
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 24
-    paddingRight: 19
-    paddingTop: 9
-    paddingBottom: 9
-  - name: messagebg
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: phoneDisplay
     x: 0
-    y: 665
-    width: 507
-    height: 185
+    y: 287
+    width: 436
+    height: 166
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: salogo
+    x: 0
+    y: 455
+    width: 450
+    height: 395
     borderLeft: 0
     borderRight: 0
     borderTop: 0

@@ -68,6 +68,10 @@ public class CardSelectionController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cardSelectionController = this;
+        TweenPosition tweenPosition = gameObject.GetComponent<TweenPosition>();
+
+        this.gameObject.transform.position = tweenPosition.from;
+
         NGUITools.SetActive(this.gameObject, false);
 	}
 	
@@ -163,10 +167,16 @@ public class CardSelectionController : MonoBehaviour {
         shouldShow = true;
         NGUITools.SetActive(this.gameObject, true);
 
-        TweenScale tweenScale = gameObject.GetComponent<TweenScale>();
-        if (tweenScale != null)
+        //TweenScale tweenScale = gameObject.GetComponent<TweenScale>();
+        //if (tweenScale != null)
+        //{
+        //    tweenScale.PlayForward();
+        //}
+
+        TweenPosition tweenPosition = gameObject.GetComponent<TweenPosition>();
+        if (tweenPosition != null)
         {
-            tweenScale.PlayForward();
+            tweenPosition.PlayForward();
         }
 
         Finished = false;
@@ -196,10 +206,16 @@ public class CardSelectionController : MonoBehaviour {
 
     public void Close()
     {
-        TweenScale tweenScale = gameObject.GetComponent<TweenScale>();
-        if (tweenScale != null)
+        //TweenScale tweenScale = gameObject.GetComponent<TweenScale>();
+        //if (tweenScale != null)
+        //{
+        //    tweenScale.PlayReverse();
+        //}
+
+        TweenPosition tweenPosition = gameObject.GetComponent<TweenPosition>();
+        if (tweenPosition != null)
         {
-            tweenScale.PlayReverse();
+            tweenPosition.PlayReverse();
         }
 
         SlotCount = 0;

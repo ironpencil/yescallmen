@@ -39,7 +39,16 @@ public class BattleManager : MonoBehaviour {
 
     public int BattlesPerShow = 2;
 
-    public int BattleNumber = 0;
+    public int battleNumber = 0;
+    public int BattleNumber
+    {
+        get { return battleNumber; }
+        set
+        {
+            battleNumber = value;
+            callNumberLabel.text = BattleNumber.ToString();
+        }
+    }
 
     public int playerMaxAnger = 100;
     public int PlayerMaxAnger
@@ -48,7 +57,7 @@ public class BattleManager : MonoBehaviour {
         set
         {
             playerMaxAnger = Mathf.Max(1, value);
-            playerAngerLabel.text = PlayerCurrentAnger.ToString() + " / " + PlayerMaxAnger;
+            playerAngerMaxLabel.text = PlayerMaxAnger.ToString();
 
             //save the max HP change back to Globals
             Globals.GetInstance().PlayerMaxHP = value;
@@ -62,7 +71,7 @@ public class BattleManager : MonoBehaviour {
         set
         {
             playerCurrentAnger = Mathf.Max(0, value);
-            playerAngerLabel.text = PlayerCurrentAnger.ToString() + " / " + PlayerMaxAnger;
+            playerAngerCurrentLabel.text = PlayerCurrentAnger.ToString();
         }
     }
 
@@ -73,7 +82,7 @@ public class BattleManager : MonoBehaviour {
         set
         {
             enemyMaxHP = Mathf.Max(1, value);
-            enemyHPLabel.text = EnemyCurrentHP.ToString() + " / " + EnemyMaxHP;
+            enemyHPMaxLabel.text = EnemyMaxHP.ToString();
         }
     }
 
@@ -83,8 +92,8 @@ public class BattleManager : MonoBehaviour {
         get { return enemyCurrentHP; }
         set
         {
-            enemyCurrentHP = Mathf.Min(EnemyMaxHP, value);
-            enemyHPLabel.text = EnemyCurrentHP.ToString() + " / " + EnemyMaxHP;
+            enemyCurrentHP = Mathf.Max(0, value);
+            enemyHPCurrentLabel.text = EnemyCurrentHP.ToString();
         }            
     }
 
@@ -159,7 +168,7 @@ public class BattleManager : MonoBehaviour {
     public bool IsEnemyAlive()
     {
 
-        return EnemyCurrentHP > 0;
+        return EnemyCurrentHP < EnemyMaxHP;
 
         //return (EnemyCurrentAnger > 0 &&
         //    EnemyCurrentConfusion > 0 &&
@@ -182,12 +191,17 @@ public class BattleManager : MonoBehaviour {
         EnemyActionManager.enemyActionManager.NextEnemy(Globals.GetInstance().PlayerLevel, BattleNumber);
 
         EnemyMaxHP = EnemyActionManager.enemyActionManager.MaxHP;
-        EnemyCurrentHP = EnemyMaxHP;        
+        EnemyCurrentHP = 0;        
     }
 
-    public UILabel playerAngerLabel;
+    public UILabel playerAngerCurrentLabel;
+    public UILabel playerAngerMaxLabel;
 
-    public UILabel enemyHPLabel;
+    public UILabel enemyHPCurrentLabel;
+    public UILabel enemyHPMaxLabel;
+    
+    public UILabel callersPerShowLabel;
+    public UILabel callNumberLabel;
     /*old damage typespublic UILabel enemyAngerLabel;
     public UILabel enemyConfusionLabel;
     public UILabel enemyFatigueLabel;
@@ -197,7 +211,7 @@ public class BattleManager : MonoBehaviour {
     {
         //int newValue = 
 
-        EnemyCurrentHP = EnemyCurrentHP - value;
+        EnemyCurrentHP = EnemyCurrentHP + value;
 
         /* old damage types
          * switch (damageType)
@@ -243,11 +257,13 @@ public class BattleManager : MonoBehaviour {
         EnemyCurrentFatigue = EnemyMaxFatigue;
          */
 
-        EnemyMaxHP = EnemyMaxHP;
-        EnemyCurrentHP = EnemyMaxHP;
+        EnemyMaxHP = 0;
+        EnemyCurrentHP = 0;
 
         PlayerMaxAnger = Globals.GetInstance().PlayerMaxHP;
         PlayerCurrentAnger = 0;
+
+        callersPerShowLabel.text = BattlesPerShow.ToString();
 
         //ArgumentsWon = Globals.GetInstance().PlayerBattlesWon;
         //ArgumentsLost = Globals.GetInstance().PlayerBattlesLost;

@@ -24,9 +24,18 @@ public class TurnManager : MonoBehaviour {
     private TurnState currentTurnState = TurnState.EndShow;
     public TurnState CurrentState { get { return currentTurnState; } }
 
+    public UILabel ShowNumberLabel;
+    public UILabel CallInfoHeaderLabel;
+
+    public string CallInfoHeaderDefaultText = "The Penis Mightier - Call Info";
+
 	// Use this for initialization
 	void Start () {
         turnManager = this;
+
+        int showNumber = Globals.GetInstance().PlayerShowsCompleted + 1;
+        ShowNumberLabel.text = showNumber.ToString();
+        CallInfoHeaderLabel.text = CallInfoHeaderDefaultText;
 	}
 	
 	// Update is called once per frame
@@ -82,17 +91,17 @@ public class TurnManager : MonoBehaviour {
     {
         currentTurnState = TurnState.EndShow;
 
-        Globals.GetInstance().SaveSession();
+        
 
         string finishText = "";
 
         if (Globals.GetInstance().PlayerFinishedLastShow)
         {
-            finishText = ">> Well that's all the time we have for tonight's show. Join me next time on #YesCallMen to get more TRUTH BOMBS dropped on you.";
+            finishText = ">> Well that's all the time we have for tonight's show. Join me next time on 'The Penis Mightier' to get more TRUTH BOMBS dropped on you.";
         }
         else
         {
-            finishText = ">> I'M DONE! I'M JUST DONE!! MAYBE WE'LL BE BACK TOMORROW, AND HOPEFULLY THESE STUPID FEMINAZIS WILL STOP WITH THEIR BULLSHIT!";
+            finishText = ">> I'M DONE! I'M JUST DONE!! MAYBE WE'LL BE BACK TOMORROW, AND HOPEFULLY THESE DAMN FEMINAZIS WILL STOP WITH THEIR BULLSHIT!";
         }
 
         GameMessageManager.gameMessageManager.AddLine("", false);
@@ -114,6 +123,10 @@ public class TurnManager : MonoBehaviour {
         {
             yield return new WaitForSeconds(0.1f);
         }
+        
+        Globals.GetInstance().SaveSession();
+
+        StartCoroutine(DisplaySaveText());
 
         yield return new WaitForSeconds(4.0f);
 
@@ -137,7 +150,7 @@ public class TurnManager : MonoBehaviour {
         currentTurnState = TurnState.StartBattle;
         BattleManager.battleManager.StartNewBattle();
 
-        GameMessageManager.gameMessageManager.AddLine(">> Jane from Callingsville, you're on the air, go ahead.", false, GameMessageManager.gameMessageManager.HostColorHex);
+        GameMessageManager.gameMessageManager.AddLine(">> Caller, you're on the Mascu-Line, go ahead.", false, GameMessageManager.gameMessageManager.HostColorHex);
 
         //GameMessageManager.gameMessageManager.AddLine("How to Play: Play cards by dragging them to the play area.", false);
         //GameMessageManager.gameMessageManager.AddLine("After each turn, all cards in play and in hand will be sent to the Discard Pile.", false);
@@ -320,7 +333,7 @@ public class TurnManager : MonoBehaviour {
         MRAManager.instance.AddAnotherStrangeQuote();
 
         GameMessageManager.gameMessageManager.AddLine(">> The caller screams in frustration, then the line goes dead.", false, GameMessageManager.gameMessageManager.SystemColorHex);
-        GameMessageManager.gameMessageManager.AddLine(">> Ha, another caller who couldn't take the heat!", false, GameMessageManager.gameMessageManager.HostColorHex);
+        GameMessageManager.gameMessageManager.AddLine(">> Ha ha, I accept your defeat, caller!", false, GameMessageManager.gameMessageManager.HostColorHex);
 
         if (BattleManager.battleManager.BattleNumber >= BattleManager.battleManager.BattlesPerShow)
         {
@@ -382,6 +395,28 @@ public class TurnManager : MonoBehaviour {
         DeckManager.deckManager.ShuffleDiscardIntoDeck();
 
         Globals.GetInstance().SaveSession();
+        StartCoroutine(DisplaySaveText());
+    }
+
+    public IEnumerator DisplaySaveText()
+    {
+        CallInfoHeaderLabel.text = "Saving";
+
+        yield return new WaitForSeconds(0.25f);
+
+        CallInfoHeaderLabel.text += " .";
+
+        yield return new WaitForSeconds(0.25f);
+
+        CallInfoHeaderLabel.text += " .";
+
+        yield return new WaitForSeconds(0.25f);
+
+        CallInfoHeaderLabel.text += " .";
+
+        yield return new WaitForSeconds(0.25f);
+
+        CallInfoHeaderLabel.text = CallInfoHeaderDefaultText;
     }
 
     public IEnumerator ChangeToStateAfterSeconds(TurnState newState, float seconds)

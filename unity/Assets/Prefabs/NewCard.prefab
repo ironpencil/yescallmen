@@ -282,7 +282,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .875, g: .875, b: .875, a: 1}
   mPivot: 7
   mWidth: 100
@@ -345,7 +344,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -404,7 +402,6 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .741176486, g: .098823525, b: .098823525, a: 1}
   mPivot: 4
   mWidth: 112
@@ -467,7 +464,6 @@ MonoBehaviour:
     relative: 1
     absolute: -18
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .0914263725, g: .119211666, b: .80392158, a: 1}
   mPivot: 1
   mWidth: 194
@@ -541,7 +537,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .0914263725, g: .119211666, b: .80392158, a: 1}
   mPivot: 7
   mWidth: 194
@@ -636,7 +631,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 100
@@ -773,7 +767,7 @@ MonoBehaviour:
   eventReceiver: {fileID: 0}
   callWhenFinished: 
   from: {x: 1, y: 1, z: 0}
-  to: {x: 1, y: 1, z: 0}
+  to: {x: 1.5, y: 1.5, z: 0}
   updateTable: 1
 --- !u!114 &11400030
 MonoBehaviour:
@@ -838,7 +832,6 @@ MonoBehaviour:
     relative: 1
     absolute: -95
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .0914263725, g: .119211666, b: .80392158, a: 1}
   mPivot: 4
   mWidth: 74
@@ -901,7 +894,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: .882352948, g: .882352948, b: .882352948, a: 1}
   mPivot: 7
   mWidth: 100

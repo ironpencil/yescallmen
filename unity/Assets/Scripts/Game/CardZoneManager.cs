@@ -136,7 +136,7 @@ public class CardZoneManager : MonoBehaviour {
         UIGrid cardSlot = slot.GetComponentInChildren<UIGrid>();
 
         //if we already have a card in this slot, return false
-        if (cardSlot.GetChildList().size > 0) { return false; }
+        if (cardSlot.GetChildList().Count > 0) { return false; }
 
         //if no card in slot, then check to make sure this card matches whatever restrictions are currently in place
         if (CardSelectionController.cardSelectionController.canSlotCard != null)

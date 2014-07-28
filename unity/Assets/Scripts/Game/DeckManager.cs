@@ -16,6 +16,9 @@ public class DeckManager : MonoBehaviour {
 
     public OnShuffleDiscardIntoDeck onShuffleDiscardIntoDeck;
 
+    public UILabel DeckCountLabel;
+    public UILabel DiscardCountLabel;
+
     public int deckCount = 0;
     public int discardCount = 0;
 
@@ -23,7 +26,8 @@ public class DeckManager : MonoBehaviour {
     public int DiscardCount { get { return discard.Count; } }
 
 	// Use this for initialization
-	void Start () {
+    void Start()
+    {
 
         deckManager = this;
 
@@ -62,21 +66,20 @@ public class DeckManager : MonoBehaviour {
             }
         }
 
-            foreach (CardDefinition card in startCards)
-            {
-                AddCardToDeck(card, initializeNewDeck);
-            }
-
-
+        foreach (CardDefinition card in startCards)
+        {
+            AddCardToDeck(card, initializeNewDeck);
+        }
+        
         ShuffleDeck();
-	
-	}
+        UpdateLabels();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        deckCount = DeckCount;
-        discardCount = DiscardCount;
+        //deckCount = DeckCount;
+        //discardCount = DiscardCount;
 	
 	}
 
@@ -85,6 +88,7 @@ public class DeckManager : MonoBehaviour {
         deck.AddRange(discard);
         discard = new List<CardDefinition>();
         ShuffleDeck();
+        UpdateLabels();
 
         // Notify the listener
         if (onShuffleDiscardIntoDeck != null)
@@ -118,6 +122,8 @@ public class DeckManager : MonoBehaviour {
         {
             GainCard(card);
         }
+
+        UpdateLabels();
     }
 
     public void AddCardToDiscard(CardDefinition card, bool doGainCard)
@@ -128,6 +134,8 @@ public class DeckManager : MonoBehaviour {
         {
             GainCard(card);
         }
+
+        UpdateLabels();
     }
 
     public void GainCard(CardDefinition card)
@@ -191,7 +199,15 @@ public class DeckManager : MonoBehaviour {
             targetPile.RemoveAt(lastIndex);
         }
 
+        UpdateLabels();
+
         return cardToDraw;
+    }
+
+    private void UpdateLabels()
+    {
+        DeckCountLabel.text = DeckCount.ToString() + "\r\nCards\r\n";
+        DiscardCountLabel.text = DiscardCount.ToString() + "\r\nCards\r\n";
     }
 
 }
