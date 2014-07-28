@@ -104,17 +104,17 @@ public class TurnManager : MonoBehaviour {
             finishText = ">> I'M DONE! I'M JUST DONE!! MAYBE WE'LL BE BACK TOMORROW, AND HOPEFULLY THESE DAMN FEMINAZIS WILL STOP WITH THEIR BULLSHIT!";
         }
 
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
 
-        while (!GameMessageManager.gameMessageManager.isFinished)
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
+        //while (!GameMessageManager.gameMessageManager.isFinished)
+        //{
+        //    yield return new WaitForSeconds(0.1f);
+        //}
 
         GameMessageManager.gameMessageManager.SetText("", true);
         GameMessageManager.gameMessageManager.AddLine(finishText, false, GameMessageManager.gameMessageManager.HostColorHex);
@@ -374,17 +374,19 @@ public class TurnManager : MonoBehaviour {
 
     private IEnumerator DoOutOfBattle()
     {  
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
-        GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
+        //GameMessageManager.gameMessageManager.AddLine("", false);
 
-        while (!GameMessageManager.gameMessageManager.isFinished)
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
+        //while (!GameMessageManager.gameMessageManager.isFinished)
+        //{
+        //    yield return new WaitForSeconds(0.1f);
+        //}
+
+        yield return new WaitForSeconds(0.1f);
 
         GameMessageManager.gameMessageManager.SetText("", true);
         GameMessageManager.gameMessageManager.AddLine(">> Alright let's take the next caller.", false, GameMessageManager.gameMessageManager.HostColorHex);
@@ -396,6 +398,15 @@ public class TurnManager : MonoBehaviour {
 
         Globals.GetInstance().SaveSession();
         StartCoroutine(DisplaySaveText());
+
+        while (!GameMessageManager.gameMessageManager.isFinished)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        ChangeState(TurnManager.TurnState.StartBattle);
     }
 
     public IEnumerator DisplaySaveText()

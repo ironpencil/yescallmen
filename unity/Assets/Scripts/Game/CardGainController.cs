@@ -7,6 +7,10 @@ using System.Linq;
 public class CardGainController : MonoBehaviour {
 
     public static CardGainController cardGainController;
+
+    private static bool hasSeenCallRewardTutorial = false;
+    private static bool hasSeenShowRewardTutorial = false;
+
 	// Use this for initialization
 	void Start () {
         cardGainController = this;
@@ -33,6 +37,13 @@ public class CardGainController : MonoBehaviour {
 
     public void GainFinishedShowCard()
     {
+        //player levels up before we get to here after the first show, so level should be 2
+        if (!hasSeenShowRewardTutorial && Globals.GetInstance().PlayerLevel == 2)
+        {
+            TutorialManager.instance.ShowLevelingTutorial();
+            hasSeenShowRewardTutorial = true;
+        }
+
         List<CardDefinition> rewardCards = GenerateShowRewardCards(Globals.GetInstance().PlayerLevel, true);
 
         DisplayRewardCards(rewardCards);
@@ -100,5 +111,11 @@ public class CardGainController : MonoBehaviour {
             cdc.DisplayCard(newCard, CardContainer.CardZone.None);
         }
         GameMessageManager.gameMessageManager.AddLine(">> You may gain a new card by dragging it to the Discard Pile.", false, GameMessageManager.gameMessageManager.SystemColorHex);
+
+        if (!hasSeenCallRewardTutorial && Globals.GetInstance().PlayerLevel == 1)
+        {
+            TutorialManager.instance.ShowRewardsTutorial();
+            hasSeenCallRewardTutorial = true;
+        }
     }
 }

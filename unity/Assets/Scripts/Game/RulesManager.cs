@@ -64,6 +64,9 @@ public class RulesManager : MonoBehaviour {
 	
 	}
 
+    private static bool hasSeenSpiteMessage = false;
+    private static bool hasSeenActionMessage = false;
+
     public bool CanPlayCard(GameObject card)
     {
         GameCard gameCard = card.GetComponent<GameCard>();
@@ -74,12 +77,24 @@ public class RulesManager : MonoBehaviour {
 
         if (gameCard.cardType == GameCard.CardType.Action && ActionsLeft == 0)
         {
-            GameMessageManager.gameMessageManager.AddLine(">> You do not have enough Actions to play " + gameCard.Title + ".", false, GameMessageManager.gameMessageManager.SystemColorHex);
+            if (!hasSeenActionMessage)
+            {
+                TutorialManager.instance.Show("Important!\r\n\r\nAction cards require an Action to play, ya dingus!");
+                hasSeenActionMessage = true;
+            }
+
+            GameMessageManager.gameMessageManager.AddLine(">> You can't play " + gameCard.Title + " because you don't have any Actions Remaining.", false, GameMessageManager.gameMessageManager.SystemColorHex);
             return false;
         }
 
-        if (gameCard.spiteUsed > SpiteLeft) {
-            GameMessageManager.gameMessageManager.AddLine(">> You do not have enough Spite to play " + gameCard.Title + ".", false, GameMessageManager.gameMessageManager.SystemColorHex); 
+        if (gameCard.spiteUsed > SpiteLeft)
+        {
+            if (!hasSeenSpiteMessage)
+            {
+                TutorialManager.instance.Show("Important!\r\n\r\nArgument cards use Spite (\"-X Spite\").\r\n\r\nYou must have enough Spite Remaining to use them!");
+                hasSeenSpiteMessage = true;
+            }
+            GameMessageManager.gameMessageManager.AddLine(">> You do not have enough Spite to play " + gameCard.Title + ".", false, GameMessageManager.gameMessageManager.SystemColorHex);
             return false;
         }
 
