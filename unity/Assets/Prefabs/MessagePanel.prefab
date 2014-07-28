@@ -270,7 +270,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3006
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
@@ -319,7 +319,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 534
@@ -357,8 +356,7 @@ MonoBehaviour:
     relative: .5
     absolute: 10
   updateAnchors: 1
-  DebugDepth: 0
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: .862745106, g: .862745106, b: .862745106, a: 1}
   mPivot: 4
   mWidth: 506
   mHeight: 18
@@ -485,7 +483,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3009
   mAlpha: 1
   mClipping: 3
   mClipRange: {x: 0, y: 3, z: 522, w: 142}
@@ -521,7 +519,6 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 534
@@ -572,7 +569,6 @@ MonoBehaviour:
     relative: 1
     absolute: -6
   updateAnchors: 1
-  DebugDepth: 0
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 4
   mWidth: 514
