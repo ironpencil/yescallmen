@@ -40,7 +40,7 @@ public class TurnManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
     private bool started = false;
@@ -119,7 +119,7 @@ public class TurnManager : MonoBehaviour {
         GameMessageManager.gameMessageManager.SetText("", true);
         GameMessageManager.gameMessageManager.AddLine(finishText, false, GameMessageManager.gameMessageManager.HostColorHex);
 
-        while (!GameMessageManager.gameMessageManager.isFinished)
+        while (!GameMessageManager.gameMessageManager.IsFinished)
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -144,6 +144,7 @@ public class TurnManager : MonoBehaviour {
 
     private void DoStartBattle()
     {
+
         Debug.Log("Starting Battle");
         Globals.GetInstance().PlayerFinishedLastShow = false;
 
@@ -263,6 +264,11 @@ public class TurnManager : MonoBehaviour {
             //Debug.Log("DoPlayerDraw()::CurrentState==" + currentTurnState.ToString());
             if (BattleManager.battleManager.IsPlayerAlive())
             {
+                if (!Globals.GetInstance().DoIntroTutorial)
+                {
+                    Globals.GetInstance().TargetAudioBalance = Globals.SIMPLE_LINES_BALANCE;
+                }
+
                 //Debug.Log("DoPlayerDraw()::IsPlayerAlive==true");
                 //do player draw phase
                 currentTurnState = TurnState.PlayerDraw;
@@ -324,7 +330,7 @@ public class TurnManager : MonoBehaviour {
 
     private IEnumerator DoBattleWon()
     {
-        while (!GameMessageManager.gameMessageManager.isFinished)
+        while (!GameMessageManager.gameMessageManager.IsFinished)
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -356,7 +362,7 @@ public class TurnManager : MonoBehaviour {
 
     private IEnumerator DoBattleLost()
     {
-        while (!GameMessageManager.gameMessageManager.isFinished)
+        while (!GameMessageManager.gameMessageManager.IsFinished)
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -399,7 +405,7 @@ public class TurnManager : MonoBehaviour {
         Globals.GetInstance().SaveSession();
         StartCoroutine(DisplaySaveText());
 
-        while (!GameMessageManager.gameMessageManager.isFinished)
+        while (!GameMessageManager.gameMessageManager.IsFinished)
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -455,7 +461,7 @@ public class TurnManager : MonoBehaviour {
     public IEnumerator ChangeToStateWhenMessageFinished(TurnState newState, float additionalWaitTime)
     {
         //Debug.Log("Waiting on Message to transition to " + newState.ToString());
-        while (!GameMessageManager.gameMessageManager.isFinished)
+        while (!GameMessageManager.gameMessageManager.IsFinished)
         {
             yield return new WaitForSeconds(0.25f);
             //Debug.Log("Cards left in display: " + CardDisplayController.cardDisplayController.displayedCards.Count);

@@ -11,11 +11,25 @@ public class TitleScreenManager : MonoBehaviour {
 
     public UITweener ClickTextLabelTween;
 
+    public UISlider VolumeSlider;
+
 	// Use this for initialization
 	void Start () {
         instance = this;
 
         ClearSaveDataScript.isEnabled = Globals.GetInstance().DoesSaveDataExist();
+
+        try
+        {
+            if (Globals.GetInstance().AudioSource1.isPlaying ||
+                Globals.GetInstance().AudioSource2.isPlaying)
+            {
+                Globals.GetInstance().AudioSource1.Stop();
+                Globals.GetInstance().AudioSource2.Stop();
+            }
+        }
+        catch { }
+
         //ClearSaveDataScript.enabled = Globals.GetInstance().DoesSaveDataExist();
 	}
 	
@@ -33,6 +47,22 @@ public class TitleScreenManager : MonoBehaviour {
         BarWipe.instance.DoWipe(true);
 
         ClickTextLabelTween.PlayForward();
+
+        StartCoroutine(StartMusic());
+    }
+
+    private IEnumerator StartMusic()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        if (!Globals.GetInstance().AudioSource1.isPlaying &&
+            !Globals.GetInstance().AudioSource2.isPlaying)
+        {
+            AudioListener.volume = Globals.GetInstance().InitialAudioVolume;
+            Globals.GetInstance().AudioSource1.Play();
+            Globals.GetInstance().AudioSource2.Play();
+            NGUITools.SetActive(VolumeSlider.gameObject, true);
+        }
     }
 
     public void StartGame()

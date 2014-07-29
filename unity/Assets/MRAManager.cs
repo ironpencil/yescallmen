@@ -39,12 +39,12 @@ public class MRAManager : MonoBehaviour
 
     public string GetHostArgument()
     {
-        int randomIndex = UnityEngine.Random.Range(0, 5);
+        int randomIndex = UnityEngine.Random.Range(0, 4);
 
         //prevent duplicates
         while (randomIndex == lastHostArgIndex)
         {
-            randomIndex = UnityEngine.Random.Range(0, 5);
+            randomIndex = UnityEngine.Random.Range(0, 4);
         }
 
         lastHostArgIndex = randomIndex;
@@ -192,7 +192,7 @@ public class MRAManager : MonoBehaviour
 
     List<string> maleMRAVerbs = new List<string>()
     {
-        "own a fedora for every occassion",
+        "own fedoras for every occassion",
         "avoid females during their periods",
         "get falsely accused of rape",
         "mistrust paternity tests",

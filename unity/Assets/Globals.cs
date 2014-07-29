@@ -40,7 +40,15 @@ public class Globals : MonoBehaviour
             DestroyImmediate(gameObject);
             return;
         }
+
+        UpdateAudioBalance(true);
     }
+
+    public void Update()
+    {
+        UpdateAudioBalance(false);
+    }
+
 
     public void Initialize()
     {
@@ -200,6 +208,38 @@ public class Globals : MonoBehaviour
     }
     #endregion
 
+    #region audio
+
+    public float InitialAudioVolume = 0.5f;
+
+    public AudioSource AudioSource1;
+    public AudioSource AudioSource2;
+
+    private float audioBalance = 1.0f;
+    public float TargetAudioBalance = 1.0f;
+
+    public static float FULL_LINES_BALANCE = 1.0F;
+    public static float SIMPLE_LINES_BALANCE = 0.0f;
+
+    public float AudioBalanceSpeed = 10.0f;
+
+    private void UpdateAudioBalance(bool force)
+    {
+        if (force || !Mathf.Approximately(audioBalance, TargetAudioBalance))
+        {
+            audioBalance = Mathf.MoveTowards(audioBalance, TargetAudioBalance,
+                AudioBalanceSpeed * Time.deltaTime);
+
+            AudioSource1.volume = audioBalance;
+            AudioSource2.volume = 1.0f - audioBalance;
+        }
+    }
+
+
+    #endregion
+
+    
+
     private const string KEY_PLAYER_MAX_HP = "playerMaxHP";
     private const string KEY_DECK_CONTENTS = "deckContents";
     private const string KEY_PLAYER_LEVEL = "playerLevel";
@@ -242,7 +282,7 @@ public class Globals : MonoBehaviour
     public bool DoLoadPlayerPrefs = true;
 
     public void CalculateFeministsConverted()
-    {
+    {        
         string unitString = "";
 
         if (PlayerLevel <= 10)
@@ -307,5 +347,7 @@ public class Globals : MonoBehaviour
     }
 
     public GameScene LastScene = GameScene.Title;
+
+    public bool DoIntroTutorial = false;
 
 }

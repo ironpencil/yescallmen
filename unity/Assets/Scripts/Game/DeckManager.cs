@@ -47,31 +47,43 @@ public class DeckManager : MonoBehaviour {
 
         bool initializeNewDeck = false;
 
+        //don't have a saved deck, make a fresh deck and enable the intro tutorial
         if (startCards.Count == 0)
         {
+            Globals.GetInstance().DoIntroTutorial = true;
+
             initializeNewDeck = true;
+
+            startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
+            startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
+            startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
             startCards.Add(new CardDefinition(CardFactory.CardName.AngerAttack, 1));
-
+            startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
             startCards.Add(new CardDefinition(CardFactory.CardName.FatigueAttack, 1));
-
+            startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
             startCards.Add(new CardDefinition(CardFactory.CardName.ConfusionAttack, 1));
-
+            startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
+            startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));          
             //startCards.Add(new CardDefinition(CardFactory.CardName.Trasher, 1));
 
             //startCards.Add(new CardDefinition(CardFactory.CardName.NotAllMen, 1));
 
-            for (int i = 0; i < 7; i++)
-            {
-                startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
-            }
+            //for (int i = 0; i < 7; i++)
+            //{
+            //    startCards.Add(new CardDefinition(CardFactory.CardName.Spite, 1));
+            //}
         }
 
         foreach (CardDefinition card in startCards)
         {
             AddCardToDeck(card, initializeNewDeck);
         }
-        
-        ShuffleDeck();
+
+        if (!initializeNewDeck)
+        {
+            ShuffleDeck();
+        }
+
         UpdateLabels();
     }
 	
@@ -206,8 +218,23 @@ public class DeckManager : MonoBehaviour {
 
     private void UpdateLabels()
     {
-        DeckCountLabel.text = DeckCount.ToString() + "\r\nCards\r\n";
-        DiscardCountLabel.text = DiscardCount.ToString() + "\r\nCards\r\n";
+        if (DeckCount == 1)
+        {
+            DeckCountLabel.text = "1\r\nCard\r\n";
+        }
+        else
+        {
+            DeckCountLabel.text = DeckCount.ToString() + "\r\nCards\r\n";
+        }
+
+        if (DiscardCount == 1)
+        {
+            DiscardCountLabel.text = "1\r\nCard\r\n";
+        }
+        else
+        {
+            DiscardCountLabel.text = DiscardCount.ToString() + "\r\nCards\r\n";
+        }
     }
 
 }

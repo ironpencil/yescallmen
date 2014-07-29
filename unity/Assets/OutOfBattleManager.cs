@@ -56,7 +56,7 @@ public class OutOfBattleManager : MonoBehaviour {
 
                 GameMessageManager.gameMessageManager.AddLine("[" + GameMessageManager.gameMessageManager.SystemColorHex + "]>> Numbers from your last show are coming in", false);
 
-                while (!GameMessageManager.gameMessageManager.isFinished)
+                while (!GameMessageManager.gameMessageManager.IsFinished)
                 {
                     yield return new WaitForSeconds(0.1f);                    
                 }
@@ -94,7 +94,7 @@ public class OutOfBattleManager : MonoBehaviour {
 
         GameMessageManager.gameMessageManager.AddLine(">> Let's get right to it and take some calls.", false, GameMessageManager.gameMessageManager.HostColorHex);
 
-        while (!GameMessageManager.gameMessageManager.isFinished)
+        while (!GameMessageManager.gameMessageManager.IsFinished)
         {
             yield return new WaitForSeconds(0.1f);
             if (FastStart) { yield break; }

@@ -59,7 +59,7 @@ public class StartShowButton : MonoBehaviour {
 
     private IEnumerator StartShow()
     {
-        while (!GameMessageManager.gameMessageManager.isFinished)
+        while (!GameMessageManager.gameMessageManager.IsFinished)
         {
             yield return new WaitForSeconds(0.1f);
         }

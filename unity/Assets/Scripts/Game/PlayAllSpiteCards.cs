@@ -12,7 +12,8 @@ public class PlayAllSpiteCards : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (TurnManager.turnManager.CurrentState == TurnManager.TurnState.PlayerActive)
+        if (TurnManager.turnManager.CurrentState == TurnManager.TurnState.PlayerActive &&
+            TutorialManager.instance.CanPlayAllSpite)
         {
             if (!buttonScript.isEnabled)
             {

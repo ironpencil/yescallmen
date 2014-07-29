@@ -14,7 +14,8 @@ public class EndTurn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (TurnManager.turnManager.CurrentState == TurnManager.TurnState.PlayerActive)
+        if (TurnManager.turnManager.CurrentState == TurnManager.TurnState.PlayerActive &&
+            TutorialManager.instance.CanEndTurn)
         {
             if (!buttonScript.isEnabled)
             {
@@ -37,6 +38,12 @@ public class EndTurn : MonoBehaviour {
         {
             Debug.Log("Ending Turn. Current State = " + TurnManager.turnManager.CurrentState.ToString());
             TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerCleanup);
+        }
+
+        //if we're doing the tutorial, ending turn should advance it
+        if (Globals.GetInstance().DoIntroTutorial)
+        {
+            TutorialManager.instance.ContinueTutorial = true;
         }
     }
 }

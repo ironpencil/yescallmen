@@ -93,6 +93,11 @@ public class CardGainController : MonoBehaviour {
 
     private static void DisplayRewardCards(List<CardDefinition> rewardCards)
     {
+        if (!Globals.GetInstance().DoIntroTutorial)
+        {
+            Globals.GetInstance().TargetAudioBalance = Globals.FULL_LINES_BALANCE;
+        }
+
         CardDisplayController cdc = CardDisplayController.cardDisplayController;
         cdc.CurrentDisplayMode = CardDisplayController.DisplayMode.Selection;
         cdc.numCardsToSelect = 1;

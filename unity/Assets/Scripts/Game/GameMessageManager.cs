@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameMessageManager : MonoBehaviour {
 
@@ -11,8 +12,21 @@ public class GameMessageManager : MonoBehaviour {
     public IPTypewriterEffect typewriter;
 
     public int charsPerSecond = 50;
+    
+    private bool isTypewriterFinished = false;
+    public bool IsFinished
+    {
+        get
+        {
+            return (isTypewriterFinished && messageQueue.Count == 0);
+        }
+    }
 
-    public bool isFinished = true;
+    public List<AudioClip> RandomMumbles;
+
+    public List<AudioClip> IntroMumbles;
+
+    public AudioSource MumbleSource;
 
 	// Use this for initialization
 	void Awake () {
@@ -29,9 +43,63 @@ public class GameMessageManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        typewriter.charsPerSecond = charsPerSecond;        
+        typewriter.charsPerSecond = charsPerSecond;
 
+        DoRandomMumbles();
 	}
+
+    private void DoRandomMumbles()
+    {
+        if (!IsFinished)
+        {
+            if (!MumbleSource.isPlaying)
+            {
+                if (playNextMumble)
+                {
+                    playNextMumble = false;
+
+                    int nextMumble = GetNextMumble();
+
+                    AudioClip clip = RandomMumbles[nextMumble];
+                    MumbleSource.PlayOneShot(clip);
+                    StartCoroutine(DelayMumbling(clip.length));
+                }                
+            }
+        }
+    }
+
+    private int GetNextMumble()
+    {
+        int nextMumble = Random.Range(0, RandomMumbles.Count);
+
+        int safety = 0;
+        while (previousMumbles.Contains(nextMumble) && safety < RandomMumbles.Count)
+        {
+            nextMumble = Random.Range(0, RandomMumbles.Count);
+            safety++; //only search for a new mumble so many times
+        }
+
+        previousMumbles.Enqueue(nextMumble);
+
+        if (previousMumbles.Count > MumbleRepeatLimit)
+        {
+            previousMumbles.Dequeue();
+        }
+        return nextMumble;
+    }
+
+    public int MumbleRepeatLimit = 3;
+    public float MumbleDelayFactor = 0.8f;
+
+    private Queue<int> previousMumbles = new Queue<int>();
+
+    private bool playNextMumble = true;
+
+    private IEnumerator DelayMumbling(float delayLength)
+    {
+        yield return new WaitForSeconds(delayLength * MumbleDelayFactor);
+        playNextMumble = true;
+    }
 
     public void SetText(string text, bool instant, string colorHex)
     {
@@ -40,7 +108,7 @@ public class GameMessageManager : MonoBehaviour {
 
     public void SetText(string text, bool instant)
     {
-        isFinished = false;
+        isTypewriterFinished = false;
         typewriter.SetText(text);        
         //typewriter.isActive = true;
 
@@ -63,7 +131,7 @@ public class GameMessageManager : MonoBehaviour {
 
     public void AddLine(string text, bool instant)
     {
-        isFinished = false;
+        isTypewriterFinished = false;
         typewriter.AddText("\r\n" + text);
         //typewriter.isActive = true;
 
@@ -82,7 +150,7 @@ public class GameMessageManager : MonoBehaviour {
 
     public void AddText(string text, bool instant)
     {
-        isFinished = false;
+        isTypewriterFinished = false;
         typewriter.AddText(text);
         //typewriter.isActive = true;
         
@@ -94,9 +162,21 @@ public class GameMessageManager : MonoBehaviour {
         messageScrollview.ResetPosition();
     }
 
+
+    private Queue<MessageItem> messageQueue = new Queue<MessageItem>();
+
+    private Speaker currentSpeaker = Speaker.Host;
+
+    public enum Speaker
+    {
+        Host,
+        Caller,
+        System
+    }
+
     private void OnFinished() {
         Debug.Log("Message Finished Displaying!");
-        isFinished = true;
+        isTypewriterFinished = true;
     }
 
     public Color HostColor = Color.white;
@@ -120,4 +200,19 @@ public class GameMessageManager : MonoBehaviour {
         byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
         return new Color32(r, g, b, 255);
     }
+}
+
+public class MessageItem
+{
+    public string Text;
+
+    public GameMessageManager.Speaker Speaker;
+
+    public MessageItem(GameMessageManager.Speaker speaker, string text)
+    {
+
+        Speaker = speaker;
+        Text = text;
+    }
+
 }
