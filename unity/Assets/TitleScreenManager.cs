@@ -9,15 +9,11 @@ public class TitleScreenManager : MonoBehaviour {
 
     public static TitleScreenManager instance;
 
-    public UITweener ClickTextLabelTween;
-
     public UISlider VolumeSlider;
 
 	// Use this for initialization
 	void Start () {
         instance = this;
-
-        ClearSaveDataScript.isEnabled = Globals.GetInstance().DoesSaveDataExist();
 
         try
         {
@@ -36,17 +32,15 @@ public class TitleScreenManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        ClearSaveDataScript.isEnabled = Globals.GetInstance().DoesSaveDataExist();
+        //ClearSaveDataScript.isEnabled = Globals.GetInstance().DoesSaveDataExist();
 	}
 
     public void WipeToTitle()
-    {
+    {        
         BarWipe.instance.TransitionPanel.alpha = 1.0f;
         NGUITools.SetActive(IntroPanel.gameObject, false);
 
         BarWipe.instance.DoWipe(true);
-
-        ClickTextLabelTween.PlayForward();
 
         StartCoroutine(StartMusic());
     }
@@ -60,6 +54,14 @@ public class TitleScreenManager : MonoBehaviour {
         {
             Globals.GetInstance().StartMusic();
             NGUITools.SetActive(VolumeSlider.gameObject, true);
+        }
+
+        yield return new WaitForSeconds(0.25f);
+
+        if (Globals.GetInstance().DoesSaveDataExist())
+        {
+            NGUITools.SetActive(ClearSaveDataScript.gameObject, true);
+            ClearSaveDataScript.isEnabled = true;
         }
     }
 

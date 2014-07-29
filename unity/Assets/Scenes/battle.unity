@@ -19401,7 +19401,7 @@ MonoBehaviour:
   MumbleSource: {fileID: 1819080661}
   AlwaysDoHostMumble: 0
   MumbleRepeatLimit: 10
-  MumbleDelayOffset: -.100000001
+  MumbleDelayOffset: -.150000006
   HostColor: {r: 1, g: 1, b: 1, a: 1}
   CallerColor: {r: 1, g: 0, b: 1, a: 1}
   SystemColor: {r: 1, g: .921568632, b: .0156862754, a: 1}
@@ -19484,7 +19484,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .899999976
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
