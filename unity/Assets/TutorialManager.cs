@@ -275,14 +275,20 @@ Your deck saves between calls, shows, and game sessions!
 
 Try gaining a card by dragging it to the discard pile.";
 
-    private string credits = @"Iron Pencil is Jim South (sighnoceros on SA)
+    private string credits = @"Iron Pencil is:
 
+The Contemptuous Mr. Jim South
+Design, Art, Programming
 
-Special Thanks:
+With Special Thanks To:
 
-Everdraed - Testing and Feedback
+The Bewildering Mr. Austin Thresher
+'Casio Lines'
 
-and #SAGameDev on synirc.net";
+The Deplorable Mr. Everdraed
+Sound Effects
+
+and #SAGameDev on synIRC.net";
 
 
     private string refreshTutorial = @"Welcome!

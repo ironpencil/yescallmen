@@ -816,6 +816,7 @@ GameObject:
   - 65: {fileID: 464667263}
   - 114: {fileID: 464667261}
   - 82: {fileID: 464667262}
+  - 114: {fileID: 464667264}
   m_Layer: 8
   m_Name: Host
   m_TagString: Untagged
@@ -883,7 +884,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11400000, guid: 27824d4ae3629e844b77d5805cb0da04, type: 2}
-  mSpriteName: host
+  mSpriteName: host_mouthClosed
   mFillCenter: 1
 --- !u!114 &464667261
 MonoBehaviour:
@@ -901,7 +902,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 39ca0859b71557d46b1b9e471f201861, type: 3}
   - {fileID: 8300000, guid: 25c6921415619e14697645366f76fd93, type: 3}
   source: {fileID: 464667262}
-  ClipDelayOffset: -.100000001
+  AnimationDuration: 4.5
+  ForcedBeginDelay: .100000001
+  ForcedAnimDelay: 1.5
+  ForcedAnimRange: 0
+  StartTimer: 3
+  ClipDelayOffset: -.200000003
 --- !u!82 &464667262
 AudioSource:
   m_ObjectHideFlags: 0
@@ -972,6 +978,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 140, y: 160, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &464667264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 464667258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0fa594117e9b34bbf52edb9855041f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakingSprites:
+  - {fileID: 21300000, guid: 09902be480b80a349b237df00f7de4a6, type: 3}
+  - {fileID: 21300000, guid: dd63bbe675f79444a8c15a6d17810203, type: 3}
+  BaseAnimationDelay: .25
+  AnimationDelayRangeOffset: .150000006
+  AnimationStartDelay: .150000006
 --- !u!1 &505066243
 GameObject:
   m_ObjectHideFlags: 0

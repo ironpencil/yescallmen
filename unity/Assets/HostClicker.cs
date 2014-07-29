@@ -8,9 +8,21 @@ public class HostClicker : MonoBehaviour {
 
     public AudioSource source;
 
+    public float AnimationDuration = 2.0f;
+
+    public float ForcedBeginDelay = 0.2f;
+    public float ForcedAnimDelay = 1.0f;
+    public float ForcedAnimRange = 0.0f;
+
+    public float StartTimer = 3.0f;
+
+    private HostSpeechManager speechManager;
+
 	// Use this for initialization
 	void Start () {
-	
+        speechManager = gameObject.GetComponent<HostSpeechManager>();
+
+        StartCoroutine(BeginStartTimer());
 	}
 	
 	// Update is called once per frame
@@ -18,21 +30,78 @@ public class HostClicker : MonoBehaviour {
 	
 	}
 
+    private IEnumerator BeginStartTimer()
+    {
+        //will just decrease timer until it is less than zero
+        while (StartTimer > 0.0f)
+        {
+            yield return null;
+            StartTimer = StartTimer - Time.deltaTime;
+        }
+    }
+
     bool canPlaySound = true;
 
     void OnClick()
     {
-        if (canPlaySound && GameMessageManager.gameMessageManager.IsFinished)
+        if (!(StartTimer > 0.0f))
         {
-            canPlaySound = false;
-            StartCoroutine(PlayHostSounds());
+            if (canPlaySound && GameMessageManager.gameMessageManager.IsFinished)
+            {
+                canPlaySound = false;
+                StartCoroutine(PlayHostSounds());
+            }
         }
     }
+
+    void OnDoubleClick()
+    {
+        if (!(StartTimer > 0.0f))
+        {
+            if (GameMessageManager.gameMessageManager.AlwaysDoHostMumble)
+            {
+                StartCoroutine(DisableAlwaysMumble());
+            }
+            else
+            {
+                StartCoroutine(EnableAlwaysMumble());
+            }
+        }
+    }
+
+    private IEnumerator EnableAlwaysMumble()
+    {
+        //if we're toggling on, wait for any current sounds to finish
+
+        while (!canPlaySound)
+        {
+            yield return null;
+        }
+
+        canPlaySound = false; //disable clicking to play single shot sounds
+
+        GameMessageManager.gameMessageManager.AlwaysDoHostMumble = true;
+    }
+
+    private IEnumerator DisableAlwaysMumble()
+    {
+        //if we're toggling off, turn it off immediately
+        GameMessageManager.gameMessageManager.AlwaysDoHostMumble = false;
+
+        //enable clicking to play single shot sounds
+        canPlaySound = true;
+
+        yield return null;
+    }
+
 
     public float ClipDelayOffset = -0.1f;
 
     private IEnumerator PlayHostSounds()
     {
+
+        speechManager.ForceAnimate(AnimationDuration, ForcedBeginDelay, ForcedAnimDelay, ForcedAnimRange);
+
         foreach (AudioClip clip in clips)
         {
             source.PlayOneShot(clip);

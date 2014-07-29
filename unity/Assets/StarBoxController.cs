@@ -21,10 +21,4 @@ public class StarBoxController : MonoBehaviour {
         //StartCoroutine(LetThereBeLight());
     }
 
-    private IEnumerator LetThereBeLight()
-    {
-        yield return new WaitForSeconds(delay);
-
-        
-    }
 }

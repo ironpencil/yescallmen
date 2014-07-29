@@ -137,7 +137,7 @@ public class GameMessageManager : MonoBehaviour {
 
     private Queue<int> previousMumbles = new Queue<int>();
 
-    private bool playNextMumble = true;
+    private bool playNextMumble = true;    
 
     private IEnumerator DelayMumbling(float delayLength)
     {
@@ -273,6 +273,8 @@ public class GameMessageManager : MonoBehaviour {
     private Queue<MessageItem> messageQueue = new Queue<MessageItem>();
 
     private Speaker currentSpeaker = Speaker.Host;
+
+    public Speaker CurrentSpeaker { get { return currentSpeaker; } }
 
     public enum Speaker
     {
