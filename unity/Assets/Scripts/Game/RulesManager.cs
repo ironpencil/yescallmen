@@ -102,7 +102,7 @@ public class RulesManager : MonoBehaviour {
                     hasSeenActionMessage = true;
                 }
 
-                GameMessageManager.gameMessageManager.AddLine(">> You can't play " + gameCard.Title + " because you don't have any Actions Remaining.", false, GameMessageManager.gameMessageManager.SystemColorHex);
+                GameMessageManager.gameMessageManager.AddLine(">> You can't play " + gameCard.Title + " because you don't have any Actions Remaining.", false, GameMessageManager.Speaker.System);
                 return false;
             }
 
@@ -113,7 +113,7 @@ public class RulesManager : MonoBehaviour {
                     TutorialManager.instance.Show("Important!\r\n\r\nArgument cards use Spite (\"-X Spite\").\r\n\r\nYou must have enough Spite Remaining to use them!", 0.5f);
                     hasSeenSpiteMessage = true;
                 }
-                GameMessageManager.gameMessageManager.AddLine(">> You do not have enough Spite to play " + gameCard.Title + ".", false, GameMessageManager.gameMessageManager.SystemColorHex);
+                GameMessageManager.gameMessageManager.AddLine(">> You do not have enough Spite to play " + gameCard.Title + ".", false, GameMessageManager.Speaker.System);
                 return false;
             }
         }
@@ -198,7 +198,7 @@ public class RulesManager : MonoBehaviour {
         if (printQuote && gameCard.cardType == GameCard.CardType.Argument)
         {
             GameMessageManager.gameMessageManager.AddLine(">> " + MRAManager.instance.GetHostArgument(), false, 
-                GameMessageManager.gameMessageManager.HostColorHex);
+                GameMessageManager.Speaker.Host);
             //GameMessageManager.gameMessageManager.AddLine(">> " + MRAManager.instance.GetHostArgument() + "", false);
         }
 

@@ -27,7 +27,7 @@ public class EnemyActionManager : MonoBehaviour {
     {
         //GameMessageManager.gameMessageManager.AddLine(EnemyName + " makes their case, raising your anger by " + Damage + "!", false);
         GameMessageManager.gameMessageManager.AddLine(">> " + EnemyName + " " + MRAManager.instance.GetCallerArgument() + " (Anger increased by " + Damage + ")", false,
-            GameMessageManager.gameMessageManager.CallerColorHex);
+            GameMessageManager.Speaker.Caller);
 
         BattleManager.battleManager.DamagePlayer(Damage);
         TurnManager.turnManager.ChangeState(TurnManager.TurnState.PlayerDraw);

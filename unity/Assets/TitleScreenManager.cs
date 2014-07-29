@@ -58,9 +58,7 @@ public class TitleScreenManager : MonoBehaviour {
         if (!Globals.GetInstance().AudioSource1.isPlaying &&
             !Globals.GetInstance().AudioSource2.isPlaying)
         {
-            AudioListener.volume = Globals.GetInstance().InitialAudioVolume;
-            Globals.GetInstance().AudioSource1.Play();
-            Globals.GetInstance().AudioSource2.Play();
+            Globals.GetInstance().StartMusic();
             NGUITools.SetActive(VolumeSlider.gameObject, true);
         }
     }

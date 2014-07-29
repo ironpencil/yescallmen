@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class GameMessageManager : MonoBehaviour {
 
@@ -13,7 +14,7 @@ public class GameMessageManager : MonoBehaviour {
 
     public int charsPerSecond = 50;
     
-    private bool isTypewriterFinished = false;
+    private bool isTypewriterFinished = true;
     public bool IsFinished
     {
         get
@@ -22,7 +23,11 @@ public class GameMessageManager : MonoBehaviour {
         }
     }
 
+    public bool PlayRandomMumbles = true;
+
     public List<AudioClip> RandomMumbles;
+
+    public bool PlayIntroMumbles = false;
 
     public List<AudioClip> IntroMumbles;
 
@@ -45,24 +50,63 @@ public class GameMessageManager : MonoBehaviour {
 	void Update () {
         typewriter.charsPerSecond = charsPerSecond;
 
-        DoRandomMumbles();
+        ProcessQueue();
+
+            DoRandomMumbles();
 	}
+
+    
+    //secret counter to turn on host mumble all the time
+    private int MumbleTriggerCounter = 0;
+    public void IncrementMumbleTriggerCounter()
+    {
+        MumbleTriggerCounter++;
+
+        switch (MumbleTriggerCounter)
+        {
+            case 5:
+                AlwaysDoHostMumble = !AlwaysDoHostMumble;
+                break;
+            case 6:
+                MumbleDelayOffset = MumbleDelayOffset - 0.5f;
+                break;
+            case 7:
+                MumbleDelayOffset = MumbleDelayOffset - 0.5f;
+                break;
+            case 8:
+                MumbleDelayOffset = MumbleDelayOffset + 1.0f;
+                AlwaysDoHostMumble = !AlwaysDoHostMumble;
+                MumbleTriggerCounter = 0;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public bool AlwaysDoHostMumble = false;
 
     private void DoRandomMumbles()
     {
-        if (!IsFinished)
+        if (RandomMumbles.Count == 0) { return; }
+
+        if (!IsFinished || AlwaysDoHostMumble)
         {
             if (!MumbleSource.isPlaying)
             {
                 if (playNextMumble)
                 {
-                    playNextMumble = false;
+                    if (currentSpeaker == Speaker.Host ||
+                        AlwaysDoHostMumble)
+                    {
+                        playNextMumble = false;
 
-                    int nextMumble = GetNextMumble();
+                        int nextMumble = GetNextMumble();
 
-                    AudioClip clip = RandomMumbles[nextMumble];
-                    MumbleSource.PlayOneShot(clip);
-                    StartCoroutine(DelayMumbling(clip.length));
+
+                        AudioClip clip = RandomMumbles[nextMumble];
+                        MumbleSource.PlayOneShot(clip);
+                        StartCoroutine(DelayMumbling(clip.length));
+                    }
                 }                
             }
         }
@@ -70,12 +114,12 @@ public class GameMessageManager : MonoBehaviour {
 
     private int GetNextMumble()
     {
-        int nextMumble = Random.Range(0, RandomMumbles.Count);
+        int nextMumble = UnityEngine.Random.Range(0, RandomMumbles.Count);
 
         int safety = 0;
         while (previousMumbles.Contains(nextMumble) && safety < RandomMumbles.Count)
         {
-            nextMumble = Random.Range(0, RandomMumbles.Count);
+            nextMumble = UnityEngine.Random.Range(0, RandomMumbles.Count);
             safety++; //only search for a new mumble so many times
         }
 
@@ -89,7 +133,7 @@ public class GameMessageManager : MonoBehaviour {
     }
 
     public int MumbleRepeatLimit = 3;
-    public float MumbleDelayFactor = 0.8f;
+    public float MumbleDelayOffset = 0.02f;
 
     private Queue<int> previousMumbles = new Queue<int>();
 
@@ -97,39 +141,94 @@ public class GameMessageManager : MonoBehaviour {
 
     private IEnumerator DelayMumbling(float delayLength)
     {
-        yield return new WaitForSeconds(delayLength * MumbleDelayFactor);
+        yield return new WaitForSeconds(delayLength + MumbleDelayOffset);
         playNextMumble = true;
     }
 
-    public void SetText(string text, bool instant, string colorHex)
-    {
-        SetText("[" + colorHex + "]" + text + "[-] ", instant);
-    }
-
-    public void SetText(string text, bool instant)
+    public void ClearText()
     {
         isTypewriterFinished = false;
-        typewriter.SetText(text);        
+        typewriter.SetText("");        
         //typewriter.isActive = true;
 
-        if (instant)
-        {
-            typewriter.Finish();
-        }
-        else
-        {
-            typewriter.ResetToBeginning();
-        }
+        typewriter.Finish();
+
+        //clear message queue
+        messageQueue.Clear();
+        colorTagExists = false;
 
         messageScrollview.ResetPosition();
     }
 
-    public void AddLine(string text, bool instant, string colorHex)
+    public void FinishQueue()
     {
-        AddLine("[" + colorHex + "]" + text + "[-] ", instant);
+        while (messageQueue.Count > 0)
+        {
+            ProcessMessage(messageQueue.Dequeue());
+        }
+        typewriter.Finish();
+        messageScrollview.ResetPosition();
     }
 
-    public void AddLine(string text, bool instant)
+    private bool colorTagExists = false;
+
+    private void ProcessQueue()
+    {
+        if (isTypewriterFinished && messageQueue.Count > 0)
+        {
+            ProcessMessage(messageQueue.Dequeue());
+        }
+    }
+
+    private void ProcessMessage(MessageItem message)
+    {
+        string preText = "";
+
+        if (message.Speaker != currentSpeaker)
+        {
+            //switch to new speaker
+            currentSpeaker = message.Speaker;
+            
+            //clear mumble queue
+            previousMumbles.Clear();
+
+            //check for existing text to see if we need to cancel out previous color
+
+            if (colorTagExists) { preText += "[-]"; }
+
+            //change to new color
+            switch (currentSpeaker)
+            {
+                case Speaker.Host:
+                    preText += "[" + HostColorHex + "]";
+                    break;
+                case Speaker.Caller:
+                    preText += "[" + CallerColorHex + "]";
+                    break;
+                case Speaker.System:
+                    preText += "[" + SystemColorHex + "]";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        //process actual message
+        typewriter.AddText(preText + message.Text);
+        isTypewriterFinished = false;
+
+        messageScrollview.ResetPosition();
+    }
+
+    public void AddLine(string text, bool instant, Speaker speaker)
+    {
+        //AddLine("[" + colorHex + "]" + text + "[-] ", instant);
+        AddText("\r\n" + text, instant, speaker);
+        
+    }
+
+    //obsolete
+    private void AddLine(string text, bool instant)
     {
         isTypewriterFinished = false;
         typewriter.AddText("\r\n" + text);
@@ -143,12 +242,20 @@ public class GameMessageManager : MonoBehaviour {
         messageScrollview.ResetPosition();
     }
 
-    public void AddText(string text, bool instant, string colorHex)
+    public void AddText(string text, bool instant, Speaker speaker)
     {
-        AddText("[" + colorHex + "]" + text + "[-] ", instant);
-    }
+        //AddText("[" + colorHex + "]" + text + "[-] ", instant);
 
-    public void AddText(string text, bool instant)
+        messageQueue.Enqueue(new MessageItem(speaker, text));
+
+        if (instant)
+        {
+            FinishQueue();
+        }
+    }
+    
+    //obsolete
+    private void AddText(string text, bool instant)
     {
         isTypewriterFinished = false;
         typewriter.AddText(text);

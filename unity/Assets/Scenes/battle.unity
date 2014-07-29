@@ -16146,6 +16146,7 @@ GameObject:
   - 114: {fileID: 1524982188}
   - 114: {fileID: 1524982187}
   - 65: {fileID: 1524982186}
+  - 114: {fileID: 1524982189}
   m_Layer: 8
   m_Name: DeckDropContainer
   m_TagString: Untagged
@@ -16227,6 +16228,31 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .733333349
+--- !u!114 &1524982189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1524982184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHoverOver: []
+  onHoverOut: []
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick:
+  - mTarget: {fileID: 1819080655}
+    mMethodName: IncrementMumbleTriggerCounter
+    mParameters: []
+    oneShot: 0
+  onDragOver: []
+  onDragOut: []
 --- !u!1 &1526262395
 GameObject:
   m_ObjectHideFlags: 0
@@ -19337,7 +19363,7 @@ MonoBehaviour:
   messageScrollview: {fileID: 1550534151}
   typewriter: {fileID: 1458121467}
   charsPerSecond: 60
-  isFinished: 1
+  PlayRandomMumbles: 1
   RandomMumbles:
   - {fileID: 8300000, guid: 6f538d93e60a97447941866d1baa7970, type: 3}
   - {fileID: 8300000, guid: 58762c08aa9d7254ca4449f7f556bff4, type: 3}
@@ -19352,10 +19378,30 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 62480f420e5fa1e4db12959c89f3a85c, type: 3}
   - {fileID: 8300000, guid: cef25083336e0b047b17ee2ddbc09545, type: 3}
   - {fileID: 8300000, guid: c9bb674431ebb814aa5883d97b5b43f6, type: 3}
+  - {fileID: 8300000, guid: 02276be30d80a7346bbf4993cd271667, type: 3}
+  - {fileID: 8300000, guid: 25c6921415619e14697645366f76fd93, type: 3}
+  - {fileID: 8300000, guid: 39ca0859b71557d46b1b9e471f201861, type: 3}
+  - {fileID: 8300000, guid: 4614e80957a697b428a7fcf58de0c527, type: 3}
+  - {fileID: 8300000, guid: 4ea6fe77f1a491647b0fec4167b01026, type: 3}
+  - {fileID: 8300000, guid: 4f49f9a2ec376664fa6751e57c26ed6d, type: 3}
+  - {fileID: 8300000, guid: 521b3c272913b904c810661413efad00, type: 3}
+  - {fileID: 8300000, guid: 77fe175164871934aaa754676f9ae280, type: 3}
+  - {fileID: 8300000, guid: 7a03d80cf38aa1942aeb758172d15665, type: 3}
+  - {fileID: 8300000, guid: 8f37d98957ac3f248b1839e7e79d17a9, type: 3}
+  - {fileID: 8300000, guid: b1518e3794548ad47aa1c955936d40c1, type: 3}
+  - {fileID: 8300000, guid: bb13b275bbf15ad49b3fe2a16c962c65, type: 3}
+  - {fileID: 8300000, guid: cdc0c3c4fc53b1b4d8b675173a07d93a, type: 3}
+  - {fileID: 8300000, guid: d961a226492bb6747a2bc27c0cd26c47, type: 3}
+  - {fileID: 8300000, guid: efa63038540395a4fbcc8dbf8905ee35, type: 3}
+  - {fileID: 8300000, guid: f77a7cce2daf51d42a8f453cd61d204d, type: 3}
+  - {fileID: 8300000, guid: f88ef2ced751b60459d82a740177e03c, type: 3}
+  - {fileID: 8300000, guid: fdcaf9e8a55659f40b253808b9d8242a, type: 3}
+  PlayIntroMumbles: 0
   IntroMumbles: []
   MumbleSource: {fileID: 1819080661}
-  MumbleRepeatLimit: 3
-  MumbleDelayFactor: .800000012
+  AlwaysDoHostMumble: 0
+  MumbleRepeatLimit: 10
+  MumbleDelayOffset: -.100000001
   HostColor: {r: 1, g: 1, b: 1, a: 1}
   CallerColor: {r: 1, g: 0, b: 1, a: 1}
   SystemColor: {r: 1, g: .921568632, b: .0156862754, a: 1}
@@ -19438,7 +19484,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .899999976
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -22469,7 +22515,7 @@ AudioSource:
   m_GameObject: {fileID: 2128300345}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 43c02e64e0b0fc64a82ac3b409a0237d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 66a557fd28b1c4b489f8f79a5a2543e9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -22573,7 +22619,7 @@ AudioSource:
   m_GameObject: {fileID: 2128300345}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: eccc4551a680b034b8e07be9fd6dd0e7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 023501aaace1d5b40af52d65b63c9423, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -140,12 +140,6 @@ public class Globals : MonoBehaviour
                 bin.Serialize(stream, deckContents);
 
                 deckString = System.Convert.ToBase64String(stream.ToArray());
-
-
-
-                //string deckString = System.Text.Encoding.UTF8.GetString(stream.ToArray());
-                //Debug.Log("Save DeckString: " + deckString);
-                //PlayerPrefs.SetString(DECK_CONTENTS, deckString);
             }
         }
         catch (Exception e)
@@ -166,19 +160,7 @@ public class Globals : MonoBehaviour
 
         string deckString = SaveDeckToString(DeckContents);
 
-        PlayerPrefs.SetString(KEY_DECK_CONTENTS, deckString);
-
-        //using (MemoryStream stream = new MemoryStream())
-        //{
-        //    BinaryFormatter bin = new BinaryFormatter();
-        //    bin.Serialize(stream, DeckContents);
-
-        //    string deckString = System.Text.Encoding.UTF8.GetString(stream.ToArray());
-        //    Debug.Log("Save DeckString: " + deckString);
-        //    PlayerPrefs.SetString(DECK_CONTENTS, deckString);
-        //}        
-
-
+        PlayerPrefs.SetString(KEY_DECK_CONTENTS, deckString);    
         
         PlayerPrefs.Save();
     }
@@ -233,6 +215,14 @@ public class Globals : MonoBehaviour
             AudioSource1.volume = audioBalance;
             AudioSource2.volume = 1.0f - audioBalance;
         }
+    }
+
+    [ContextMenu("Start Music")]
+    public void StartMusic()
+    {
+        AudioListener.volume = Globals.GetInstance().InitialAudioVolume;
+        Globals.GetInstance().AudioSource1.Play();
+        Globals.GetInstance().AudioSource2.Play();
     }
 
 

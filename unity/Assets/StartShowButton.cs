@@ -33,7 +33,7 @@ public class StartShowButton : MonoBehaviour {
     {
         if (debugPointsDisplay)
         {
-            GameMessageManager.gameMessageManager.SetText("", true);
+            GameMessageManager.gameMessageManager.ClearText();
             Globals.GetInstance().PlayerFinishedLastShow = true;
             Globals.GetInstance().PlayerLevel++;
             PointsDisplay.pointsDisplay.UpdatePointTotal();
@@ -45,13 +45,13 @@ public class StartShowButton : MonoBehaviour {
 
         if (OutOfBattleManager.outOfBattleManager.CanStartShow)
         {
-            GameMessageManager.gameMessageManager.AddLine(">> Alright, here's our first caller of the evening...", false, GameMessageManager.gameMessageManager.HostColorHex);
+            GameMessageManager.gameMessageManager.AddLine(">> Alright, here's our first caller of the evening...", false, GameMessageManager.Speaker.Host);
         }
         else
         {
             OutOfBattleManager.outOfBattleManager.FastStart = true;
-            GameMessageManager.gameMessageManager.SetText("", true);
-            GameMessageManager.gameMessageManager.AddLine(">> Enough waiting around, let's take our first caller...", false, GameMessageManager.gameMessageManager.HostColorHex);
+            GameMessageManager.gameMessageManager.ClearText();
+            GameMessageManager.gameMessageManager.AddLine(">> Enough waiting around, let's take our first caller...", false, GameMessageManager.Speaker.Host);
         }
 
         StartCoroutine(StartShow());

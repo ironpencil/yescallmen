@@ -25,11 +25,11 @@ public class LevelAllCardsEvent : CardEvent
 
         if (cardsLeveled == 1)
         {
-            GameMessageManager.gameMessageManager.AddLine(">> " + gameCard.Title + ": Leveled up 1 card!", false, GameMessageManager.gameMessageManager.SystemColorHex);
+            GameMessageManager.gameMessageManager.AddLine(">> " + gameCard.Title + ": Leveled up 1 card!", false, GameMessageManager.Speaker.System);
         }
         else
         {
-            GameMessageManager.gameMessageManager.AddLine(">> " + gameCard.Title + ": Leveled up " + cardsLeveled + " cards!", false, GameMessageManager.gameMessageManager.SystemColorHex);
+            GameMessageManager.gameMessageManager.AddLine(">> " + gameCard.Title + ": Leveled up " + cardsLeveled + " cards!", false, GameMessageManager.Speaker.System);
         }
 
         eventFinished = true;

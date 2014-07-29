@@ -116,8 +116,8 @@ public class TurnManager : MonoBehaviour {
         //    yield return new WaitForSeconds(0.1f);
         //}
 
-        GameMessageManager.gameMessageManager.SetText("", true);
-        GameMessageManager.gameMessageManager.AddLine(finishText, false, GameMessageManager.gameMessageManager.HostColorHex);
+        GameMessageManager.gameMessageManager.ClearText();
+        GameMessageManager.gameMessageManager.AddLine(finishText, false, GameMessageManager.Speaker.Host);
 
         while (!GameMessageManager.gameMessageManager.IsFinished)
         {
@@ -151,7 +151,7 @@ public class TurnManager : MonoBehaviour {
         currentTurnState = TurnState.StartBattle;
         BattleManager.battleManager.StartNewBattle();
 
-        GameMessageManager.gameMessageManager.AddLine(">> Caller, you're on the Mascu-Line, go ahead.", false, GameMessageManager.gameMessageManager.HostColorHex);
+        GameMessageManager.gameMessageManager.AddLine(">> Caller, you're on the Mascu-Line, go ahead.", false, GameMessageManager.Speaker.Host);
 
         //GameMessageManager.gameMessageManager.AddLine("How to Play: Play cards by dragging them to the play area.", false);
         //GameMessageManager.gameMessageManager.AddLine("After each turn, all cards in play and in hand will be sent to the Discard Pile.", false);
@@ -177,10 +177,10 @@ public class TurnManager : MonoBehaviour {
             DiscardHand();
             CleanupCardsInPlay();
 
-            GameMessageManager.gameMessageManager.SetText("", true);
+            GameMessageManager.gameMessageManager.ClearText();
 
             GameMessageManager.gameMessageManager.AddLine(">> " + MRAManager.instance.GetHostArgument(), false,
-                GameMessageManager.gameMessageManager.HostColorHex);
+                GameMessageManager.Speaker.Host);
 
 
             ChangeState(TurnState.EnemyTurn);
@@ -338,8 +338,8 @@ public class TurnManager : MonoBehaviour {
         Globals.GetInstance().PlayerBattlesWon++;
         MRAManager.instance.AddAnotherStrangeQuote();
 
-        GameMessageManager.gameMessageManager.AddLine(">> The caller screams in frustration, then the line goes dead.", false, GameMessageManager.gameMessageManager.SystemColorHex);
-        GameMessageManager.gameMessageManager.AddLine(">> Ha ha, I accept your defeat, caller!", false, GameMessageManager.gameMessageManager.HostColorHex);
+        GameMessageManager.gameMessageManager.AddLine(">> The caller screams in frustration, then the line goes dead.", false, GameMessageManager.Speaker.System);
+        GameMessageManager.gameMessageManager.AddLine(">> Ha ha, I accept your defeat, caller!", false, GameMessageManager.Speaker.Host);
 
         if (BattleManager.battleManager.BattleNumber >= BattleManager.battleManager.BattlesPerShow)
         {
@@ -371,7 +371,7 @@ public class TurnManager : MonoBehaviour {
         MRAManager.instance.AddAnotherStrangeQuote();
         //BattleManager.battleManager.PlayerCurrentAnger = BattleManager.battleManager.PlayerMaxAnger;
 
-        GameMessageManager.gameMessageManager.AddLine(">> I CAN'T HANDLE ANY MORE OF THESE IDIOTS TONIGHT!", false, GameMessageManager.gameMessageManager.HostColorHex);
+        GameMessageManager.gameMessageManager.AddLine(">> I CAN'T HANDLE ANY MORE OF THESE IDIOTS TONIGHT!", false, GameMessageManager.Speaker.Host);
 
         CardGainController.cardGainController.GainBattleLostCard();
         Globals.GetInstance().PlayerFinishedLastShow = false;
@@ -394,8 +394,8 @@ public class TurnManager : MonoBehaviour {
 
         yield return new WaitForSeconds(0.1f);
 
-        GameMessageManager.gameMessageManager.SetText("", true);
-        GameMessageManager.gameMessageManager.AddLine(">> Alright let's take the next caller.", false, GameMessageManager.gameMessageManager.HostColorHex);
+        GameMessageManager.gameMessageManager.ClearText();
+        GameMessageManager.gameMessageManager.AddLine(">> Alright let's take the next caller.", false, GameMessageManager.Speaker.Host);
 
         currentTurnState = TurnState.OutOfBattle;
 
