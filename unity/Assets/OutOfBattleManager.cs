@@ -49,7 +49,7 @@ public class OutOfBattleManager : MonoBehaviour {
         {
             case Globals.GameScene.Title:
                 //coming from the title scene
-                GameMessageManager.gameMessageManager.AddLine(">> Welcome to 'The Penis Mightier', the only show that gives TRUE FACTS about the struggle for Men's Rights. I'm your host, Richard Powers.", false, GameMessageManager.Speaker.Host);
+                GameMessageManager.gameMessageManager.AddLine(">> Welcome to #YesCallMen, the only show that gives TRUE FACTS about the struggle for Men's Rights. I'm your host, Richard Powers.", false, GameMessageManager.Speaker.Host);
                 break;
             case Globals.GameScene.Battle:
                 //coming from the battle scene
@@ -81,12 +81,12 @@ public class OutOfBattleManager : MonoBehaviour {
                 if (Globals.GetInstance().PlayerFinishedLastShow)
                 {
                     //player won last show                    
-                    GameMessageManager.gameMessageManager.AddLine(">> Welcome to another episode of 'The Penis Mightier'! We had a great show last time and hope to deliver more of the same tonight.", false, GameMessageManager.Speaker.Host);
+                    GameMessageManager.gameMessageManager.AddLine(">> Welcome to another episode of #YesCallMen! We had a great show last time and hope to deliver more of the same tonight.", false, GameMessageManager.Speaker.Host);
                 }
                 else
                 {
                     GameMessageManager.gameMessageManager.AddLine(">> Looks like your outburst last time didn't get you any new fans...", false, GameMessageManager.Speaker.System);
-                    GameMessageManager.gameMessageManager.AddLine(">> OK well, welcome back to another episode of 'The Penis Mightier'. Hopefully things go more smoothly tonight and I don't have to deal with such incredible stupidity.", false, GameMessageManager.Speaker.Host);
+                    GameMessageManager.gameMessageManager.AddLine(">> OK well, welcome back to another episode of #YesCallMen. Hopefully things go more smoothly tonight and I don't have to deal with such incredible stupidity.", false, GameMessageManager.Speaker.Host);
                 }
 
                 break;

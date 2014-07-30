@@ -206,18 +206,20 @@ public class TutorialManager : MonoBehaviour {
 
 #region tutorial text
 
-    private string newDeckIntroSpite = @"Welcome!
+    private string newDeckIntroSpite = @"Welcome to #YesCallMen!
+
+Click cards to play them to your ~anime~ play mat.
 
 Play Spite cards to generate Spite for your arguments.
 
-Play cards by vertically dragging them
-up to your ~anime~ play mat.
-
-Try playing a Spite card now.";
+Try playing a Spite card now.";   
 
     private string newDeckIntroAllSpite = @"Good job!
 
 You can play as many Spite cards as you want each turn.
+
+They do a little damage too, so play them
+even if you don't need the Spite!
 
 Try playing out the rest of your Spite cards
 by hitting the Play All Spite button.";
@@ -226,23 +228,38 @@ by hitting the Play All Spite button.";
 
 Argument cards use Spite.
 
-Try playing Divorce Laws to do some damage and draw a card.";
+They do damage and often have other effects.
+
+Divorce Laws says +1 Card, which means
+you get to draw a card after playing it!
+
+Don't worry about +1 Action for now.
+
+Try playing Divorce Laws.";
 
     private string newDeckIntroSpite2 = @"Good!
 
-Damage increases the Caller's Shame.
+Damage increases the Caller's Shame, which is
+displayed in Call Info in the upper right.
 
-Max it out to make them hang up!
+Max out a Caller's Shame to make them hang up,
+but do it before they max out your Anger!
 
 Play the new Spite card you drew.";
 
-    private string newDeckIntroConfusion = @"Circumcision reveals the top card of the deck.
+    private string newDeckIntroConfusion = @"Great!
 
+You can play as many Arguments as you want each turn
+as long as you have the Spite to pay for them.
+
+Circumcision reveals the top card of the deck.
 If it is an Argument card, you get to play it for free!
 
 Try playing Circumcision.";
 
-    private string newDeckIntroEndTurn = @"Great! Circumcision revealed an Argument and played it for free!
+    private string newDeckIntroEndTurn = @"Excellent!
+
+Circumcision revealed an Argument and played it for free!
 
 When you end your turn, everything gets discarded
 and you draw a new hand.
@@ -253,9 +270,9 @@ Try clicking End Turn now. Good luck!";
 
     private string endShowTutorial = @"As you finish shows, you will get access to higher level versions of Spite and Argument cards.
 
-Higher level Spite cards provide more Spite, but not damage.
+Higher level Spite cards provide more Spite.
 
-Higher level Argument cards use more Spite, but do more damage and may be stronger in other ways!
+Higher level Argument cards use more Spite, but do more damage and may be stronger in other ways too!
 
 Some card effects may even level up cards you already have!
 
@@ -264,8 +281,8 @@ Special - Play for free";
 
     private string endBattleTutorial = @"After a call, you can select a card to add to your deck.
 
-New Card Type
-Action - Uses an Action. You start with 1 Action a turn.
+Action cards use an Action instead of Spite. You start
+with 1 Action each turn, but some cards give you more.
 
 New Effects
 Trash - Removes a card from your deck [b]permanently[/b]!
@@ -273,7 +290,7 @@ Gain - Adds a new card to your deck [b]permanently[/b]!
 
 Your deck saves between calls, shows, and game sessions!
 
-Try gaining a card by dragging it to the discard pile.";
+Try adding a new card to your deck by clicking it.";
 
     private string credits = @"Iron Pencil is:
 
@@ -286,22 +303,26 @@ The Bewildering Mr. Austin Thresher
 'Casio Lines'
 
 The Deplorable Mr. Everdraed
-Sound Effects
+Sound Effects, Art
+
+The Enigmatic Mr. Fangz
+Title Art
 
 and #SAGameDev on synIRC.net";
 
 
-    private string refreshTutorial = @"Welcome!
+    private string refreshTutorial = @"Welcome back to #YesCallMen!
 
-Drag cards up to your ~anime~ playmat to play them.
+Click cards to play them.
 
 Card Types
 Spite - Play for free
 Argument - Uses Spite
+Action - Uses Actions
 
 Discard Pile is shuffled to refill Draw Pile when empty.
 
-Do damage to fill the caller's Shame before they fill your Anger!";
+Do damage to fill the Caller's Shame before they fill your Anger!";
 #endregion
 
 }

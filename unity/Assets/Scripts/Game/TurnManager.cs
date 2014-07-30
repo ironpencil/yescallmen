@@ -27,7 +27,7 @@ public class TurnManager : MonoBehaviour {
     public UILabel ShowNumberLabel;
     public UILabel CallInfoHeaderLabel;
 
-    public string CallInfoHeaderDefaultText = "The Penis Mightier - Call Info";
+    public string CallInfoHeaderDefaultText = "#YesCallMen - Call Info";
 
 	// Use this for initialization
 	void Start () {
@@ -97,7 +97,7 @@ public class TurnManager : MonoBehaviour {
 
         if (Globals.GetInstance().PlayerFinishedLastShow)
         {
-            finishText = ">> Well that's all the time we have for tonight's show. Join me next time on 'The Penis Mightier' to get more TRUTH BOMBS dropped on you.";
+            finishText = ">> Well that's all the time we have for tonight's show. Join me next time on #YesCallMen to get more TRUTH BOMBS dropped on you.";
         }
         else
         {
