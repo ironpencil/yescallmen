@@ -154,6 +154,7 @@ public class DragDropCard : UIDragDropItem {
                         if (gameCard.cardDefinition != null)
                         {
                             DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
+                            cardController.gameCard.isGainedCard = false; //only allowed to gain it once
                         }
                     }
                     //gameObject.GetComponent<UIDragDropContainer>().enabled = false;
@@ -164,6 +165,7 @@ public class DragDropCard : UIDragDropItem {
                     break;
                 case CardContainer.CardZone.Deck:
                     DeckManager.deckManager.AddCardToDeck(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
+                    cardController.gameCard.isGainedCard = false; //only allowed to gain it once
                     Destroy(cardController.gameObject);
                     break;
                 default:

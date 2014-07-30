@@ -80,7 +80,11 @@ public class DrawPileController : MonoBehaviour {
 
         for (int i = currentHandSize; i < maximumHandSize; i++)
         {
-            cardObjects.Add(DrawCardToZone(CardContainer.CardZone.Hand));
+            GameObject newCard = DrawCardToZone(CardContainer.CardZone.Hand);
+            if (newCard != null)
+            {
+                cardObjects.Add(newCard);
+            }
         }
 
         return cardObjects;

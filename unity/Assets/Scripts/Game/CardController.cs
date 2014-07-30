@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class CardController : MonoBehaviour {
@@ -24,7 +25,9 @@ public class CardController : MonoBehaviour {
     public List<EventDelegate> onClick = new List<EventDelegate>();
     public List<EventDelegate> onDoubleClick = new List<EventDelegate>();
     public List<EventDelegate> onDragOver = new List<EventDelegate>();
-    public List<EventDelegate> onDragOut = new List<EventDelegate>();    
+    public List<EventDelegate> onDragOut = new List<EventDelegate>();
+
+    public List<UITweener> onTrashTweens = new List<UITweener>();
 
 	// Use this for initialization
 	void Start () {
@@ -36,14 +39,59 @@ public class CardController : MonoBehaviour {
 	
 	}
 
+    private bool isTrashing = false;
+
+    public bool IsTrashing { get { return isTrashing; } }
+
+    public float TrashDelay = 1.0f;
+
+    public void DoTrashAnimation()
+    {
+        if (!isTrashing)
+        {
+            isTrashing = true;
+
+            //UIWidget cardWidget = gameObject.GetComponent<UIWidget>();
+            //cardWidget.pivot = UIWidget.Pivot.Top;
+            //gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, 0, gameObject.transform.localPosition.y);
+            //foreach (UITweener tween in onTrashTweens)
+            //{
+            //    tween.PlayForward();
+            //}
+
+            StartCoroutine(TrashCardAfterDelay());
+        }
+    }
+
+    private IEnumerator TrashCardAfterDelay()
+    {
+        yield return new WaitForSeconds(TrashDelay);
+        foreach (UITweener tween in onTrashTweens)
+        {
+            tween.PlayForward();
+        }
+    }
+
+    void DestroyCard()
+    {
+        CardZoneManager.cardZoneManager.RepositionCardGridNextUpdate(gameObject);
+        UnityEngine.Object.Destroy(gameObject);        
+    }
+
     public void DoScaleToNormal()
     {
-        EventDelegate.Execute(ScaleToNormal);
+        if (!isTrashing)
+        {
+            EventDelegate.Execute(ScaleToNormal);
+        }
     }
 
     public void DoScaleToLarge()
     {
-        EventDelegate.Execute(ScaleToLarge);
+        if (!isTrashing)
+        {
+            EventDelegate.Execute(ScaleToLarge);
+        }
     }
 
     void OnHover(bool isOver)
@@ -60,10 +108,13 @@ public class CardController : MonoBehaviour {
     {
         if (CurrentZone == CardContainer.CardZone.Hand ||
             //CurrentZone == CardContainer.CardZone.Play ||
+            //(CurrentZone == CardContainer.CardZone.Display &&
+            //CardDisplayController.cardDisplayController.CurrentDisplayMode == CardDisplayController.DisplayMode.Selection))
             CurrentZone == CardContainer.CardZone.Display)
         {
             NGUITools.BringForward(gameObject);
-            EventDelegate.Execute(ScaleToLarge);
+            //EventDelegate.Execute(ScaleToLarge);
+            DoScaleToLarge();
         }
         EventDelegate.Execute(onHoverOver);
     }
@@ -72,9 +123,12 @@ public class CardController : MonoBehaviour {
     {
         if (CurrentZone == CardContainer.CardZone.Hand ||
             CurrentZone == CardContainer.CardZone.Play ||
+            //(CurrentZone == CardContainer.CardZone.Display &&
+            //CardDisplayController.cardDisplayController.CurrentDisplayMode == CardDisplayController.DisplayMode.Selection))
             CurrentZone == CardContainer.CardZone.Display)
         {
-            EventDelegate.Execute(ScaleToNormal);
+            //EventDelegate.Execute(ScaleToNormal);
+            DoScaleToNormal();
         }        
         EventDelegate.Execute(onHoverOut);
     }
@@ -94,10 +148,13 @@ public class CardController : MonoBehaviour {
         UpdateCurrentZone();
         if (CurrentZone == CardContainer.CardZone.Hand ||
             //CurrentZone == CardContainer.CardZone.Play ||
+            //(CurrentZone == CardContainer.CardZone.Display &&
+            //CardDisplayController.cardDisplayController.CurrentDisplayMode == CardDisplayController.DisplayMode.Selection))
             CurrentZone == CardContainer.CardZone.Display)
         {
             NGUITools.BringForward(gameObject);
-            EventDelegate.Execute(ScaleToLarge);
+            //EventDelegate.Execute(ScaleToLarge);
+            DoScaleToLarge();
         }
 
         EventDelegate.Execute(onPress);
@@ -111,7 +168,8 @@ public class CardController : MonoBehaviour {
         //{
         //if (CurrentZone != CardContainer.CardZone.Display)
         //{
-            EventDelegate.Execute(ScaleToNormal);
+            //EventDelegate.Execute(ScaleToNormal);
+        DoScaleToNormal();
         //}
        // }
         EventDelegate.Execute(onRelease);

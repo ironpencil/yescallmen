@@ -47,6 +47,8 @@ public class PutCardsOnDeckEvent : CardEvent
         Debug.Log("OnSelectionFinished()");
         List<CardController> selectedCards = CardSelectionController.cardSelectionController.GetCards();
 
+        CardZoneManager.cardZoneManager.SetZoneRepositionStrength(CardContainer.CardZone.Deck, 7.5f);
+
         foreach (CardController card in selectedCards)
         {
             if (CardSelectionController.cardSelectionController.Result == CardSelectionController.SelectionResult.OK)

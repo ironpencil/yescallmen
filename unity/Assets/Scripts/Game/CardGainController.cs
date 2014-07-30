@@ -113,9 +113,9 @@ public class CardGainController : MonoBehaviour {
 
             gameCard.isGainedCard = true;
 
-            cdc.DisplayCard(newCard, CardContainer.CardZone.None);
+            cdc.DisplayCard(newCard, CardContainer.CardZone.None, 0.0f);
         }
-        GameMessageManager.gameMessageManager.AddLine(">> You may gain a new card by dragging it to the Discard Pile.", false, GameMessageManager.Speaker.System);
+        GameMessageManager.gameMessageManager.AddLine(">> You may click a card to add it to your deck permanently.", false, GameMessageManager.Speaker.System);
 
         if (!hasSeenCallRewardTutorial && Globals.GetInstance().PlayerLevel == 1)
         {

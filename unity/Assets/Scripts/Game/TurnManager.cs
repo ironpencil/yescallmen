@@ -198,6 +198,9 @@ public class TurnManager : MonoBehaviour {
 
         foreach (CardController card in cardsInPlay)
         {
+            //don't move cards in the middle of trashing
+            if (card.IsTrashing) { break; }
+
             card.gameObject.transform.parent = CardZoneManager.cardZoneManager.discardContainer.transform;
             card.CurrentZone = CardContainer.CardZone.Discard;
 
@@ -207,6 +210,7 @@ public class TurnManager : MonoBehaviour {
                 if (gameCard.cardDefinition != null)
                 {
                     DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
+                    gameCard.isGainedCard = false; //only allowed to gain it once
                 }
             }
 
@@ -235,6 +239,7 @@ public class TurnManager : MonoBehaviour {
                 if (gameCard.cardDefinition != null)
                 {
                     DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
+                    gameCard.isGainedCard = false; //only allowed to gain it once
                 }
             }
 

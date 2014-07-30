@@ -14,7 +14,7 @@ public class DeckManager : MonoBehaviour {
 
     public delegate void OnShuffleDiscardIntoDeck();
 
-    public OnShuffleDiscardIntoDeck onShuffleDiscardIntoDeck;
+    //public OnShuffleDiscardIntoDeck onShuffleDiscardIntoDeck;
 
     public UILabel DeckCountLabel;
     public UILabel DiscardCountLabel;
@@ -97,16 +97,24 @@ public class DeckManager : MonoBehaviour {
 
     public void ShuffleDiscardIntoDeck()
     {
-        deck.AddRange(discard);
+        //deck.AddRange(discard);
+        //discard = new List<CardDefinition>();
+        //ShuffleDeck();
+        //UpdateLabels();
+
+        //// Notify the listener
+        //if (onShuffleDiscardIntoDeck != null)
+        //{
+        //    onShuffleDiscardIntoDeck();
+        //}
+
+
+        DiscardPileController.discardPileController.ClearDiscardPile();
         discard = new List<CardDefinition>();
         ShuffleDeck();
         UpdateLabels();
 
-        // Notify the listener
-        if (onShuffleDiscardIntoDeck != null)
-        {
-            onShuffleDiscardIntoDeck();
-        }
+
     }
 
     public void ShuffleDeck()

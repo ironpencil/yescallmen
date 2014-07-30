@@ -12,6 +12,7 @@ public class CardZoneManager : MonoBehaviour {
     public GameObject displayContainer;
     public GameObject selectionContainer;
     public GameObject deckContainer;
+    public GameObject trashContainer;
 
 	// Use this for initialization
 	void Start () {
@@ -82,10 +83,27 @@ public class CardZoneManager : MonoBehaviour {
             case CardContainer.CardZone.Deck:
                 targetObject = deckContainer;
                 break;
+            case CardContainer.CardZone.None:
+                targetObject = trashContainer;
+                break;
             default:
                 break;
         }
         return targetObject;
+    }
+
+    public void SetZoneRepositionStrength(CardContainer.CardZone zone, float strength)
+    {
+        GameObject targetObject = GetZoneContainer(zone);
+
+        if (targetObject != null)
+        {
+            UIGrid grid = targetObject.GetComponent<UIGrid>();
+            if (grid != null)
+            {
+                grid.repositionStrength = strength;
+            }
+        }
     }
 
     public static CardContainer.CardZone FindObjectZone(GameObject go)
@@ -228,10 +246,20 @@ public class CardZoneManager : MonoBehaviour {
 
     public void MoveCardToZone(GameObject cardObject, CardContainer.CardZone newZone)
     {
-        MoveCardToZone(cardObject, newZone, null);
+        MoveCardToZone(cardObject, newZone, null, true);
     }
 
     public void MoveCardToZone(GameObject cardObject, CardContainer.CardZone newZone, UIGrid cardSlot)
+    {
+        MoveCardToZone(cardObject, newZone, cardSlot, true);
+    }
+
+    public void MoveCardToZone(GameObject cardObject, CardContainer.CardZone newZone, bool doReparent)
+    {
+        MoveCardToZone(cardObject, newZone, null, doReparent);
+    }
+
+    public void MoveCardToZone(GameObject cardObject, CardContainer.CardZone newZone, UIGrid cardSlot, bool doReparent)
     {        
 
         UIGrid currentGrid = cardObject.transform.parent.gameObject.GetComponent<UIGrid>();
@@ -244,12 +272,12 @@ public class CardZoneManager : MonoBehaviour {
         {
             newParent = cardSlot.gameObject;
         }
-        else if (newZone != CardContainer.CardZone.None)
+        else// if (newZone != CardContainer.CardZone.None)
         {
             newParent = GetZoneContainer(newZone);
         }
 
-        if (newParent != null)
+        if (newParent != null && doReparent)
         {
             cardObject.transform.parent = newParent.transform;
 
@@ -261,6 +289,11 @@ public class CardZoneManager : MonoBehaviour {
             {
                 destinationGrid.repositionNow = true;
             }
+        }
+        else
+        {
+            //this should not happen, moving to a null parent, just detach the card
+            //cardObject.transform.parent = null;
         }
 
         if (currentGrid != null)
@@ -283,7 +316,14 @@ public class CardZoneManager : MonoBehaviour {
         switch (newZone)
         {
             case CardContainer.CardZone.None:
-                Destroy(cardObject);
+                if (cardController != null)
+                {
+                    cardController.DoTrashAnimation();
+                }
+                else
+                {
+                    Destroy(cardObject);
+                }
                 break;
             case CardContainer.CardZone.Hand:
                 break;
@@ -292,14 +332,62 @@ public class CardZoneManager : MonoBehaviour {
             case CardContainer.CardZone.Discard:
                 NGUITools.BringForward(cardObject);
                 DeckManager.deckManager.AddCardToDiscard(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
+                cardController.gameCard.isGainedCard = false; //only allowed to gain it once
                 break;
             case CardContainer.CardZone.Deck:
                 DeckManager.deckManager.AddCardToDeck(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
-                Destroy(cardObject);
+                cardController.gameCard.isGainedCard = false; //only allowed to gain it once
+                StartCoroutine(MoveCardToDeck(cardObject));
                 break;
             default:
                 break;
         }
+
+    }
+
+    private IEnumerator MoveCardToDeck(GameObject card)
+    {
+        TweenAlpha.Begin(card, 0.6f, 0.0f);
+        yield return StartCoroutine(WaitForCardToStopMoving(card, 1.0f));
+
+        yield return new WaitForSeconds(1.0f);
+        Destroy(card);
+    }
+
+    private IEnumerator WaitForCardToStopMoving(GameObject card, float maxWaitSeconds)
+    {
+        //wait for any grid repositions to start
+        yield return null;
+
+        maxWaitSeconds = maxWaitSeconds - Time.deltaTime;
+
+        SpringPosition sp = card.GetComponent<SpringPosition>();
+
+        if (sp != null)
+        {
+            while (sp.enabled && maxWaitSeconds > 0.0f)
+            {
+                yield return null;
+                maxWaitSeconds = maxWaitSeconds - Time.deltaTime;
+                //Debug.Log("Waiting for Card to stop moving. SP enabled = " + sp.enabled);
+            }
+        }
+    }
+
+    private IEnumerator RepositionGridNextUpdate(UIGrid grid)
+    {
+        yield return null;
+        if (grid != null)
+        {
+            grid.repositionNow = true;
+        }
+    }
+
+    public void RepositionCardGridNextUpdate(GameObject cardObject)
+    {
+        UIGrid currentGrid = cardObject.transform.parent.gameObject.GetComponent<UIGrid>();
+
+        StartCoroutine(RepositionGridNextUpdate(currentGrid));
     }
 
 

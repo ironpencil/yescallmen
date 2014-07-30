@@ -57,7 +57,11 @@ public class TrashSelectedCardsEvent : CardEvent
                 //remember card in case an event later wants to reference it
                 gameCard.rememberedCards.Add(card.gameCard.cardDefinition);
 
-                UnityEngine.Object.Destroy(card.gameObject);
+                //trash the card immediately
+                card.TrashDelay = 0.0f;
+                //move card to None zone to destroy
+                CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.None);
+                //UnityEngine.Object.Destroy(card.gameObject);
             }
             else
             {
