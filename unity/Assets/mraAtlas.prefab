@@ -56,7 +56,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: animesleeve1
     x: 452
-    y: 170
+    y: 159
     width: 100
     height: 140
     borderLeft: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: host_mouthClosed
-    x: 452
+    x: 604
     y: 483
     width: 140
     height: 180
@@ -159,7 +159,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: host_mouthOpen
-    x: 594
+    x: 746
     y: 483
     width: 140
     height: 180
@@ -186,7 +186,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: musicNotes
     x: 452
-    y: 68
+    y: 57
     width: 100
     height: 100
     borderLeft: 0
@@ -198,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: paintingHost
-    x: 736
-    y: 483
+    x: 452
+    y: 301
     width: 140
     height: 180
     borderLeft: 0
@@ -211,10 +211,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: paintingInfinite
-    x: 452
+    x: 594
     y: 312
     width: 147
     height: 169
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: paintingMRA
+    x: 452
+    y: 483
+    width: 150
+    height: 180
     borderLeft: 0
     borderRight: 0
     borderTop: 0

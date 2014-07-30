@@ -11,6 +11,8 @@ public class TitleScreenManager : MonoBehaviour {
 
     public UISlider VolumeSlider;
 
+    public float MusicDelay = 1.0f;
+
 	// Use this for initialization
 	void Start () {
         instance = this;
@@ -47,7 +49,7 @@ public class TitleScreenManager : MonoBehaviour {
 
     private IEnumerator StartMusic()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(MusicDelay);
 
         if (!Globals.GetInstance().AudioSource1.isPlaying &&
             !Globals.GetInstance().AudioSource2.isPlaying)
