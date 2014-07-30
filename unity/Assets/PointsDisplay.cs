@@ -84,7 +84,8 @@ public class PointsDisplay : MonoBehaviour {
                 default:
                     if (Globals.GetInstance().PlayerLevel > 50)
                     {
-                        GameMessageManager.gameMessageManager.AddLine(">> The reach of your message is literally unfathomable. All feminists that were, are, or ever will be now understand your truth. You are truly the worst.", false, GameMessageManager.Speaker.System);
+                        GameMessageManager.gameMessageManager.AddLine(">> The reach of your message is literally unfathomable. All feminists that were, are, or ever will be now understand your truth.", false, GameMessageManager.Speaker.System);
+                        GameMessageManager.gameMessageManager.AddLine(">> You are truly the worst.", false, GameMessageManager.Speaker.System);
                         //GameMessageManager.gameMessageManager.AddLine("All feminists that were, are, or ever will be now understand your truth.", false, GameMessageManager.Speaker.System);
                         //GameMessageManager.gameMessageManager.AddLine("", false);
                         //GameMessageManager.gameMessageManager.AddLine("You are truly the worst.", false, GameMessageManager.Speaker.System);

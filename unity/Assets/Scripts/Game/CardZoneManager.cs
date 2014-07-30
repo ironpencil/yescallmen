@@ -23,6 +23,21 @@ public class CardZoneManager : MonoBehaviour {
 	
 	}
 
+    public CardContainer.CardZone currentTargetZone = CardContainer.CardZone.None;
+    public CardContainer.CardZone CurrentTargetZone
+    {
+        get
+        {
+            return currentTargetZone;
+        }
+
+        set
+        {
+            Debug.Log(">>>>> Changing Target Zone from " + currentTargetZone.ToString() + " to " + value.ToString() + ".");
+            currentTargetZone = value;            
+        }
+    }
+
     public List<CardController> GetCardsInZone(CardContainer.CardZone zone)
     {
         GameObject targetObject = GetZoneContainer(zone);
@@ -212,18 +227,31 @@ public class CardZoneManager : MonoBehaviour {
     }
 
     public void MoveCardToZone(GameObject cardObject, CardContainer.CardZone newZone)
+    {
+        MoveCardToZone(cardObject, newZone, null);
+    }
+
+    public void MoveCardToZone(GameObject cardObject, CardContainer.CardZone newZone, UIGrid cardSlot)
     {        
 
         UIGrid currentGrid = cardObject.transform.parent.gameObject.GetComponent<UIGrid>();
 
         CardController cardController = cardObject.GetComponent<CardController>();
 
-        if (newZone != CardContainer.CardZone.None)
+        GameObject newParent = null;
+
+        if (newZone == CardContainer.CardZone.Selection)
         {
+            newParent = cardSlot.gameObject;
+        }
+        else if (newZone != CardContainer.CardZone.None)
+        {
+            newParent = GetZoneContainer(newZone);
+        }
 
-            GameObject newParent = GetZoneContainer(newZone);
-
-            cardObject.transform.parent = newParent.transform;            
+        if (newParent != null)
+        {
+            cardObject.transform.parent = newParent.transform;
 
             cardController.UpdateCurrentZone();
 
@@ -252,7 +280,6 @@ public class CardZoneManager : MonoBehaviour {
 
         NGUITools.MarkParentAsChanged(cardObject);
 
-
         switch (newZone)
         {
             case CardContainer.CardZone.None:
@@ -273,5 +300,105 @@ public class CardZoneManager : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+
+    public bool DoClickCard(CardController card)
+    {
+        CardContainer.CardZone fromZone = card.CurrentZone;
+
+        switch (fromZone)
+        {
+            case CardContainer.CardZone.Hand:
+                return DoClickCardInHand(card);
+            case CardContainer.CardZone.Display:
+                return DoClickCardInDisplay(card);
+            case CardContainer.CardZone.Selection:
+                return DoClickCardInSelection(card);
+            default:
+                break;
+        }
+
+
+
+
+        return false;
+    }
+
+    private bool DoClickCardInHand(CardController card)
+    {
+        if (CurrentTargetZone == CardContainer.CardZone.Play)
+        {
+            if (!TurnManager.turnManager.CanPlayCards()) { return false; }
+
+            if (!RulesManager.rulesManager.CanPlayCard(card.gameObject)) { return false; }
+
+
+            //card can be played, now play it
+            MoveCardToZone(card.gameObject, CardContainer.CardZone.Play);
+            RulesManager.rulesManager.PlayCard(card.gameObject, false);
+
+            //click was successful, return true
+            return true;
+        }
+        else if (CurrentTargetZone == CardContainer.CardZone.Selection)
+        {
+            // can't select cards from hand if the selection pane doesn't want cards from hand
+            if (CardSelectionController.cardSelectionController.SourceCardZone != CardContainer.CardZone.Hand) { return false; }
+
+            UIGrid emptySlot = CardSelectionController.cardSelectionController.GetFreeSlot();
+
+            if (emptySlot == null) { return false; }
+
+            //if no card in slot, then check to make sure this card matches whatever restrictions are currently in place
+            if (CardSelectionController.cardSelectionController.canSlotCard != null)
+            {
+                bool canSlotCard = CardSelectionController.cardSelectionController.canSlotCard(card);
+                if (!canSlotCard) { return false; }
+            }
+
+            //allowed to slot card, so do it
+            MoveCardToZone(card.gameObject, CardContainer.CardZone.Selection, emptySlot);
+
+            NGUITools.BringForward(card.gameObject);
+            CardSelectionController.cardSelectionController.FilledSlots++;
+
+            card.DoScaleToNormal();
+
+            //click was successful, return true
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool DoClickCardInDisplay(CardController card)
+    {
+        //can't select cards if display mode is not selection
+        if (CardDisplayController.cardDisplayController.CurrentDisplayMode != CardDisplayController.DisplayMode.Selection)
+        {
+            return false;
+        }
+
+        //otherwise just send it to the destination zone
+        MoveCardToZone(card.gameObject, CardDisplayController.cardDisplayController.selectionDestination);
+        CardDisplayController.cardDisplayController.SelectCard(card.gameObject);
+
+        card.DoScaleToNormal();
+
+        return true;
+    }
+
+    private bool DoClickCardInSelection(CardController card)
+    {
+        //only allow selecting cards in the selection panel if it is up
+        if (CardSelectionController.cardSelectionController.Finished) { return false; }
+
+        //otherwise just send it back to the source zone
+        MoveCardToZone(card.gameObject, CardSelectionController.cardSelectionController.SourceCardZone);
+
+        CardSelectionController.cardSelectionController.FilledSlots--;
+
+        return true;
     }
 }

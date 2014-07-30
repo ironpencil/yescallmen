@@ -252,6 +252,8 @@ public class TurnManager : MonoBehaviour {
         {
             currentTurnState = TurnState.PlayerActive;
             CardEventManager.cardEventManager.TurnOnProcessing();
+
+            CardZoneManager.cardZoneManager.CurrentTargetZone = CardContainer.CardZone.Play;
         }
     }
 

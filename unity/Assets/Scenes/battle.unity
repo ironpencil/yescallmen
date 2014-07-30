@@ -8162,7 +8162,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.80000019
+  aspectRatio: 4
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -11692,7 +11692,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.80000019
+  aspectRatio: 3.20000005
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -19348,6 +19348,7 @@ MonoBehaviour:
   displayContainer: {fileID: 1346309468}
   selectionContainer: {fileID: 1330614581}
   deckContainer: {fileID: 1443256101}
+  currentTargetZone: 0
 --- !u!114 &1819080655
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,8 +6,6 @@ public class HostSpeechManager : MonoBehaviour {
 
     public List<Sprite> speakingSprites;
 
-    private int currentAnimFrame = 0;
-
     private UISprite spriteScript;
 
     public float BaseAnimationDelay = 0.15f;

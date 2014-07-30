@@ -84,6 +84,8 @@ public class CardSelectionController : MonoBehaviour {
 
     public OnFinish onFinish;
 
+    private CardContainer.CardZone cachedTargetCardZone = CardContainer.CardZone.None;
+
     public void Setup(string promptText, ButtonOption buttons, bool canCancel, int slotCount, int cardsRequired, CardContainer.CardZone cardSource)
     {
         PromptLabel.text = promptText;
@@ -199,6 +201,9 @@ public class CardSelectionController : MonoBehaviour {
             NGUITools.BringForward(CancelButton.gameObject);
         }
 
+        cachedTargetCardZone = CardZoneManager.cardZoneManager.CurrentTargetZone;
+
+        CardZoneManager.cardZoneManager.CurrentTargetZone = CardContainer.CardZone.Selection;
         //Globals.GetInstance().DebugWidgetDepths = true;
 
         //NGUITools.PushBack(backgroundWidget.gameObject);
@@ -229,6 +234,8 @@ public class CardSelectionController : MonoBehaviour {
         StartCoroutine(SetInactiveAfterSeconds(1.0f));
         onFinish = null;
         canSlotCard = null;
+
+        CardZoneManager.cardZoneManager.CurrentTargetZone = cachedTargetCardZone;
 
         //Globals.GetInstance().DebugWidgetDepths = false;
     }
@@ -271,5 +278,27 @@ public class CardSelectionController : MonoBehaviour {
         List<CardController> slottedCards = CardZoneManager.cardZoneManager.GetCardsInZone(CardContainer.CardZone.Selection);
 
         return slottedCards;        
+    }
+
+    public UIGrid GetFreeSlot()
+    {
+        UIGrid returnGrid = null;
+
+        foreach (CardSlotController slot in Slots)
+        {
+            if (slot.gameObject.activeSelf)
+            {
+                UIGrid cardSlot = slot.GetComponentInChildren<UIGrid>();
+
+                //if no child in this slot, use it
+                if (cardSlot.GetChildList().Count == 0)
+                {
+                    returnGrid = cardSlot;
+                    break;
+                }
+            }
+        }
+
+        return returnGrid;        
     }
 }

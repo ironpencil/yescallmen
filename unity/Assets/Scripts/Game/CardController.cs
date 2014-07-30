@@ -36,6 +36,16 @@ public class CardController : MonoBehaviour {
 	
 	}
 
+    public void DoScaleToNormal()
+    {
+        EventDelegate.Execute(ScaleToNormal);
+    }
+
+    public void DoScaleToLarge()
+    {
+        EventDelegate.Execute(ScaleToLarge);
+    }
+
     void OnHover(bool isOver)
     {
         //Debug.Log(Time.time + ":OnHover(" + isOver + "): current " + (current == null ? "=" : "!") + "=null");
@@ -137,6 +147,8 @@ public class CardController : MonoBehaviour {
     void Click()
     {
         EventDelegate.Execute(onClick);
+
+        CardZoneManager.cardZoneManager.DoClickCard(this);
     }
 
     void OnDoubleClick()
