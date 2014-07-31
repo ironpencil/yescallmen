@@ -7944,7 +7944,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4
+  aspectRatio: 5.80000019
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -11558,7 +11558,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.20000005
+  aspectRatio: 5.80000019
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
@@ -19342,6 +19342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a44151a575a92429d3e12f5be2791b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NotAllMenSound: {fileID: 8300000, guid: 8e635d44713ee164196b1d2812dd3b8b, type: 3}
   PlayCardSound: {fileID: 8300000, guid: 99a0f77b33e0ef242af9877399c759a7, type: 3}
   RolloverCardSound: {fileID: 8300000, guid: ad0f17c7c6a638b4985920dab80d6d4a, type: 3}
   ReshuffleSound: {fileID: 8300000, guid: 802dcecf1b29e2740ab17a75a91722c6, type: 3}

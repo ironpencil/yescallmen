@@ -42,7 +42,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 8f773931907f7f248809b7b1a6e36a13, type: 2}
   mSprites:
   - name: anime1
-    x: 0
+    x: 962
     y: 852
     width: 965
     height: 445
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: animesleeve1
-    x: 452
-    y: 159
+    x: 856
+    y: 368
     width: 100
     height: 140
     borderLeft: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: arrow
-    x: 1964
-    y: 1948
+    x: 856
+    y: 266
     width: 75
     height: 100
     borderLeft: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: blackbar
     x: 1002
-    y: 1346
+    y: 1326
     width: 1024
     height: 100
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: buttonDown
-    x: 1002
-    y: 1315
+    x: 452
+    y: 15
     width: 125
     height: 29
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: buttonUp
-    x: 1129
-    y: 1315
+    x: 654
+    y: 15
     width: 125
     height: 29
     borderLeft: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: fullcard
-    x: 0
-    y: 5
+    x: 452
+    y: 228
     width: 200
     height: 280
     borderLeft: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: fullcardsoft
-    x: 202
-    y: 5
+    x: 654
+    y: 228
     width: 200
     height: 280
     borderLeft: 0
@@ -145,9 +145,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: glass
+    x: 1002
+    y: 1428
+    width: 980
+    height: 620
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: host_mouthClosed
-    x: 604
-    y: 483
+    x: 654
+    y: 46
     width: 140
     height: 180
     borderLeft: 0
@@ -159,8 +172,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: host_mouthOpen
-    x: 746
-    y: 483
+    x: 796
+    y: 46
     width: 140
     height: 180
     borderLeft: 0
@@ -173,7 +186,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: messagebg
     x: 452
-    y: 665
+    y: 510
     width: 507
     height: 185
     borderLeft: 0
@@ -185,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: musicNotes
-    x: 845
-    y: 381
+    x: 0
+    y: 30
     width: 100
     height: 100
     borderLeft: 0
@@ -198,8 +211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: musicNotesMuted
-    x: 452
-    y: 57
+    x: 102
+    y: 30
     width: 100
     height: 100
     borderLeft: 0
@@ -211,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: paintingHost
-    x: 452
-    y: 301
+    x: 1694
+    y: 670
     width: 140
     height: 180
     borderLeft: 0
@@ -224,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: paintingInfinite
-    x: 594
-    y: 312
+    x: 1836
+    y: 681
     width: 147
     height: 169
     borderLeft: 0
@@ -238,7 +251,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: paintingMRA
     x: 452
-    y: 483
+    y: 46
     width: 150
     height: 180
     borderLeft: 0
@@ -251,7 +264,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: phoneDisplay
     x: 0
-    y: 287
+    y: 132
     width: 436
     height: 166
     borderLeft: 0
@@ -264,7 +277,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: salogo
     x: 0
-    y: 455
+    y: 300
     width: 450
     height: 395
     borderLeft: 0
@@ -276,8 +289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: sfxIcon
-    x: 594
-    y: 210
+    x: 204
+    y: 30
     width: 100
     height: 100
     borderLeft: 0
@@ -289,8 +302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: sfxIconMuted
-    x: 743
-    y: 381
+    x: 306
+    y: 30
     width: 100
     height: 100
     borderLeft: 0
@@ -302,8 +315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: showTitle
-    x: 967
-    y: 1087
+    x: 962
+    y: 640
     width: 730
     height: 210
     borderLeft: 0
@@ -328,8 +341,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: white
-    x: 1002
-    y: 1448
+    x: 0
+    y: 697
     width: 960
     height: 600
     borderLeft: 0

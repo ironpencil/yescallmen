@@ -6,6 +6,7 @@ public class SFXManager : MonoBehaviour {
 
     public static SFXManager instance;
 
+    public AudioClip NotAllMenSound;
     public AudioClip PlayCardSound;
     public AudioClip RolloverCardSound;
 

@@ -82,7 +82,7 @@ public class CardController : MonoBehaviour {
 
     public void DoScaleToNormal()
     {
-        if (!isTrashing)
+        if (!(isTrashing && CurrentZone == CardContainer.CardZone.None))
         {
             EventDelegate.Execute(ScaleToNormal);            
         }
@@ -97,7 +97,7 @@ public class CardController : MonoBehaviour {
                 doPlayCardEffects)
             {
                 doPlayCardEffects = false;                
-                StartCoroutine(DoPlayCardEffects());
+                //StartCoroutine(DoPlayCardEffects());
                 //SFXManager.instance.PlaySound(SFXManager.instance.PlayCardSound, 1.0f);
                 //float shakeIntensity = Mathf.Min(0.01 + gameCard.Level * 
                 //BattleManager.battleManager.CameraShaker.Shake(
@@ -150,8 +150,32 @@ public class CardController : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.01f);
 
-        BattleManager.battleManager.CameraShaker.StartShaking();
-        SFXManager.instance.PlaySound(SFXManager.instance.PlayCardSound, 1.0f);
+        if (gameCard.cardDefinition.CardName == CardFactory.CardName.NotAllMen)
+        {
+            SFXManager.instance.PlaySound(SFXManager.instance.NotAllMenSound, 1.0f);
+
+            yield return new WaitForSeconds(0.4f);
+
+            BattleManager.battleManager.CameraShaker.addShakeAmount *= 4;
+            BattleManager.battleManager.CameraShaker.StartShaking();
+            BattleManager.battleManager.CameraShaker.addShakeAmount *= 0.25f;
+            
+
+            //SFXManager.instance.PlaySound(SFXManager.instance.NotAllMenSound, 0.5f);
+            //don't play a sound, we already started it
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.25f);
+
+            SFXManager.instance.PlaySound(SFXManager.instance.PlayCardSound, 0.5f);
+
+            yield return new WaitForSeconds(0.15f);
+
+            BattleManager.battleManager.CameraShaker.StartShaking();
+
+            
+        }
     }
 
     void HoverOut()
@@ -242,7 +266,14 @@ public class CardController : MonoBehaviour {
     {
         EventDelegate.Execute(onClick);
 
-        CardZoneManager.cardZoneManager.DoClickCard(this);
+        if (CardZoneManager.cardZoneManager.DoClickCard(this))
+        {
+            //card was able to be activated
+            if (CurrentZone == CardContainer.CardZone.Play)
+            {
+                StartCoroutine(DoPlayCardEffects());
+            }
+        }
     }
 
     void OnDoubleClick()
