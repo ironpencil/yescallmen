@@ -5,7 +5,9 @@ public class Shaker : MonoBehaviour
 {
     private Vector3 originPosition;
     public float shake_decay, shake_intensity;
-    public float shake_delay = 0.001f;   
+    public float shake_delay = 0.001f;
+
+    public float addShakeAmount = 0.0f;
 
     bool isShaking = false;
 
@@ -21,6 +23,7 @@ public class Shaker : MonoBehaviour
 
     }
 
+    [ContextMenu("Shake It Up")]
     public void StartShaking()
     {
         isShaking = true;
@@ -31,6 +34,8 @@ public class Shaker : MonoBehaviour
 
     private IEnumerator DoShake()
     {
+        shake_intensity += addShakeAmount;
+
         while (shake_intensity > 0)
         {
             transform.position = originPosition + Random.insideUnitSphere * shake_intensity;
@@ -45,7 +50,10 @@ public class Shaker : MonoBehaviour
 
     public void Shake(float intensity, float decay)
     {
+        isShaking = true;
         shake_intensity = intensity;
         shake_decay = decay;
+
+        StartCoroutine(DoShake());
     }
 }

@@ -6,8 +6,6 @@ public class HostClicker : MonoBehaviour {
 
     public List<AudioClip> clips;
 
-    public AudioSource source;
-
     public float AnimationDuration = 2.0f;
 
     public float ForcedBeginDelay = 0.2f;
@@ -104,7 +102,7 @@ public class HostClicker : MonoBehaviour {
 
         foreach (AudioClip clip in clips)
         {
-            source.PlayOneShot(clip);
+            Globals.GetInstance().SFXSource.PlayOneShot(clip);
             yield return new WaitForSeconds(clip.length + ClipDelayOffset);
         }
 

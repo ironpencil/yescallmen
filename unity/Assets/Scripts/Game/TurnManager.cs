@@ -201,53 +201,55 @@ public class TurnManager : MonoBehaviour {
             //don't move cards in the middle of trashing
             if (card.IsTrashing) { break; }
 
-            card.gameObject.transform.parent = CardZoneManager.cardZoneManager.discardContainer.transform;
-            card.CurrentZone = CardContainer.CardZone.Discard;
+            CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.Discard);
+            //card.gameObject.transform.parent = CardZoneManager.cardZoneManager.discardContainer.transform;
+            //card.CurrentZone = CardContainer.CardZone.Discard;
 
-            GameCard gameCard = card.gameCard;
-            if (gameCard != null)
-            {
-                if (gameCard.cardDefinition != null)
-                {
-                    DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
-                    gameCard.isGainedCard = false; //only allowed to gain it once
-                }
-            }
+            //GameCard gameCard = card.gameCard;
+            //if (gameCard != null)
+            //{
+            //    if (gameCard.cardDefinition != null)
+            //    {
+            //        DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
+            //        gameCard.isGainedCard = false; //only allowed to gain it once
+            //    }
+            //}
 
-            NGUITools.MarkParentAsChanged(card.gameObject);
+            //NGUITools.MarkParentAsChanged(card.gameObject);
         }
 
-        if (playGrid != null) { playGrid.repositionNow = true; }
-        if (discardGrid != null) { discardGrid.repositionNow = true; }
+        //if (playGrid != null) { playGrid.repositionNow = true; }
+        //if (discardGrid != null) { discardGrid.repositionNow = true; }
     }
 
     private static void DiscardHand()
     {
         List<CardController> cardsInHand = CardZoneManager.cardZoneManager.GetCardsInZone(CardContainer.CardZone.Hand);
 
-        UIGrid handGrid = CardZoneManager.cardZoneManager.handContainer.GetComponent<UIGrid>();
-        UIGrid discardGrid = CardZoneManager.cardZoneManager.discardContainer.GetComponent<UIGrid>();
+        //UIGrid handGrid = CardZoneManager.cardZoneManager.handContainer.GetComponent<UIGrid>();
+        //UIGrid discardGrid = CardZoneManager.cardZoneManager.discardContainer.GetComponent<UIGrid>();
 
         foreach (CardController card in cardsInHand)
         {
-            card.gameObject.transform.parent = CardZoneManager.cardZoneManager.discardContainer.transform;
-            card.CurrentZone = CardContainer.CardZone.Discard;
+            CardZoneManager.cardZoneManager.MoveCardToZone(card.gameObject, CardContainer.CardZone.Discard);
+        //    card.gameObject.transform.parent = CardZoneManager.cardZoneManager.discardContainer.transform;
+        //    card.CurrentZone = CardContainer.CardZone.Discard;
 
-            GameCard gameCard = card.gameCard;
-            if (gameCard != null)
-            {
-                if (gameCard.cardDefinition != null)
-                {
-                    DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
-                    gameCard.isGainedCard = false; //only allowed to gain it once
-                }
-            }
+        //    GameCard gameCard = card.gameCard;
+        //    if (gameCard != null)
+        //    {
+        //        if (gameCard.cardDefinition != null)
+        //        {
+        //            DeckManager.deckManager.AddCardToDiscard(gameCard.cardDefinition, gameCard.isGainedCard);
+        //            gameCard.isGainedCard = false; //only allowed to gain it once
+        //        }
+        //    }
 
-            NGUITools.MarkParentAsChanged(card.gameObject);
+        //    NGUITools.MarkParentAsChanged(card.gameObject);
         }
 
-        if (handGrid != null) { handGrid.repositionNow = true; }
-        if (discardGrid != null) { discardGrid.repositionNow = true; }
+        //if (handGrid != null) { handGrid.repositionNow = true; }
+        //if (discardGrid != null) { discardGrid.repositionNow = true; }
     }
 
     private void DoPlayerActive()

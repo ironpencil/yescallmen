@@ -10,7 +10,7 @@ public class TrashSelectedCardsEvent : CardEvent
     public int numCards = 1;
     public int numRequiredCards = 0;
 
-    public string promptText = "You may trash a card from your hand.";
+    public string promptText = "You may Trash a card from your hand.";
 
     public string OKButtonText = "Trash";
     public string CancelButtonText = "No Thanks";

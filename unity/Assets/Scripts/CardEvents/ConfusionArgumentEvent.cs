@@ -53,7 +53,7 @@ public class ConfusionArgumentEvent : CardEvent
                 
                 if (playCard)
                 {
-                    RulesManager.rulesManager.PlayCard(topCard, false);
+                    RulesManager.rulesManager.PlayCard(topCard, false, false);
                 }
             }
         }

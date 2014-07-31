@@ -41,12 +41,13 @@ public class Globals : MonoBehaviour
             return;
         }
 
-        UpdateAudioBalance(true);
+        GlobalMusicVolume = InitialAudioVolume;
+        GlobalSFXVolume = InitialAudioVolume;
     }
 
     public void Update()
     {
-        UpdateAudioBalance(false);
+        UpdateMusicBalance(false);
     }
 
 
@@ -197,6 +198,8 @@ public class Globals : MonoBehaviour
     public AudioSource AudioSource1;
     public AudioSource AudioSource2;
 
+    public AudioSource SFXSource;
+
     private float audioBalance = 1.0f;
     public float TargetAudioBalance = 1.0f;
 
@@ -205,24 +208,54 @@ public class Globals : MonoBehaviour
 
     public float AudioBalanceSpeed = 10.0f;
 
-    private void UpdateAudioBalance(bool force)
+    private float globalMusicVolume = 0.75f;
+    public float GlobalMusicVolume
+    {
+        get { return globalMusicVolume; }
+        set
+        {
+            globalMusicVolume = value;
+            UpdateMusicBalance(true);
+        }
+    }
+
+    private float globalSFXVolume = 0.75f;
+    public float GlobalSFXVolume
+    {
+        get { return globalSFXVolume; }
+        set
+        {
+            globalSFXVolume = value;
+            UpdateSFXVolume();
+        }
+    }
+
+    private void UpdateMusicBalance(bool force)
     {
         if (force || !Mathf.Approximately(audioBalance, TargetAudioBalance))
         {
             audioBalance = Mathf.MoveTowards(audioBalance, TargetAudioBalance,
                 AudioBalanceSpeed * Time.deltaTime);
 
-            AudioSource1.volume = audioBalance;
-            AudioSource2.volume = 1.0f - audioBalance;
+            AudioSource1.volume = GlobalMusicVolume * audioBalance;
+            AudioSource2.volume = GlobalMusicVolume * (1.0f - audioBalance);
         }
+    }
+
+    private void UpdateSFXVolume()
+    {
+        SFXSource.volume = GlobalSFXVolume;
     }
 
     [ContextMenu("Start Music")]
     public void StartMusic()
     {
-        AudioListener.volume = Globals.GetInstance().InitialAudioVolume;
-        Globals.GetInstance().AudioSource1.Play();
-        Globals.GetInstance().AudioSource2.Play();
+        //AudioListener.volume = Globals.GetInstance().InitialAudioVolume;
+        //GlobalMusicVolume = InitialAudioVolume;
+        //GlobalSFXVolume = InitialAudioVolume;
+
+        AudioSource1.Play();
+        AudioSource2.Play();
     }
 
 

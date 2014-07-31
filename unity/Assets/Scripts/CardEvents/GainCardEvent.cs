@@ -25,6 +25,11 @@ public class GainCardEvent : CardEvent
 
             DeckManager.deckManager.GainCard(gameCard.cardDefinition);
 
+            UIWidget cardWidget = gameCard.gameObject.GetComponent<UIWidget>();
+            cardWidget.alpha = 0.0f;
+
+            TweenAlpha.Begin(newCard.gameObject, 0.5f, 1.0f);
+
             //GameMessageManager.gameMessageManager.AddLine("Drew card: " + gameCard.Title, false);
             CardDisplayController.cardDisplayController.DisplayCard(newCard, addToZone, 1.0f);
 

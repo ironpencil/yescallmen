@@ -297,16 +297,15 @@ Try adding a new card to your deck by clicking it.";
 The Contemptuous Mr. Jim South
 Design, Art, Programming
 
+Card sounds by www.kenney.nl
+
 With Special Thanks To:
 
-The Bewildering Mr. Austin Thresher
-'Casio Lines'
+The Bewildering Mr. Austin Thresher : 'Casio Lines'
 
-The Deplorable Mr. Everdraed
-Sound Effects, Art
+The Deplorable Mr. Everdraed : Voice, Art
 
-The Enigmatic Mr. Fangz
-Title Art
+The Enigmatic Mr. Fangz : Title Art
 
 and #SAGameDev on synIRC.net";
 

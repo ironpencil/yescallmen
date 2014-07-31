@@ -86,7 +86,7 @@ public class LevelSelectedCardsEvent : CardEvent
             return true;
         }
 
-        GameMessageManager.gameMessageManager.AddLine(">> Only Argument cards and Spite cards can level up.", false, GameMessageManager.Speaker.System);
+        GameMessageManager.gameMessageManager.AddLine(">> Only Argument and Spite cards can level up.", false, GameMessageManager.Speaker.System);
         return false;
     }
 

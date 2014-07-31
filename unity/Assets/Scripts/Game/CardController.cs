@@ -45,6 +45,8 @@ public class CardController : MonoBehaviour {
 
     public float TrashDelay = 1.0f;
 
+    public bool doPlayCardEffects = false;
+
     public void DoTrashAnimation()
     {
         if (!isTrashing)
@@ -82,9 +84,27 @@ public class CardController : MonoBehaviour {
     {
         if (!isTrashing)
         {
-            EventDelegate.Execute(ScaleToNormal);
+            EventDelegate.Execute(ScaleToNormal);            
         }
     }
+
+    public void OnScaleComplete()
+    {
+        if (Mathf.Approximately(transform.localScale.x, 1.0f))
+        {
+            //scaled to 1
+            if (CurrentZone == CardContainer.CardZone.Play &&
+                doPlayCardEffects)
+            {
+                doPlayCardEffects = false;                
+                StartCoroutine(DoPlayCardEffects());
+                //SFXManager.instance.PlaySound(SFXManager.instance.PlayCardSound, 1.0f);
+                //float shakeIntensity = Mathf.Min(0.01 + gameCard.Level * 
+                //BattleManager.battleManager.CameraShaker.Shake(
+            }
+        }
+    }
+    
 
     public void DoScaleToLarge()
     {
@@ -96,13 +116,15 @@ public class CardController : MonoBehaviour {
 
     void OnHover(bool isOver)
     {
-        //Debug.Log(Time.time + ":OnHover(" + isOver + "): current " + (current == null ? "=" : "!") + "=null");
+        Debug.Log(Time.time + ":OnHover(" + isOver + "): current " + (current == null ? "=" : "!") + "=null");
         if (current != null) return;
         current = this;
         if (isOver) HoverOver();
         else HoverOut();
         current = null;
     }
+
+    bool playRollOver = true;
 
     void HoverOver()
     {
@@ -115,8 +137,21 @@ public class CardController : MonoBehaviour {
             NGUITools.BringForward(gameObject);
             //EventDelegate.Execute(ScaleToLarge);
             DoScaleToLarge();
+            if (playRollOver)
+            {
+                SFXManager.instance.PlaySound(SFXManager.instance.RolloverCardSound, 0.6f);
+            }
+            playRollOver = false;
         }
         EventDelegate.Execute(onHoverOver);
+    }
+
+    private IEnumerator DoPlayCardEffects()
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        BattleManager.battleManager.CameraShaker.StartShaking();
+        SFXManager.instance.PlaySound(SFXManager.instance.PlayCardSound, 1.0f);
     }
 
     void HoverOut()
@@ -131,6 +166,7 @@ public class CardController : MonoBehaviour {
             DoScaleToNormal();
         }        
         EventDelegate.Execute(onHoverOut);
+        playRollOver = true;
     }
 
     void OnPress(bool pressed)

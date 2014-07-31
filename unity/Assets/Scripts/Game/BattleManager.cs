@@ -5,6 +5,8 @@ public class BattleManager : MonoBehaviour {
 
     public static BattleManager battleManager;
 
+    public Shaker CameraShaker;
+
     //public int argumentsWon = 0;
     //public int ArgumentsWon
     //{

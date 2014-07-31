@@ -754,7 +754,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 633f6bc8dab2aa54f99c6845b709cdb7, type: 3}
   m_Name: 
@@ -781,22 +781,26 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 3.60924602
+      outSlope: 3.60924602
       tangentMode: 0
     - time: 1
       value: 1
-      inSlope: -.588953376
-      outSlope: -.588953376
+      inSlope: -1.1173296
+      outSlope: -1.1173296
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
   ignoreTimeScale: 1
   delay: 0
-  duration: .200000003
+  duration: .25
   steeperCurves: 0
   tweenGroup: 1
-  onFinished: []
+  onFinished:
+  - mTarget: {fileID: 11400030}
+    mMethodName: OnScaleComplete
+    mParameters: []
+    oneShot: 0
   eventReceiver: {fileID: 0}
   callWhenFinished: 
   from: {x: 1, y: 1, z: 0}
@@ -842,6 +846,7 @@ MonoBehaviour:
   - {fileID: 11400038}
   - {fileID: 11400040}
   TrashDelay: 1
+  doPlayCardEffects: 0
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -31,8 +31,6 @@ public class GameMessageManager : MonoBehaviour {
 
     public List<AudioClip> IntroMumbles;
 
-    public AudioSource MumbleSource;
-
 	// Use this for initialization
 	void Awake () {
         gameMessageManager = this;
@@ -87,12 +85,11 @@ public class GameMessageManager : MonoBehaviour {
 
     private void DoRandomMumbles()
     {
-        if (RandomMumbles.Count == 0) { return; }
+        if (RandomMumbles.Count == 0 ||
+            !PlayRandomMumbles) { return; }
 
         if (!IsFinished || AlwaysDoHostMumble)
         {
-            if (!MumbleSource.isPlaying)
-            {
                 if (playNextMumble)
                 {
                     if (currentSpeaker == Speaker.Host ||
@@ -104,11 +101,10 @@ public class GameMessageManager : MonoBehaviour {
 
 
                         AudioClip clip = RandomMumbles[nextMumble];
-                        MumbleSource.PlayOneShot(clip);
+                        Globals.GetInstance().SFXSource.PlayOneShot(clip);
                         StartCoroutine(DelayMumbling(clip.length));
                     }
                 }                
-            }
         }
     }
 

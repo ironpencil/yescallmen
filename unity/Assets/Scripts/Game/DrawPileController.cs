@@ -52,7 +52,7 @@ public class DrawPileController : MonoBehaviour {
                 }
             }
             //newCard = CardFactory.cardFactory.CreateCard(cardName, 1, gameObject);
-        }
+        }        
 
         return newCard;
     }

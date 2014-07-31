@@ -263,8 +263,10 @@ public class CardZoneManager : MonoBehaviour {
     {        
 
         UIGrid currentGrid = cardObject.transform.parent.gameObject.GetComponent<UIGrid>();
-
+       
         CardController cardController = cardObject.GetComponent<CardController>();
+
+        CardContainer.CardZone previousZone = cardController.CurrentZone;
 
         GameObject newParent = null;
 
@@ -281,7 +283,8 @@ public class CardZoneManager : MonoBehaviour {
         {
             cardObject.transform.parent = newParent.transform;
 
-            cardController.UpdateCurrentZone();
+            //cardController.UpdateCurrentZone();
+            cardController.CurrentZone = newZone;
 
             UIGrid destinationGrid = newParent.GetComponent<UIGrid>();
 
@@ -319,6 +322,7 @@ public class CardZoneManager : MonoBehaviour {
                 if (cardController != null)
                 {
                     cardController.DoTrashAnimation();
+                    MoveToTrashEffects(previousZone);
                 }
                 else
                 {
@@ -326,24 +330,123 @@ public class CardZoneManager : MonoBehaviour {
                 }
                 break;
             case CardContainer.CardZone.Hand:
+                MoveToHandEffects(previousZone);
                 break;
             case CardContainer.CardZone.Play:
+                MoveToPlayEffects(previousZone);
                 break;
             case CardContainer.CardZone.Discard:
                 NGUITools.BringForward(cardObject);
                 DeckManager.deckManager.AddCardToDiscard(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
                 cardController.gameCard.isGainedCard = false; //only allowed to gain it once
+                MoveToDiscardEffects(previousZone);
                 break;
             case CardContainer.CardZone.Deck:
                 DeckManager.deckManager.AddCardToDeck(cardController.gameCard.cardDefinition, cardController.gameCard.isGainedCard);
                 cardController.gameCard.isGainedCard = false; //only allowed to gain it once
                 StartCoroutine(MoveCardToDeck(cardObject));
+                MoveToDeckEffects(previousZone);
+                break;
+            case CardContainer.CardZone.Selection:
+                MoveToSelectionEffects(previousZone);
                 break;
             default:
                 break;
         }
 
     }
+
+    private void MoveToTrashEffects(CardContainer.CardZone fromZone)
+    {
+        //introduce a slight random delay for instances of drawing multiple cards
+        //Debug.Log("Draw card sound");
+        //SFXManager.instance.QueueSound(SFXManager.instance.DrawCardSound, 1.0f, UnityEngine.Random.Range(0.0f, cardSoundDelayRange));
+    }
+
+    private void MoveToHandEffects(CardContainer.CardZone fromZone)
+    {
+        //introduce a slight random delay for instances of drawing multiple cards
+        //Debug.Log("Draw card sound");
+        switch (fromZone)
+        {
+            case CardContainer.CardZone.Display:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.2f));    
+                break;
+            case CardContainer.CardZone.Selection:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.1f));   
+                break;
+            default:
+                break;
+        }                
+    }
+
+    private void MoveToPlayEffects(CardContainer.CardZone fromZone)
+    {
+        //introduce a slight random delay for instances of drawing multiple cards
+        //Debug.Log("Draw card sound");
+        //SFXManager.instance.QueueSound(SFXManager.instance.DrawCardSound, 1.0f, UnityEngine.Random.Range(0.0f, cardSoundDelayRange));
+    }
+
+    private void MoveToDiscardEffects(CardContainer.CardZone fromZone)
+    {
+        //introduce a slight random delay for instances of drawing multiple cards
+        //Debug.Log("Draw card sound");
+        //SFXManager.instance.QueueSound(SFXManager.instance.DrawCardSound, 1.0f, UnityEngine.Random.Range(0.0f, cardSoundDelayRange));
+
+        switch (fromZone)
+        {
+            case CardContainer.CardZone.Hand:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.2f)); 
+                break;
+            case CardContainer.CardZone.Play:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.2f)); 
+                break;
+            case CardContainer.CardZone.Display:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.1f)); 
+                break;
+            case CardContainer.CardZone.Selection:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.1f)); 
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void MoveToDeckEffects(CardContainer.CardZone fromZone)
+    {
+        //introduce a slight random delay for instances of drawing multiple cards
+        //Debug.Log("Draw card sound");
+        //SFXManager.instance.QueueSound(SFXManager.instance.DrawCardSound, 1.0f, UnityEngine.Random.Range(0.0f, cardSoundDelayRange));
+        switch (fromZone)
+        {
+            case CardContainer.CardZone.Discard:
+                SFXManager.instance.QueueSound(SFXManager.instance.ReshuffleSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.5f));  
+                break;
+            case CardContainer.CardZone.Selection:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.1f));  
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void MoveToSelectionEffects(CardContainer.CardZone fromZone)
+    {
+        switch (fromZone)
+        {
+            case CardContainer.CardZone.Hand:
+                SFXManager.instance.QueueSound(SFXManager.instance.RandomSlidingSound, 1.0f, UnityEngine.Random.Range(0.0f, 0.1f));   
+                break;
+            default:
+                break;
+        }
+        //introduce a slight random delay for instances of drawing multiple cards
+        //Debug.Log("Draw card sound");
+        //SFXManager.instance.QueueSound(SFXManager.instance.DrawCardSound, 1.0f, UnityEngine.Random.Range(0.0f, cardSoundDelayRange));
+    }
+
+
+
 
     private IEnumerator MoveCardToDeck(GameObject card)
     {
@@ -395,14 +498,23 @@ public class CardZoneManager : MonoBehaviour {
     {
         CardContainer.CardZone fromZone = card.CurrentZone;
 
+        bool canClickCard = false;
+
         switch (fromZone)
         {
             case CardContainer.CardZone.Hand:
-                return DoClickCardInHand(card);
+                canClickCard = DoClickCardInHand(card);
+                if (!canClickCard)
+                {
+                    SFXManager.instance.PlaySound(SFXManager.instance.RolloverCardSound, 1.0f);
+                }
+                break;
             case CardContainer.CardZone.Display:
-                return DoClickCardInDisplay(card);
+                canClickCard = DoClickCardInDisplay(card);
+                break;
             case CardContainer.CardZone.Selection:
-                return DoClickCardInSelection(card);
+                canClickCard = DoClickCardInSelection(card);
+                break;
             default:
                 break;
         }
@@ -410,7 +522,7 @@ public class CardZoneManager : MonoBehaviour {
 
 
 
-        return false;
+        return canClickCard;
     }
 
     private bool DoClickCardInHand(CardController card)
@@ -424,7 +536,7 @@ public class CardZoneManager : MonoBehaviour {
 
             //card can be played, now play it
             MoveCardToZone(card.gameObject, CardContainer.CardZone.Play);
-            RulesManager.rulesManager.PlayCard(card.gameObject, false);
+            RulesManager.rulesManager.PlayCard(card.gameObject, true);
 
             //click was successful, return true
             return true;

@@ -154,8 +154,12 @@ public class RulesManager : MonoBehaviour {
 
     //    PlayCard(cardObject);
     //}
+    public void PlayCard(GameObject cardObject, bool printQuote)    
+    {
+        PlayCard(cardObject, printQuote, true);
+    }
 
-    public void PlayCard(GameObject cardObject, bool printQuote)
+    public void PlayCard(GameObject cardObject, bool printQuote, bool playCardEffects)
     {
         CardController cardController = cardObject.GetComponent<CardController>();
 
@@ -213,6 +217,8 @@ public class RulesManager : MonoBehaviour {
             //any card we play during the tutorial should advance the tutorial to the next step
             TutorialManager.instance.ContinueTutorial = true;
         }
+
+        cardController.doPlayCardEffects = playCardEffects;
     }
 
     public void ResetTurn()

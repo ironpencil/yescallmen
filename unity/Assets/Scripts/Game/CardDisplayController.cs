@@ -46,6 +46,8 @@ public class CardDisplayController : MonoBehaviour {
 
     public float defaultDisplayTime = 3.0f;
 
+    public float cardSoundDelayRange = 0.5f;
+
     //public UIScrollView handScrollView;
 
     public List<DisplayedCard> displayedCards = new List<DisplayedCard>();
@@ -150,6 +152,10 @@ public class CardDisplayController : MonoBehaviour {
     public void DisplayCard(GameObject cardObject, CardContainer.CardZone destinationZone, float displayTime)
     {
         if (cardObject == null) return;
+
+        //introduce a slight random delay for instances of drawing multiple cards
+        Debug.Log("Draw card sound");
+        SFXManager.instance.QueueSound(SFXManager.instance.RandomDrawingSound, 1.0f, UnityEngine.Random.Range(0.0f, cardSoundDelayRange));
 
         //TweenScale.Begin(cardObject, 0.5f, new Vector3(1.5f, 1.5f, 0.0f)).PlayForward(); 
 

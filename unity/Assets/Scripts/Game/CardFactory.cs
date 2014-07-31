@@ -319,7 +319,7 @@ public class CardFactory : MonoBehaviour
         PutCardsOnDeckEvent deckEvent = new PutCardsOnDeckEvent();
         deckEvent.numCards = 1;
         deckEvent.numRequiredCards = 0;
-        deckEvent.promptText = "Put a card from hand on top of deck.";
+        deckEvent.promptText = "You may put a card on top of your deck.";
 
         gameCard.AddEvent(deckEvent);
     }
@@ -397,7 +397,7 @@ public class CardFactory : MonoBehaviour
         LevelSelectedCardsEvent levelEvent = new LevelSelectedCardsEvent();
         levelEvent.numCards = 2;
         levelEvent.numRequiredCards = 0;
-        levelEvent.promptText = "Level up 2 cards from hand, then discard them.";
+        levelEvent.promptText = "You may level up 2 cards, then discard them.";
         levelEvent.cardDestination = CardContainer.CardZone.Discard;
         levelEvent.canCancel = true;
 
@@ -498,7 +498,7 @@ public class CardFactory : MonoBehaviour
         TrashSelectedCardsEvent trashEvent = new TrashSelectedCardsEvent();
         trashEvent.numCards = 1;
         trashEvent.numRequiredCards = 0;
-        trashEvent.promptText = "Trash a card from your hand.";
+        trashEvent.promptText = "You may Trash a card from your hand.";
 
         gameCard.AddEvent(trashEvent);
 
