@@ -19222,6 +19222,8 @@ MonoBehaviour:
   typewriter: {fileID: 1458121467}
   charsPerSecond: 60
   PlayRandomMumbles: 1
+  VictoryMumblesOnly: 0
+  DefeatMumblesOnly: 0
   RandomMumbles:
   - {fileID: 8300000, guid: 6f538d93e60a97447941866d1baa7970, type: 3}
   - {fileID: 8300000, guid: 58762c08aa9d7254ca4449f7f556bff4, type: 3}
@@ -19254,10 +19256,27 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f77a7cce2daf51d42a8f453cd61d204d, type: 3}
   - {fileID: 8300000, guid: f88ef2ced751b60459d82a740177e03c, type: 3}
   - {fileID: 8300000, guid: fdcaf9e8a55659f40b253808b9d8242a, type: 3}
+  VictoryMumbles:
+  - {fileID: 8300000, guid: 62480f420e5fa1e4db12959c89f3a85c, type: 3}
+  - {fileID: 8300000, guid: 02276be30d80a7346bbf4993cd271667, type: 3}
+  - {fileID: 8300000, guid: cdc0c3c4fc53b1b4d8b675173a07d93a, type: 3}
+  - {fileID: 8300000, guid: 521b3c272913b904c810661413efad00, type: 3}
+  - {fileID: 8300000, guid: b1518e3794548ad47aa1c955936d40c1, type: 3}
+  - {fileID: 8300000, guid: efa63038540395a4fbcc8dbf8905ee35, type: 3}
+  - {fileID: 8300000, guid: 7a03d80cf38aa1942aeb758172d15665, type: 3}
+  - {fileID: 8300000, guid: 8f37d98957ac3f248b1839e7e79d17a9, type: 3}
+  DefeatMumbles:
+  - {fileID: 8300000, guid: 77fe175164871934aaa754676f9ae280, type: 3}
+  - {fileID: 8300000, guid: cef25083336e0b047b17ee2ddbc09545, type: 3}
+  - {fileID: 8300000, guid: c9bb674431ebb814aa5883d97b5b43f6, type: 3}
+  - {fileID: 8300000, guid: 14e35ec614692184b8bedca2c4ea4494, type: 3}
+  - {fileID: 8300000, guid: 4614e80957a697b428a7fcf58de0c527, type: 3}
+  - {fileID: 8300000, guid: e5f8369a481717d40ae01e16d4d18911, type: 3}
+  - {fileID: 8300000, guid: da532b4b89ef3ad499efce88ad99abea, type: 3}
   PlayIntroMumbles: 0
   IntroMumbles: []
   AlwaysDoHostMumble: 0
-  MumbleRepeatLimit: 10
+  MumbleRepeatLimit: 4
   MumbleDelayOffset: -.150000006
   HostColor: {r: 1, g: 1, b: 1, a: 1}
   CallerColor: {r: 1, g: 0, b: 1, a: 1}
@@ -19345,6 +19364,13 @@ MonoBehaviour:
   NotAllMenSound: {fileID: 8300000, guid: 8e635d44713ee164196b1d2812dd3b8b, type: 3}
   PlayCardSound: {fileID: 8300000, guid: 99a0f77b33e0ef242af9877399c759a7, type: 3}
   RolloverCardSound: {fileID: 8300000, guid: ad0f17c7c6a638b4985920dab80d6d4a, type: 3}
+  TrashCardSound: {fileID: 8300000, guid: c8c7aaef839138d42ba9400977a2df5e, type: 3}
+  CallWonSound: {fileID: 8300000, guid: bfe161aca9732c6439ab83c6b2b950dd, type: 3}
+  ShowWonSound: {fileID: 8300000, guid: 7f064714bdd1bc7458b3587901a17278, type: 3}
+  DrawerOpen: {fileID: 8300000, guid: ca62659c8d8c4934b9ea08d6b4fd01f9, type: 3}
+  DrawerClose: {fileID: 8300000, guid: bbc65c8d35acc324f96d2079325197f5, type: 3}
+  WindowOpen: {fileID: 8300000, guid: 3deff6e6c5d29da4a9ec05e6ce054190, type: 3}
+  WindowClose: {fileID: 8300000, guid: 65a76938fd3fd3545af011e2dfcc916c, type: 3}
   ReshuffleSound: {fileID: 8300000, guid: 802dcecf1b29e2740ab17a75a91722c6, type: 3}
   SlidingSounds:
   - {fileID: 8300000, guid: 1b44b8aa6aed971439f6c895520bd1ca, type: 3}

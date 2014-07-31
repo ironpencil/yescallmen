@@ -91,16 +91,19 @@ public class TurnManager : MonoBehaviour {
     {
         currentTurnState = TurnState.EndShow;
 
-        
+        GameMessageManager.gameMessageManager.VictoryMumblesOnly = false;
+        GameMessageManager.gameMessageManager.DefeatMumblesOnly = false;
 
         string finishText = "";
 
         if (Globals.GetInstance().PlayerFinishedLastShow)
         {
-            finishText = ">> Well that's all the time we have for tonight's show. Join me next time on #YesCallMen to get more TRUTH BOMBS dropped on you.";
+            GameMessageManager.gameMessageManager.VictoryMumblesOnly = true;
+            finishText = ">> Well that's all the time we have for tonight's show. " + MRAManager.instance.GetHostSignOff();
         }
         else
         {
+            GameMessageManager.gameMessageManager.DefeatMumblesOnly = true;
             finishText = ">> I'M DONE! I'M JUST DONE!! MAYBE WE'LL BE BACK TOMORROW, AND HOPEFULLY THESE DAMN FEMINAZIS WILL STOP WITH THEIR BULLSHIT!";
         }
 
@@ -123,6 +126,9 @@ public class TurnManager : MonoBehaviour {
         {
             yield return new WaitForSeconds(0.1f);
         }
+
+        GameMessageManager.gameMessageManager.VictoryMumblesOnly = false;
+        GameMessageManager.gameMessageManager.DefeatMumblesOnly = false;
         
         Globals.GetInstance().SaveSession();
 
@@ -347,6 +353,8 @@ public class TurnManager : MonoBehaviour {
         Globals.GetInstance().PlayerBattlesWon++;
         MRAManager.instance.AddAnotherStrangeQuote();
 
+        GameMessageManager.gameMessageManager.VictoryMumblesOnly = true;
+
         GameMessageManager.gameMessageManager.AddLine(">> The caller screams in frustration, then the line goes dead.", false, GameMessageManager.Speaker.System);
         GameMessageManager.gameMessageManager.AddLine(">> Ha ha, I accept your defeat, caller!", false, GameMessageManager.Speaker.Host);
 
@@ -356,12 +364,15 @@ public class TurnManager : MonoBehaviour {
 
             Globals.GetInstance().PlayerLevel++;
 
+            SFXManager.instance.PlaySound(SFXManager.instance.ShowWonSound, 1.0f);
+
             CardGainController.cardGainController.GainFinishedShowCard();
             Globals.GetInstance().PlayerFinishedLastShow = true;
             StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.EndShow, 0.0f));
         }
         else
         {
+            SFXManager.instance.PlaySound(SFXManager.instance.CallWonSound, 1.0f);
 
             CardGainController.cardGainController.GainBattleWonCard();
             StartCoroutine(ChangeToStateWhenDisplayEmpty(TurnState.OutOfBattle, Globals.GetInstance().SHORT_DISPLAY_TIME));
@@ -378,6 +389,9 @@ public class TurnManager : MonoBehaviour {
 
         Globals.GetInstance().PlayerBattlesLost++;
         MRAManager.instance.AddAnotherStrangeQuote();
+
+        GameMessageManager.gameMessageManager.DefeatMumblesOnly = true;
+
         //BattleManager.battleManager.PlayerCurrentAnger = BattleManager.battleManager.PlayerMaxAnger;
 
         GameMessageManager.gameMessageManager.AddLine(">> I CAN'T HANDLE ANY MORE OF THESE IDIOTS TONIGHT!", false, GameMessageManager.Speaker.Host);
@@ -402,6 +416,9 @@ public class TurnManager : MonoBehaviour {
         //}
 
         yield return new WaitForSeconds(0.1f);
+
+        GameMessageManager.gameMessageManager.VictoryMumblesOnly = false;
+        GameMessageManager.gameMessageManager.DefeatMumblesOnly = false;
 
         GameMessageManager.gameMessageManager.ClearText();
         GameMessageManager.gameMessageManager.AddLine(">> Alright let's take the next caller.", false, GameMessageManager.Speaker.Host);

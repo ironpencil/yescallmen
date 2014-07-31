@@ -24,8 +24,13 @@ public class GameMessageManager : MonoBehaviour {
     }
 
     public bool PlayRandomMumbles = true;
+    public bool VictoryMumblesOnly = false;
+    public bool DefeatMumblesOnly = false;
 
     public List<AudioClip> RandomMumbles;
+
+    public List<AudioClip> VictoryMumbles;
+    public List<AudioClip> DefeatMumbles;
 
     public bool PlayIntroMumbles = false;
 
@@ -81,7 +86,7 @@ public class GameMessageManager : MonoBehaviour {
         }
     }
 
-    public bool AlwaysDoHostMumble = false;
+    public bool AlwaysDoHostMumble = false;    
 
     private void DoRandomMumbles()
     {
@@ -97,10 +102,7 @@ public class GameMessageManager : MonoBehaviour {
                     {
                         playNextMumble = false;
 
-                        int nextMumble = GetNextMumble();
-
-
-                        AudioClip clip = RandomMumbles[nextMumble];
+                        AudioClip clip = GetNextMumble();
                         Globals.GetInstance().SFXSource.PlayOneShot(clip);
                         StartCoroutine(DelayMumbling(clip.length));
                     }
@@ -108,30 +110,53 @@ public class GameMessageManager : MonoBehaviour {
         }
     }
 
-    private int GetNextMumble()
+    private AudioClip GetNextMumble()
     {
-        int nextMumble = UnityEngine.Random.Range(0, RandomMumbles.Count);
+        AudioClip clip = SelectMumble();
 
         int safety = 0;
-        while (previousMumbles.Contains(nextMumble) && safety < RandomMumbles.Count)
+        while (previousMumbles.Contains(clip.name) && safety < RandomMumbles.Count)
         {
-            nextMumble = UnityEngine.Random.Range(0, RandomMumbles.Count);
+            clip = SelectMumble();
             safety++; //only search for a new mumble so many times
         }
 
-        previousMumbles.Enqueue(nextMumble);
+        previousMumbles.Enqueue(clip.name);
 
         if (previousMumbles.Count > MumbleRepeatLimit)
         {
             previousMumbles.Dequeue();
         }
-        return nextMumble;
+        return clip;
+    }
+
+    private AudioClip SelectMumble()
+    {
+        int nextMumble = 0;
+        AudioClip clip = null;
+
+        if (VictoryMumblesOnly)
+        {
+            nextMumble = UnityEngine.Random.Range(0, VictoryMumbles.Count);
+            clip = VictoryMumbles[nextMumble];
+        }
+        else if (DefeatMumblesOnly)
+        {
+            nextMumble = UnityEngine.Random.Range(0, DefeatMumbles.Count);
+            clip = DefeatMumbles[nextMumble];
+        }
+        else
+        {
+            nextMumble = UnityEngine.Random.Range(0, RandomMumbles.Count);
+            clip = RandomMumbles[nextMumble];
+        }
+        return clip;
     }
 
     public int MumbleRepeatLimit = 3;
     public float MumbleDelayOffset = 0.02f;
 
-    private Queue<int> previousMumbles = new Queue<int>();
+    private Queue<string> previousMumbles = new Queue<string>();
 
     private bool playNextMumble = true;    
 

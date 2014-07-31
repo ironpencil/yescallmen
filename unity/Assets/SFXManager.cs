@@ -9,6 +9,14 @@ public class SFXManager : MonoBehaviour {
     public AudioClip NotAllMenSound;
     public AudioClip PlayCardSound;
     public AudioClip RolloverCardSound;
+    public AudioClip TrashCardSound;
+    public AudioClip CallWonSound;
+    public AudioClip ShowWonSound;
+
+    public AudioClip DrawerOpen;
+    public AudioClip DrawerClose;
+    public AudioClip WindowOpen;
+    public AudioClip WindowClose;
 
     public AudioClip ReshuffleSound;
 

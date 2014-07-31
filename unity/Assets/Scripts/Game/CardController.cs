@@ -67,11 +67,15 @@ public class CardController : MonoBehaviour {
 
     private IEnumerator TrashCardAfterDelay()
     {
+        float randomDelay = UnityEngine.Random.Range(0, 0.2f);
+        SFXManager.instance.QueueSound(SFXManager.instance.TrashCardSound, 0.5f, TrashDelay - randomDelay);
+
         yield return new WaitForSeconds(TrashDelay);
         foreach (UITweener tween in onTrashTweens)
         {
             tween.PlayForward();
         }
+
     }
 
     void DestroyCard()

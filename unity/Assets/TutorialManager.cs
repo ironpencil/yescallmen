@@ -73,6 +73,8 @@ public class TutorialManager : MonoBehaviour {
 
         MessageLabel.text = text;
         MessageBoxTween.PlayForward();
+
+        SFXManager.instance.PlaySound(SFXManager.instance.WindowOpen, 1.0f);
         
     }
 
@@ -80,6 +82,8 @@ public class TutorialManager : MonoBehaviour {
     {
         BlockingCollider.enabled = false;
         MessageBoxTween.PlayReverse();
+
+        SFXManager.instance.PlaySound(SFXManager.instance.WindowClose, 1.0f);
 
         if (startStateMachineOnClose)
         {

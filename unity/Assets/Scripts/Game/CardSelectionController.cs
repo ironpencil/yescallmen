@@ -179,6 +179,7 @@ public class CardSelectionController : MonoBehaviour {
         if (tweenPosition != null)
         {
             tweenPosition.PlayForward();
+            SFXManager.instance.PlaySound(SFXManager.instance.DrawerOpen, 1.0f);
         }
 
         Finished = false;
@@ -221,6 +222,7 @@ public class CardSelectionController : MonoBehaviour {
         if (tweenPosition != null)
         {
             tweenPosition.PlayReverse();
+            SFXManager.instance.PlaySound(SFXManager.instance.DrawerClose, 1.0f);
         }
 
         SlotCount = 0;

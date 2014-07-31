@@ -27,6 +27,7 @@ public class MRAManager : MonoBehaviour
     private int lastFemaleVerbIndex = -1;
     private int lastMaleVerbIndex = -1;
     private int lastFeministArgIndex = -1;
+    private int lastSignOffIndex = -1;
 
     public string GetCallerArgument()
     {
@@ -65,6 +66,26 @@ public class MRAManager : MonoBehaviour
         }
 
         return quote;
+    }
+
+    public string GetHostSignOff()
+    {
+        return GetSignOff() + "!";
+    }
+
+    private string GetSignOff()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, signOffQuotes.Count);
+
+        //prevent duplicates
+        while (randomIndex == lastSignOffIndex)
+        {
+            randomIndex = UnityEngine.Random.Range(0, signOffQuotes.Count);
+        }
+
+        lastSignOffIndex = randomIndex;
+
+        return signOffQuotes[randomIndex];
     }
 
     private string GetFeministArgument()
@@ -150,13 +171,30 @@ public class MRAManager : MonoBehaviour
         "to be treated like human beings",
         "equal pay for equal work",
         "to be respected in the workplace",
-        "to not be stared at by creepy guys constantly"
+        "to not be stared at by creepy guys constantly",
+        "to be permitted to vote",
+        "to be more than just baby factories",
+        "to not have to shave all the time",
+        "to end genital mutilation in third-world countries",
+        "to hear more female voices in gaming",
+        "to be more than an object",
+        "their voices to be heard",
+        "to end gender discrimination",
+        "the same benefits that men enjoy",
+        "to have a career",
+        "to be allowed to leave the house",
+        "to not have to make me a sandwich"
     };
 
     List<string> feministArgumentsStrange = new List<string>() {
         "to not be shrunk down and kept in jars as trophies",
         "less than 30-hour work days",
-        "to be allowed to eat at the grown-ups table during family dinners"
+        "to be allowed to eat at the grown-ups table during family dinners",
+        "to perambulate unchaperoned",
+        "to not be crushed into tiny cubes to save space",
+        "to not have Game of Thrones be spoiled for them",
+        "to not be sent dick pics constantly",
+        "to be allowed to pick out their own clothes"
     };
 
     List<string> femaleMRAVerbs = new List<string>() 
@@ -187,7 +225,11 @@ public class MRAManager : MonoBehaviour
         "want rough sex",
         "want to be superior to men",
         "think penises are evil",
-        "lie about rape"
+        "lie about rape",
+        "act nerdy to trick gamers into liking them",
+        "vote",
+        "expect men to call them back",
+        "cloud the issue with facts"
     };
 
     List<string> maleMRAVerbs = new List<string>()
@@ -213,7 +255,10 @@ public class MRAManager : MonoBehaviour
         "excel at video games",
         "pay for sex",
         "think 'No' means 'Yes'",
-        "end up being inferior to females"
+        "end up being inferior to females",
+        "repeatedly ask for their number",
+        "take them on a date to Golden Corral in their mom's van",
+        "get used to disappointment"
     };
 
     List<string> femaleStrangeVerbs = new List<string>()
@@ -248,7 +293,7 @@ public class MRAManager : MonoBehaviour
         "kick ass and chew bubblegum",
         "literally drain the life force of men during sex",
         "move their eyes independently",
-        "pull their victims hearts from their chests using only their bare hands",
+        "pull out their victims' still-beating hearts using only their bare hands and show it to them before they die",
         "refuse to acknowledge the brilliance of the A-Team",
         "refuse to share the gift of fire",
         "run faster than horses",
@@ -261,7 +306,10 @@ public class MRAManager : MonoBehaviour
         "tell me the odds",
         "transform by the light of the full moon",
         "unhinge their jaws to devour prey whole",
-        "combine with other females to form a giant fighting robot"
+        "combine with other females to form a giant fighting robot",
+        "cut into men, tear the flesh, wear the flesh, and be born unto new worlds where the flesh becomes their key",
+        "have their reproductive organs on in the inside instead of the outside",
+        "put their trust in worthless fiat currency"
     };
 
     List<string> maleStrangeVerbs = new List<string>()
@@ -276,7 +324,8 @@ public class MRAManager : MonoBehaviour
         "bring home the bacon",
         "shuffle everyday",
         "eat pack after pack of ramen noodles cooked over trash barrels",
-        "mine for bitcoins",
+        "mine for Bitcoins",
+        "Google Ron Paul",
         "store dismembered body parts in the freezer",
         "inflate themselves to three times their size to ward off predators",
         "get their fins stuck in fishing nets",
@@ -314,7 +363,37 @@ public class MRAManager : MonoBehaviour
         "find out that their sworn enemy is actually their father",
         "fight through an army of robots",
         "die in real life if they die in the game",
-        "prefer the leading brand"
+        "prefer the leading brand",
+        "make indie games",
+        "have a computer as their closest friend",
+        "collect the Dragon Balls",
+        "purchase kawaii waifu bodypillows",
+        "pee standing up"
+    };
+
+    List<string> signOffQuotes = new List<string>() {
+        "Join me next time on #YesCallMen to get more TRUTH BOMBS dropped on you",
+        "Join me next time on #YesCallMen to get riddled with more TRUTH BULLETS",
+        "Join me next time on #YesCallMen to get diced up again by my Hanzo Steel TRUTH KATANA",
+        "Join me next time on #YesCallMen to get run over again by my TRUTH MINIVAN",
+        "Join me next time on #YesCallMen to get pummeled mercilessly again by my TRUTH FISTS",
+        "Join me next time on #YesCallMen to get crushed up again by my TRUTH TRASH COMPACTOR",
+        "Join me next time on #YesCallMen to get blown to pieces again by my TRUTH DYNAMITE",
+        "Join me next time on #YesCallMen to get ripped to shreds again by my TRUTH PIRANHAS",
+        "Join me next time on #YesCallMen to get burned to a crisp again by my TRUTH FLAMETHROWER",
+        "Join me next time on #YesCallMen to get flattened again by my TRUTH HAMMER",
+        "Join me next time on #YesCallMen to get bludgeoned about the head and neck again with my TRUTH CLUB",
+        "Join me next time on #YesCallMen to get mortally wounded again by my TRUTH BAYONET",
+        "Join me next time on #YesCallMen to get pierced again by TRUTH SHRAPNEL",
+        "Join me next time on #YesCallMen to get flayed again by my TRUTH RAZOR",
+        "Join me next time on #YesCallMen to get asphyxiated again by TRUTH GAS",
+        "Join me next time on #YesCallMen to get smothered again with my TRUTH PILLOW",
+        "Join me next time on #YesCallMen to get atomized again by my TRUTH BEAM",
+        "Join me next time on #YesCallMen to get irradiated again by my TRUTH FALLOUT",
+        "Join me next time on #YesCallMen to get shock-and-awed again by my TRUTH MISSILES",
+        "Join me next time on #YesCallMen to get accidentally targeted again by my high-altitude TRUTH DRONE",
+        "Join me next time on #YesCallMen to get annexed again by my TRUTH ARMY",
+        "Join me next time on #YesCallMen to get 360 no-scoped again by my TRUTH SNIPER RIFLE"
     };
 
     #endregion
