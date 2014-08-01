@@ -310,7 +310,8 @@ public class MRAManager : MonoBehaviour
         "combine with other females to form a giant fighting robot",
         "cut into men, tear the flesh, wear the flesh, and be born unto new worlds where the flesh becomes their key",
         "have their reproductive organs on in the inside instead of the outside",
-        "put their trust in worthless fiat currency"
+        "put their trust in worthless fiat currency",
+        "fight monsters and allow themselves to become one"
     };
 
     List<string> maleStrangeVerbs = new List<string>()
@@ -370,7 +371,8 @@ public class MRAManager : MonoBehaviour
         "collect the Dragon Balls",
         "purchase kawaii waifu bodypillows",
         "pee standing up",
-        "drop hard negs"
+        "drop hard negs",
+        "gaze long into the abyss and allow the abyss to gaze back"
     };
 
     List<string> signOffQuotes = new List<string>() {
