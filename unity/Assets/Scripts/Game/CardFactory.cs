@@ -454,7 +454,7 @@ public class CardFactory : MonoBehaviour
 
     private void GenerateNotAllMen(GameCard gameCard, int level)
     {
-        gameCard.Title = "Not All Men";
+        gameCard.Title = "Not All Men!";
         gameCard.AbilityText = "Special\r\n(No Action)\r\n\r\n+5 Cards\r\n+1 Action\r\n+25 Max Anger\r\nLevel up all cards in your hand.\r\nTrash this card.";
         gameCard.cardType = GameCard.CardType.Special;
         gameCard.actionsAdded = 1;

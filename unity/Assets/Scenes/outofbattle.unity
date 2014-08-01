@@ -3017,6 +3017,34 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: leftAnchor.absolute
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: rightAnchor.absolute
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: m_Size.x
+      value: 534
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: mWidth
+      value: 535
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
+      propertyPath: aspectRatio
+      value: 3.34375
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3549599dd16d32a408cecdef7b7124ed, type: 2}
   m_RootGameObject: {fileID: 2060982201}
@@ -3966,7 +3994,7 @@ Transform:
   m_PrefabInternal: {fileID: 1251652122}
   m_GameObject: {fileID: 1523429064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.52587891e-05, y: 7.62939453e-06, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1502414345}
@@ -4014,11 +4042,11 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 505066244}
     relative: 0
-    absolute: 0
+    absolute: -1
   rightAnchor:
     target: {fileID: 505066244}
     relative: 1
-    absolute: 0
+    absolute: -1
   bottomAnchor:
     target: {fileID: 505066244}
     relative: 0
@@ -4036,7 +4064,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.3375001
+  aspectRatio: 3.34375
 --- !u!1 &1550298684
 GameObject:
   m_ObjectHideFlags: 0
@@ -4365,26 +4393,26 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 4.44098043
+      outSlope: 4.44098043
       tangentMode: 0
     - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: .0013756156
+      inSlope: -4.44296408
+      outSlope: -4.44296408
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
   ignoreTimeScale: 1
-  delay: 0
-  duration: .300000012
+  delay: .100000001
+  duration: .495000005
   steeperCurves: 0
   tweenGroup: 0
   onFinished: []
   eventReceiver: {fileID: 0}
   callWhenFinished: 
   from: {x: 0, y: 20, z: 0}
-  to: {x: 0, y: 30, z: 0}
+  to: {x: 0, y: 80, z: 0}
   worldSpace: 0
 --- !u!1 &1586384515
 GameObject:
@@ -4548,7 +4576,7 @@ MonoBehaviour:
     m_PostInfinity: 2
   ignoreTimeScale: 1
   delay: 0
-  duration: 1.79999995
+  duration: 2
   steeperCurves: 0
   tweenGroup: 0
   onFinished: []
@@ -5184,8 +5212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scalingStyle: 0
   manualHeight: 720
-  minimumHeight: 320
-  maximumHeight: 1536
+  minimumHeight: 600
+  maximumHeight: 600
   adjustByDPI: 0
   shrinkPortraitUI: 0
 --- !u!4 &1769576493

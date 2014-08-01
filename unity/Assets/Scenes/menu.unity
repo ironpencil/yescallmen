@@ -35719,12 +35719,12 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 0}
   mPivot: 4
   mWidth: 960
-  mHeight: 600
+  mHeight: 610
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.60000002
+  aspectRatio: 1.57377052
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -56547,8 +56547,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scalingStyle: 0
   manualHeight: 720
-  minimumHeight: 320
-  maximumHeight: 1536
+  minimumHeight: 600
+  maximumHeight: 600
   adjustByDPI: 0
   shrinkPortraitUI: 0
 --- !u!4 &1511155442

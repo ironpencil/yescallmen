@@ -235,7 +235,7 @@ public class MRAManager : MonoBehaviour
 
     List<string> maleMRAVerbs = new List<string>()
     {
-        "own fedoras for every occassion",
+        "own fedoras for every occasion",
         "avoid females during their periods",
         "get falsely accused of rape",
         "mistrust paternity tests",
