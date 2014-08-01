@@ -122,4 +122,6 @@ public class HostSpeechManager : MonoBehaviour {
     private float cachedAnimateDelay = 0.0f;
     private float cachedDelayRange = 0.0f;
 
+    public bool CanForceNewAnimation { get { return !forceAnimate; } }
+
 }

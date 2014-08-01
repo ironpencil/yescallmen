@@ -14,11 +14,12 @@ public class HostClicker : MonoBehaviour {
 
     public float StartTimer = 3.0f;
 
-    private HostSpeechManager speechManager;
+    public bool CanEnableAlwaysMumble = true;
+
+    public HostSpeechManager speechManager;
 
 	// Use this for initialization
 	void Start () {
-        speechManager = gameObject.GetComponent<HostSpeechManager>();
 
         StartCoroutine(BeginStartTimer());
 	}
@@ -54,15 +55,18 @@ public class HostClicker : MonoBehaviour {
 
     void OnDoubleClick()
     {
-        if (!(StartTimer > 0.0f))
+        if (CanEnableAlwaysMumble)
         {
-            if (GameMessageManager.gameMessageManager.AlwaysDoHostMumble)
+            if (!(StartTimer > 0.0f))
             {
-                StartCoroutine(DisableAlwaysMumble());
-            }
-            else
-            {
-                StartCoroutine(EnableAlwaysMumble());
+                if (GameMessageManager.gameMessageManager.AlwaysDoHostMumble)
+                {
+                    StartCoroutine(DisableAlwaysMumble());
+                }
+                else
+                {
+                    StartCoroutine(EnableAlwaysMumble());
+                }
             }
         }
     }
@@ -97,13 +101,16 @@ public class HostClicker : MonoBehaviour {
 
     private IEnumerator PlayHostSounds()
     {
-
-        speechManager.ForceAnimate(AnimationDuration, ForcedBeginDelay, ForcedAnimDelay, ForcedAnimRange);
-
-        foreach (AudioClip clip in clips)
+        if (speechManager.CanForceNewAnimation)
         {
-            Globals.GetInstance().SFXSource.PlayOneShot(clip);
-            yield return new WaitForSeconds(clip.length + ClipDelayOffset);
+            speechManager.ForceAnimate(AnimationDuration, ForcedBeginDelay, ForcedAnimDelay, ForcedAnimRange);
+
+            foreach (AudioClip clip in clips)
+            {
+                Globals.GetInstance().SFXSource.PlayOneShot(clip);
+                yield return new WaitForSeconds(clip.length + ClipDelayOffset);
+            }
+
         }
 
         canPlaySound = true;

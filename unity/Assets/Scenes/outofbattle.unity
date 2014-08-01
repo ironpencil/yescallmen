@@ -115,17 +115,17 @@ MonoBehaviour:
   LONG_DISPLAY_TIME: 1
   DEFAULT_PLAYER_MAX_HP: 100
   PlayerMaxHP: 100
-  PlayerLevel: 51
+  PlayerLevel: 1
   PlayerBattlesWon: 0
   PlayerBattlesLost: 0
   PlayerConvertedUnit: 0
   PlayerFinishedLastShow: 0
   FirstShowOfSession: 0
   DeckContents: []
-  DoLoadPlayerPrefs: 1
+  DoLoadPlayerPrefs: 0
   FeministsConvertedString: None
   DebugWidgetDepths: 0
-  LastScene: 2
+  LastScene: 0
   DoIntroTutorial: 0
 --- !u!4 &12338113
 Transform:
@@ -1328,7 +1328,9 @@ MonoBehaviour:
   ForcedBeginDelay: .100000001
   ForcedAnimDelay: 1.5
   ForcedAnimRange: 0
-  StartTimer: 3
+  StartTimer: 6
+  CanEnableAlwaysMumble: 1
+  speechManager: {fileID: 464667264}
   ClipDelayOffset: -.200000003
 --- !u!65 &464667263
 BoxCollider:
@@ -2958,6 +2960,7 @@ Transform:
   - {fileID: 1319888715}
   - {fileID: 464667259}
   - {fileID: 1862787515}
+  - {fileID: 1594419480}
   m_Father: {fileID: 1095244757}
   m_RootOrder: 0
 --- !u!114 &1172798466
@@ -3326,6 +3329,8 @@ MonoBehaviour:
   typewriter: {fileID: 21113133}
   charsPerSecond: 100
   PlayRandomMumbles: 1
+  VictoryMumblesOnly: 0
+  DefeatMumblesOnly: 0
   RandomMumbles:
   - {fileID: 8300000, guid: 6f538d93e60a97447941866d1baa7970, type: 3}
   - {fileID: 8300000, guid: 58762c08aa9d7254ca4449f7f556bff4, type: 3}
@@ -3358,6 +3363,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f77a7cce2daf51d42a8f453cd61d204d, type: 3}
   - {fileID: 8300000, guid: f88ef2ced751b60459d82a740177e03c, type: 3}
   - {fileID: 8300000, guid: fdcaf9e8a55659f40b253808b9d8242a, type: 3}
+  VictoryMumbles: []
+  DefeatMumbles: []
   PlayIntroMumbles: 0
   IntroMumbles: []
   AlwaysDoHostMumble: 0
@@ -3770,15 +3777,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
       propertyPath: LastScene
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
       propertyPath: PlayerLevel
-      value: 51
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
       propertyPath: DoLoadPlayerPrefs
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
       propertyPath: FirstShowOfSession
@@ -4549,6 +4556,122 @@ MonoBehaviour:
   callWhenFinished: 
   from: {x: -0, y: 0, z: 75}
   to: {x: -0, y: 0, z: 15}
+--- !u!1 &1594419479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1594419480}
+  - 114: {fileID: 1594419484}
+  - 65: {fileID: 1594419483}
+  - 114: {fileID: 1594419482}
+  m_Layer: 8
+  m_Name: Keyboard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1594419480
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1594419479}
+  m_LocalRotation: {x: 0, y: 0, z: .1305262, w: .991444886}
+  m_LocalPosition: {x: 312, y: -50, z: 0}
+  m_LocalScale: {x: .999899983, y: .999899983, z: .999899983}
+  m_Children: []
+  m_Father: {fileID: 1172798465}
+  m_RootOrder: 3
+--- !u!114 &1594419482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1594419479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a289ade40394bd8449a64a6a3e2593bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: cdc0c3c4fc53b1b4d8b675173a07d93a, type: 3}
+  - {fileID: 8300000, guid: fdcaf9e8a55659f40b253808b9d8242a, type: 3}
+  - {fileID: 8300000, guid: f77a7cce2daf51d42a8f453cd61d204d, type: 3}
+  - {fileID: 8300000, guid: 7a03d80cf38aa1942aeb758172d15665, type: 3}
+  AnimationDuration: 5.19999981
+  ForcedBeginDelay: .150000006
+  ForcedAnimDelay: .200000003
+  ForcedAnimRange: .100000001
+  StartTimer: 6
+  CanEnableAlwaysMumble: 0
+  speechManager: {fileID: 464667264}
+  ClipDelayOffset: -.200000003
+--- !u!65 &1594419483
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1594419479}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 144, y: 44, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1594419484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1594419479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: .00392156886}
+  mPivot: 4
+  mWidth: 144
+  mHeight: 44
+  mDepth: 30
+  autoResizeBoxCollider: 1
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 3.27272725
+  mType: 0
+  mFillDirection: 4
+  mFillAmount: 1
+  mInvert: 0
+  mFlip: 0
+  centerType: 1
+  leftType: 1
+  rightType: 1
+  bottomType: 1
+  topType: 1
+  mAtlas: {fileID: 11400000, guid: 27824d4ae3629e844b77d5805cb0da04, type: 2}
+  mSpriteName: white
+  mFillCenter: 1
 --- !u!1 &1610792565
 GameObject:
   m_ObjectHideFlags: 0

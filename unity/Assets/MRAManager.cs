@@ -37,7 +37,7 @@ public class MRAManager : MonoBehaviour
 
         return quote;
     }
-
+    
     public string GetHostArgument()
     {
         int randomIndex = UnityEngine.Random.Range(0, 4);
@@ -171,13 +171,12 @@ public class MRAManager : MonoBehaviour
         "to be treated like human beings",
         "equal pay for equal work",
         "to be respected in the workplace",
-        "to not be stared at by creepy guys constantly",
+        "to not be stared at constantly by creepy guys",
         "to be permitted to vote",
         "to be more than just baby factories",
         "to not have to shave all the time",
         "to end genital mutilation in third-world countries",
         "to hear more female voices in gaming",
-        "to be more than an object",
         "their voices to be heard",
         "to end gender discrimination",
         "the same benefits that men enjoy",
@@ -194,7 +193,9 @@ public class MRAManager : MonoBehaviour
         "to not be crushed into tiny cubes to save space",
         "to not have Game of Thrones be spoiled for them",
         "to not be sent dick pics constantly",
-        "to be allowed to pick out their own clothes"
+        "to be allowed to pick out their own clothes",
+        "to not be literally objectified",
+        "to not have to sleep under the stairs in the basement"
     };
 
     List<string> femaleMRAVerbs = new List<string>() 
@@ -368,7 +369,8 @@ public class MRAManager : MonoBehaviour
         "have a computer as their closest friend",
         "collect the Dragon Balls",
         "purchase kawaii waifu bodypillows",
-        "pee standing up"
+        "pee standing up",
+        "drop hard negs"
     };
 
     List<string> signOffQuotes = new List<string>() {
@@ -386,7 +388,7 @@ public class MRAManager : MonoBehaviour
         "Join me next time on #YesCallMen to get mortally wounded again by my TRUTH BAYONET",
         "Join me next time on #YesCallMen to get pierced again by TRUTH SHRAPNEL",
         "Join me next time on #YesCallMen to get flayed again by my TRUTH RAZOR",
-        "Join me next time on #YesCallMen to get asphyxiated again by TRUTH GAS",
+        "Join me next time on #YesCallMen to get asphyxiated again by my TRUTH GAS",
         "Join me next time on #YesCallMen to get smothered again with my TRUTH PILLOW",
         "Join me next time on #YesCallMen to get atomized again by my TRUTH BEAM",
         "Join me next time on #YesCallMen to get irradiated again by my TRUTH FALLOUT",

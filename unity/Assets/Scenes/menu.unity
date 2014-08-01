@@ -51323,10 +51323,6 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
-      propertyPath: DoLoadPlayerPrefs
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: d2273fdfb8a90ee4c840ca4477918904, type: 2}
       propertyPath: InitialAudioVolume
       value: .75
       objectReference: {fileID: 0}

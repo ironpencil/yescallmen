@@ -68,7 +68,7 @@ public class CardController : MonoBehaviour {
     private IEnumerator TrashCardAfterDelay()
     {
         float randomDelay = UnityEngine.Random.Range(0, 0.2f);
-        SFXManager.instance.QueueSound(SFXManager.instance.TrashCardSound, 0.5f, TrashDelay - randomDelay);
+        SFXManager.instance.QueueSound(SFXManager.instance.TrashCardSound, 0.15f, TrashDelay - randomDelay);
 
         yield return new WaitForSeconds(TrashDelay);
         foreach (UITweener tween in onTrashTweens)
@@ -143,7 +143,7 @@ public class CardController : MonoBehaviour {
             DoScaleToLarge();
             if (playRollOver)
             {
-                SFXManager.instance.PlaySound(SFXManager.instance.RolloverCardSound, 0.6f);
+                SFXManager.instance.PlaySound(SFXManager.instance.RolloverCardSound, 0.4f);
             }
             playRollOver = false;
         }
@@ -156,12 +156,14 @@ public class CardController : MonoBehaviour {
 
         if (gameCard.cardDefinition.CardName == CardFactory.CardName.NotAllMen)
         {
+            yield return new WaitForSeconds(0.05f);
+
             SFXManager.instance.PlaySound(SFXManager.instance.NotAllMenSound, 1.0f);
 
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.35f);
 
             BattleManager.battleManager.CameraShaker.addShakeAmount *= 4;
-            BattleManager.battleManager.CameraShaker.StartShaking();
+            BattleManager.battleManager.CameraShaker.ShakeWithoutUpdatePosition();
             BattleManager.battleManager.CameraShaker.addShakeAmount *= 0.25f;
             
 
@@ -172,11 +174,11 @@ public class CardController : MonoBehaviour {
         {
             yield return new WaitForSeconds(0.25f);
 
-            SFXManager.instance.PlaySound(SFXManager.instance.PlayCardSound, 0.5f);
+            SFXManager.instance.PlaySound(SFXManager.instance.PlayCardSound, 0.4f);
 
             yield return new WaitForSeconds(0.15f);
 
-            BattleManager.battleManager.CameraShaker.StartShaking();
+            BattleManager.battleManager.CameraShaker.ShakeWithoutUpdatePosition();
 
             
         }

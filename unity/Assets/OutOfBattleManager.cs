@@ -12,6 +12,11 @@ public class OutOfBattleManager : MonoBehaviour {
     {
         outOfBattleManager = this;
 
+        if (!Globals.GetInstance().AudioSource1.isPlaying &&
+            !Globals.GetInstance().AudioSource2.isPlaying)
+        {
+            Globals.GetInstance().StartMusic();
+        }
         
     }
 	

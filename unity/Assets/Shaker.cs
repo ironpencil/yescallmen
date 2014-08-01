@@ -27,7 +27,14 @@ public class Shaker : MonoBehaviour
     public void StartShaking()
     {
         isShaking = true;
-        originPosition = transform.position;
+        originPosition = transform.position; //I think I used this in the title screen so have to leave it in
+
+        StartCoroutine(DoShake());
+    }
+
+    public void ShakeWithoutUpdatePosition()
+    {
+        isShaking = true;
 
         StartCoroutine(DoShake());
     }

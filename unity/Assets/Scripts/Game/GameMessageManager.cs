@@ -177,6 +177,7 @@ public class GameMessageManager : MonoBehaviour {
         //clear message queue
         messageQueue.Clear();
         colorTagExists = false;
+        currentSpeaker = Speaker.None;
 
         messageScrollview.ResetPosition();
     }
@@ -222,12 +223,15 @@ public class GameMessageManager : MonoBehaviour {
             {
                 case Speaker.Host:
                     preText += "[" + HostColorHex + "]";
+                    //colorTagExists = true;
                     break;
                 case Speaker.Caller:
                     preText += "[" + CallerColorHex + "]";
+                    //colorTagExists = true;
                     break;
                 case Speaker.System:
                     preText += "[" + SystemColorHex + "]";
+                    //colorTagExists = true;
                     break;
                 default:
                     break;
@@ -301,7 +305,8 @@ public class GameMessageManager : MonoBehaviour {
     {
         Host,
         Caller,
-        System
+        System,
+        None
     }
 
     private void OnFinished() {

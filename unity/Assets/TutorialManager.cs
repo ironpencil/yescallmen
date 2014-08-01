@@ -296,22 +296,23 @@ Your deck saves between calls, shows, and game sessions!
 
 Try adding a new card to your deck by clicking it.";
 
-    private string credits = @"Iron Pencil is:
+    private string credits = @"[b]Iron Pencil is:[/b]
 
-The Contemptuous Mr. Jim South
-Design, Art, Programming
+The Contemptuous Mr. Jim South : Design, Code, Art, Sound
+www.ironpencil.com
 
-Card sounds by www.kenney.nl
-
-With Special Thanks To:
+[b]With Special Thanks To:[/b]
 
 The Bewildering Mr. Austin Thresher : 'Casio Lines'
+dangermomentum.tumblr.com
 
-The Deplorable Mr. Everdraed : Voice, Art
+The Deplorable Mr. Everdraed : Voice, Title Art
 
 The Enigmatic Mr. Fangz : Title Art
 
-and #SAGameDev on synIRC.net";
+and #SAGameDev on synIRC.net
+
+Most card sounds by www.kenney.nl";
 
 
     private string refreshTutorial = @"Welcome back to #YesCallMen!
