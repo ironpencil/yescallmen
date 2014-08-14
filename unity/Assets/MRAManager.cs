@@ -309,7 +309,7 @@ public class MRAManager : MonoBehaviour
         "unhinge their jaws to devour prey whole",
         "combine with other females to form a giant fighting robot",
         "cut into men, tear the flesh, wear the flesh, and be born unto new worlds where the flesh becomes their key",
-        "have their reproductive organs on in the inside instead of the outside",
+        "have their reproductive organs on the inside instead of the outside",
         "put their trust in worthless fiat currency",
         "fight monsters and allow themselves to become one"
     };

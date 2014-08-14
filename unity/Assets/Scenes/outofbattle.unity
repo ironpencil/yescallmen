@@ -3236,6 +3236,7 @@ GameObject:
   - 4: {fileID: 1300282779}
   - 20: {fileID: 1300282781}
   - 114: {fileID: 1300282780}
+  - 114: {fileID: 1300282782}
   m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
@@ -3322,6 +3323,17 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+--- !u!114 &1300282782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1300282778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f08a6bbcd8842479df62ab19dc428c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1305762597
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,7 +4076,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.34375
+  aspectRatio: 3.3375001
 --- !u!1 &1550298684
 GameObject:
   m_ObjectHideFlags: 0
